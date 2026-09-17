@@ -1,75 +1,93 @@
-# HeraUEBA: Sistema Web de Monitoreo Analítico y Detección de Anomalías de Autenticación mediante IA
+# HeraUEBA - Sistema de Monitoreo Analítico (UEBA) para el Sector Salud
 
-> **Materia:** Electiva CPC
-> **Hito:** 1 — Definición de Idea, MVP y Rol del Proyecto
-> **Autor:** Líder de Desarrollo e Integración de Sistemas de IA
+## 1. Resumen del Proyecto
+HeraUEBA es un sistema web de monitoreo analítico del comportamiento de usuarios y entidades (UEBA) diseñado específicamente para el sector salud. El sistema busca mitigar el acceso inicial a los sistemas hospitalarios mediante credenciales comprometidas (táctica MITRE T1078), un riesgo crítico debido al alto valor de la información de salud. La plataforma web opera sobre el sistema SSO (Keycloak) utilizando un motor híbrido de IA (Árbol de Decisión e Isolation Forest) para priorizar alertas y facilitar la toma de decisiones del Centro de Operaciones de Seguridad (SOC).
 
----
+## 2. Declaración del Problema
+* Actualmente, los analistas revisan manualmente alertas genéricas en el SIEM.
+* Este proceso requiere entre 2 y 4 un horas para investigar un incidente cruzando IP, horario e historial.
+* Existe una inundación de falsos positivos en modelos de "viaje imposible" debido a especialistas médicos que asisten a congresos o usan VPNs.
+* Un bloqueo erróneo a un médico en cirugía genera un riesgo de vida y responsabilidad legal institucional.
 
-## 1. Definición Clara de la Idea a Desarrollar
+## 3. Objetivos del Proyecto
+* Contribuir a reducir el Tiempo Medio de Recuperación (MTTR) de incidentes de acceso en al menos un 70%, bajando la detección de 2-4 horas a menos de 45 minutos.
+* Proveer una plataforma con baja densidad cognitiva que prevenga la fatiga de alertas.
+* Cumplir con las normativas locales (Ley 1581 de 2012) y lineamientos HIPAA garantizando la explicabilidad (caja blanca) de las decisiones de IA
 
-### 1.1 Descripción del Sistema
+## 4. Usuarios Objetivo y Partes Interesadas
+* **CISO / Director TI:** Patrocinador del proyecto y responsable de la seguridad del hospital. Busca proteger datos, cumplir normativas y evitar interrupciones operativas.
+* **Coordinador SOC:** Usuario administrador del sistema con facultades resolutivas. Es el único rol autorizado para ejecutar el aislamiento de cuentas y gestionar excepciones.
+* **Analista Junior SOC:** Operador principal del sistema durante los turnos. Requiere un panel de baja densidad cognitiva para monitorear alertas en tiempo real sin necesidad de hacer *scroll* para ver información crítica
 
-**HeraUEBA** es un sistema web de monitoreo analítico de comportamiento de usuarios y entidades (**UEBA**) para el Sector Salud, diseñado como capa de detección temprana sobre el sistema de inicio de sesión único (SSO) de un Hospital Clínico Privado. Analiza en tiempo cuasi real los eventos de autenticación para identificar patrones de acceso anómalos asociados a credenciales comprometidas.
+## 5. Alcance
+**En Alcance (MVP):**
+* Uso de datos simulados (dataset RBA enriquecido)
+* Panel de control (Dashboard) en Streamlit con filtro por defecto de 24 horas.
+* Simulación de aislamiento de cuentas en la base de datos local mediante verificación de dos pasos.
+* Gestión de lista blanca (Whitelist) geográfica.
+* Visualización del camino de decisión del modelo (Árbol de Decisión).
 
-### 1.2 Problema: Acceso Inicial mediante Credenciales Comprometidas (MITRE T1078)
+**Fuera de Alcance (MVP):**
+* Revocación real de tokens en Keycloak y forzado de reseteo vía SMS/MFA (planeado para futuras iteraciones).
+* Ejecución de bloqueos de cuenta automáticos por parte de la IA (estrictamente prohibido por reglas de negocio).
 
-**T1078 — Valid Accounts** (MITRE ATT&CK, táctica *Initial Access / Persistence*) describe el uso de credenciales legítimas robadas, filtradas o adivinadas para obtener acceso sin explotar vulnerabilidades de software.
+## 6. Funcionalidades Principales y Capacidades
+* **Dashboard Priorizado:** Muestra las "Alertas Rojas" en la parte superior del *viewport* sin requerir desplazamiento, optimizando la visibilidad de amenazas críticas. (Beneficia a: Analista Junior, Coordinador SOC).
+* **Optimización de Carga Temporal:** Aplica automáticamente un filtro de 24 horas al inicio para asegurar una carga fluida de la interfaz gráfica. (Beneficia a: Analista Junior, Coordinador SOC).
+* **Explicabilidad Normativa:** Muestra explícitamente las reglas lógicas cumplidas que generaron una alerta algorítmica para cumplir con auditorías[cite: 1, 2, 3]. (Beneficia a: Coordinador SOC, CISO).
+* **Aislamiento Seguro:** Permite aislar una cuenta sospechosa tras una confirmación de dos pasos, denegando la acción si el usuario pertenece a una unidad crítica (ej. UCI)[cite: 1, 2]. (Beneficia a: Coordinador SOC).
+* **Whitelist Geográfica:** Administración de excepciones por usuario, país y fecha para evitar falsos positivos por viajes legítimos o uso de VPN[cite: 1, 2, 3]. (Beneficia a: Coordinador SOC).
 
-Criticidad en contexto hospitalario:
+## 7. Procesos de Negocio y Experiencia de Usuario
+**BP-001: Monitoreo Analítico de Accesos Anómalos**
+* **Inicio:** El motor de IA ingesta y analiza un nuevo evento de inicio de sesión.
+* **Interacción:** El Analista Junior accede al dashboard y observa inmediatamente las "Alertas Rojas". Revisa el camino de decisión de la IA (caja blanca) para determinar si la anomalía es real.
+* **Resultado:** Decisión rápida de escalar o ignorar la alerta, reduciendo el MTTR[cite: 2].
 
-- **Activos protegidos**: los sistemas hospitalarios almacenan PHI/PII, con alto valor en mercados ilícitos.
-- **Invisibilidad perimetral**: al usar credenciales válidas, firewalls, antivirus e IDS basados en firmas no generan alertas — el atacante es indistinguible de un usuario autorizado.
-- **Impacto**: interrupción de servicios clínicos, exposición de historiales médicos, sanciones regulatorias.
+**BP-002: Aislamiento de Cuentas Comprometidas**
+* **Inicio:** El Coordinador SOC verifica la veracidad de una Alerta Roja.
+* **Interacción:** Hace clic en "Aislar Usuario". El sistema verifica que el usuario no sea personal de unidad crítica. Se presenta un modal de confirmación de dos pasos.
+* **Resultado:** Si se aprueba, el sistema simula el bloqueo en la base de datos.
 
-HeraUEBA desplaza el paradigma de seguridad de *"¿la contraseña es correcta?"* a *"¿este comportamiento es coherente con el patrón histórico del usuario?"*.
+## 8. Resumen de Requisitos Funcionales
+| ID | Requisito | Relación | Prioridad | Estado |
+| :--- | :--- | :--- | :--- | :--- |
+| FR-001 | Visualización Priorizada de Alertas Rojas | Dashboard | Alta | Confirmado |
+| FR-002 | Filtro Temporal por Defecto (24 hrs) | Rendimiento UI | Alta | Confirmado |
+| FR-003 | Filtro Histórico por Usuario | Búsqueda | Media | Confirmado |
+| FR-004 | Explicabilidad del Modelo (Caja Blanca) | IA / Auditoría | Alta | Confirmado |
+| FR-005 | Interfaz de Aislamiento Simulado | Mitigación | Alta | Confirmado |
+| FR-006 | Verificación de Dos Pasos para Aislamiento | Mitigación | Alta | Confirmado |
+| FR-007 | Restricción de Bloqueo por Unidad Crítica | Mitigación | Alta | Requiere Clarificación |
+| FR-008 | Gestión de Whitelist Geográfica | Excepciones | Alta | Confirmado |
 
-### 1.3 Justificación Técnica: IA Híbrida (Supervisada + No Supervisada)
+## 9. Resumen de Requisitos No Funcionales
+| ID | Categoría | Requisito | Medición | Estado |
+| :--- | :--- | :--- | :--- | :--- |
+| NFR-001 | Rendimiento | Reducción del MTTR en 70% | Tiempo < 45 minutos | Confirmado |
+| NFR-002 | Usabilidad | Baja Densidad Cognitiva | Sin scroll para alertas críticas | Confirmado |
+| NFR-003 | Seguridad | RBAC (Analista vs Coordinador) | Pruebas de acceso a endpoints | Confirmado |
+| NFR-004 | Auditoría | Trazabilidad Normativa (Ley 1581) | Registro lógico guardado por alerta | Confirmado |
 
-**a) Árbol de Decisión (supervisado) — Fuerza Bruta / Credential Stuffing**
-Clasificador entrenado con datos etiquetados (tasa de intentos fallidos, reincidencia por IP, RTT). Adecuado porque este ataque genera patrones estructurales bien definidos y documentables. Su interpretabilidad es clave para auditoría y cumplimiento normativo en salud.
+## 10. Reglas de Negocio y Restricciones Operativas
+* **BR-001 (Cero Tolerancia a Bloqueos Automáticos):** Ningún modelo de IA podrá ejecutar un bloqueo de cuenta de forma autónoma. Toda mitigación exige intervención humana explícita (Coordinador SOC).
+* **BR-002 (Exención de Unidades Críticas):** Queda estrictamente prohibido el aislamiento operativo estándar para personal médico asignado a unidades de soporte vital (UCI, Quirófanos, Urgencias).
 
-**b) Isolation Forest (no supervisado) — Viaje Imposible**
-Detecta anomalías geográficas (ej. login en Colombia seguido, minutos después, de login en otro continente) sin requerir etiquetas previas. Aísla observaciones atípicas en el espacio de características (geolocalización IP/ASN, velocidad de desplazamiento implícita), permitiendo detección autónoma de amenazas no vistas (*zero-day behavioral*).
+## 11. Resumen Técnico
+* **Autenticación (SSO):** Keycloak integrado con Active Directory.
+* **Volumen Esperado:** ~110,000 transacciones diarias en JSON (Post-MVP).
+* **Frontend:** Dashboard desarrollado en Streamlit.
+* **Modelos de IA:** Árbol de Decisión (Fuerza bruta) e Isolation Forest (Viajes imposibles).
+* **Datos (MVP):** Dataset RBA enriquecido con IPinfo.
 
-**Complementariedad**: el Árbol de Decisión cubre amenazas conocidas de forma explicable; el Isolation Forest provee resiliencia adaptativa ante amenazas emergentes.
+## 12. Limitaciones Conocidas y Preguntas Abiertas
+| ID | Tipo | Descripción | Impacto |
+| :--- | :--- | :--- | :--- |
+| AQ-01 | Ambigüedad | Identificación de Unidades: No se detalla cómo el sistema obtendrá los atributos para saber si un usuario pertenece a UCI/Quirófanos. | Alto |
+| AQ-02 | Suposición | Ingesta de Datos: Se asume que en producción Keycloak enviará logs JSON de forma directa. | Medio |
+| AQ-03 | Pregunta Abierta | Granularidad VPN: ¿La exclusión aceptará ASN específicos o únicamente país/región?. | Alto |
 
----
+## 13. Estado del Proyecto
+* **Fase Actual:** Análisis de Requisitos y Definición del MVP.
+* **Próximos Pasos:** Desarrollo del Producto Mínimo Viable (MVP) utilizando datos simulados.
 
-## 2. El MVP (Mínimo Producto Viable)
-
-**Plazo:** 8 semanas | **Stack:** Python + Streamlit + Scikit-Learn
-
-### Componente I — Interfaz Visual (Streamlit)
-
-- **Dashboard principal**: KPIs de seguridad (volumen de intentos, tasa éxito/fracaso, distribución geográfica, anomalías detectadas por ventana temporal) mediante visualizaciones (Plotly/Altair).
-- **Panel dinámico de Alertas Rojas**: listado priorizado de eventos de alto riesgo, con usuario afectado, timestamp, tipo de anomalía (fuerza bruta / viaje imposible), nivel de confianza y geolocalización de origen.
-
-### Componente II — Motor de IA / Backend Analítico
-
-- **Ingesta y preprocesamiento** del dataset *Login Data Set for Risk-Based Authentication*, enriquecido con las bases IP-to-ASN e IP-to-Country mediante `pd.merge_asof` (unión ordenada por rangos de IP) y estrategias de muestreo para manejar el volumen de +33M registros dentro de recursos de cómputo limitados.
-- **Pipeline dual**: ejecución secuencial de Árbol de Decisión (fuerza bruta) e Isolation Forest (viaje imposible) sobre cada registro.
-- **Score de riesgo consolidado** por evento, combinando ambas salidas, que determina el escalamiento a Alertas Rojas.
-
-> Alcance delimitado: el motor opera sobre datos históricos/simulados (batch), sin integración productiva en vivo con el SSO real del hospital.
-
-### Componente III — Acciones Interactivas de Mitigación (Simuladas)
-
-- Botón **"Aislar Usuario Comprometido"** en cada Alerta Roja, que cambia el estado del usuario (`activo` → `bloqueado/cuarentena`) en la base de datos de la aplicación, reflejado inmediatamente en el dashboard vía `session_state` de Streamlit.
-
-> Simulación controlada dentro del entorno de la aplicación; no constituye integración real con Active Directory / IAM.
-
----
-
-## 3. Rol Dentro del Proyecto
-
-**Rol asumido:** Líder de Desarrollo e Integración de Sistemas de IA (*Lead AI Systems Engineer*)
-
-Responsabilidad integral y no delegable sobre el ciclo de vida completo del software:
-
-- **Arquitectura de software**: diseño modular con separación entre interfaz (Streamlit), lógica de negocio y motor de ML.
-- **Gobierno de datos**: selección, limpieza, transformación y enriquecimiento de fuentes (registros de autenticación + geolocalización IP-ASN).
-- **Pipeline de Machine Learning**: entrenamiento, validación y despliegue de los modelos con Scikit-Learn; evaluación mediante precisión, recall, F1-score y matriz de confusión.
-- **Diseño UX/UI**: construcción de la experiencia en Streamlit orientada a un usuario final no técnico (analista de seguridad hospitalario).
-
-La ejecución individual se apoya en **metodologías ágiles asistidas por IA generativa** (copiloto de desarrollo, revisión de código y mentoría técnica), con *sprints* semanales y validación iterativa por componente. La IA acelera el desarrollo pero no sustituye la autoría intelectual ni el criterio técnico del estudiante, que mantiene control y decisión final sobre cada entregable.
