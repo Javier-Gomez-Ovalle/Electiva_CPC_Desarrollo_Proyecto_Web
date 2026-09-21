@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="app.diagrams.net" agent="Big Pickle (opencode)" version="24.7.17">
   <diagram id="heraueba-components" name="Componentes">
     <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1800" math="0" shadow="0">
@@ -5,7 +6,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <!-- ===================== ACTORES ===================== -->
+        
         <mxCell id="act-ciso" value="CISO / Director TI" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
           <mxGeometry x="60" y="20" width="220" height="60" as="geometry" />
         </mxCell>
@@ -16,7 +17,7 @@
           <mxGeometry x="620" y="20" width="220" height="60" as="geometry" />
         </mxCell>
 
-        <!-- ===================== PLATAFORMA HERAUEBA ===================== -->
+        
         <mxCell id="hera" value="HeraUEBA · Monitoreo analítico (sector salud)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontColor=#0D47A1;" vertex="1" parent="1">
           <mxGeometry x="30" y="140" width="1930" height="560" as="geometry" />
         </mxCell>
@@ -68,7 +69,7 @@
           <mxGeometry x="360" y="455" width="300" height="70" as="geometry" />
         </mxCell>
 
-        <!-- ===================== CORE / INFRAESTRUCTURA ===================== -->
+        
         <mxCell id="core" value="core/ · Infraestructura compartida del framework" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;fontColor=#4A148C;" vertex="1" parent="1">
           <mxGeometry x="30" y="740" width="1930" height="600" as="geometry" />
         </mxCell>
@@ -149,7 +150,7 @@
           <mxGeometry x="20" y="130" width="300" height="55" as="geometry" />
         </mxCell>
 
-        <!-- ===================== AGENTES ===================== -->
+        
         <mxCell id="agentsc" value="agents/" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="1">
           <mxGeometry x="30" y="1380" width="780" height="150" as="geometry" />
         </mxCell>
@@ -160,7 +161,7 @@
           <mxGeometry x="410" y="65" width="350" height="60" as="geometry" />
         </mxCell>
 
-        <!-- ===================== SKILLS ===================== -->
+        
         <mxCell id="skills" value="skills/" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#FFF8E1;strokeColor=#F57F17;fontColor=#E65100;" vertex="1" parent="1">
           <mxGeometry x="840" y="1380" width="1120" height="150" as="geometry" />
         </mxCell>
@@ -177,7 +178,7 @@
           <mxGeometry x="860" y="65" width="240" height="60" as="geometry" />
         </mxCell>
 
-        <!-- ===================== INTEGRACIONES / CONFIG / EVAL ===================== -->
+        
         <mxCell id="extl" value="Integraciones · Config · Evaluación" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#FBE9E7;strokeColor=#D84315;fontColor=#BF360C;" vertex="1" parent="1">
           <mxGeometry x="30" y="1560" width="1930" height="150" as="geometry" />
         </mxCell>
@@ -194,152 +195,152 @@
           <mxGeometry x="1210" y="65" width="460" height="60" as="geometry" />
         </mxCell>
 
-        <!-- ===================== FLUJO HERAUEBA ===================== -->
-        <mxCell id="e-ciso-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="act-ciso" target="n-dash">
+        
+        <mxCell id="e-ciso-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.000;entryY=0.500;entryDx=0;entryDy=0;" edge="1" parent="1" source="act-ciso" target="n-dash">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="170" y="105" /><mxPoint x="44" y="105" /><mxPoint x="44" y="300" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-coord-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.625;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="act-coord" target="n-dash">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="450" y="105" /><mxPoint x="48" y="105" /><mxPoint x="48" y="240" /><mxPoint x="220" y="240" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-anal-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=1.000;entryY=0.500;entryDx=0;entryDy=0;" edge="1" parent="1" source="act-anal" target="n-dash">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="730" y="105" /><mxPoint x="56" y="105" /><mxPoint x="56" y="240" /><mxPoint x="310" y="240" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-sso-dash" value="autenticación RBAC" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.750;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-sso" target="n-dash">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1280" y="380" /><mxPoint x="250" y="380" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-rba-dt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-rba" target="n-dt">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="210" y="560" /><mxPoint x="190" y="560" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-rba-if" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.967;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-rba" target="n-if">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="350" y="560" /><mxPoint x="450" y="560" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-dt-expl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-dt" target="n-expl">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="190" y="537" /><mxPoint x="705" y="537" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-if-expl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.000;exitY=0.500;exitDx=0;exitDy=0;entryX=0.000;entryY=0.500;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-if" target="n-expl">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-coord-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="act-coord" target="n-dash">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-expl-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.478;exitY=0.000;exitDx=0;exitDy=0;entryX=0.250;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-expl" target="n-dash">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="700" y="380" /><mxPoint x="130" y="380" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-anal-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="act-anal" target="n-dash">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-db-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-db" target="n-dash">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="540" y="690" /><mxPoint x="55" y="690" /><mxPoint x="55" y="380" /><mxPoint x="190" y="380" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-sso-dash" value="autenticación RBAC" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-sso" target="n-dash">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-dash-whl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.625;exitY=1.000;exitDx=0;exitDy=0;entryX=0.375;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-dash" target="n-whl">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="220" y="380" /><mxPoint x="970" y="380" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-rba-dt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-rba" target="n-dt">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-whl-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.375;exitY=1.000;exitDx=0;exitDy=0;entryX=1.000;entryY=0.643;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-whl" target="n-db">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="970" y="640" /><mxPoint x="705" y="640" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-rba-if" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-rba" target="n-if">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-dash-iso" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.333;exitY=1.000;exitDx=0;exitDy=0;entryX=0.458;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-dash" target="n-iso">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="150" y="380" /><mxPoint x="1270" y="380" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-dt-expl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dt" target="n-expl">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-if-expl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-if" target="n-expl">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-expl-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-expl" target="n-dash">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-db-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-db" target="n-dash">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-dash-whl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dash" target="n-whl">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-whl-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-whl" target="n-db">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-dash-iso" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dash" target="n-iso">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-iso-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-iso" target="n-db">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <!-- ===================== INTERFACES -> ORQUESTADOR ===================== -->
-        <mxCell id="e-dash-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dash" target="n-api">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-cli-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-cli" target="n-api">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-chat-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-chat" target="n-api">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-api-router" value="tarea entrante" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-api" target="n-router">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-iso-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=1.000;entryY=0.357;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-iso" target="n-db">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1280" y="620" /><mxPoint x="705" y="620" /></Array></mxGeometry>
         </mxCell>
 
-        <!-- ===================== ORQUESTACIÓN ===================== -->
-        <mxCell id="e-router-planner" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-router" target="n-planner">
+        
+        <mxCell id="e-dash-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.000;exitY=0.500;exitDx=0;exitDy=0;entryX=0.000;entryY=0.500;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-dash" target="n-api">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-planner-exec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-planner" target="n-exec">
+        <mxCell id="e-cli-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.000;exitY=0.500;exitDx=0;exitDy=0;entryX=1.000;entryY=0.500;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-cli" target="n-api">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-router-ar" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-router" target="n-ar">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-chat-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.000;entryY=0.500;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-chat" target="n-api">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="960" y="240" /><mxPoint x="335" y="240" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-ar-ra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ar" target="n-ra">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-ar-ca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ar" target="n-ca">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-exec-ra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-exec" target="n-ra">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-exec-ca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-exec" target="n-ca">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-ra-ba" value="hereda de" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-ra" target="n-ba">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-ca-ba" value="hereda de" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-ca" target="n-ba">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-exec-sr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-exec" target="n-sr">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-api-router" value="tarea entrante" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.000;entryY=0.400;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-api" target="n-router">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="450" y="240" /><mxPoint x="44" y="240" /><mxPoint x="44" y="892" /></Array></mxGeometry>
         </mxCell>
 
-        <!-- ===================== AGENTES -> SKILLS ===================== -->
-        <mxCell id="e-ra-ws" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ra" target="n-ws">
+        
+        <mxCell id="e-router-planner" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-router" target="n-planner">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-ra-dg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ra" target="n-dg">
+        <mxCell id="e-planner-exec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-planner" target="n-exec">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-ca-ce" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ca" target="n-ce">
+        <mxCell id="e-router-ar" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.000;exitY=0.400;exitDx=0;exitDy=0;entryX=0.000;entryY=0.400;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-router" target="n-ar">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-dq-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dq" target="n-db">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-ar-ra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.000;exitY=0.273;exitDx=0;exitDy=0;entryX=0.371;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ar" target="n-ra">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="875" y="885" /><mxPoint x="875" y="1415" /><mxPoint x="190" y="1415" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-ws-gh" value="usa" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-ws" target="n-gh">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-ar-ca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.000;exitY=0.636;exitDx=0;exitDy=0;entryX=0.529;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ar" target="n-ca">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="875" y="905" /><mxPoint x="875" y="1425" /><mxPoint x="625" y="1425" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-dq-sl" value="usa" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-dq" target="n-sl">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-exec-ra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.000;exitY=0.455;exitDx=0;exitDy=0;entryX=0.000;entryY=0.500;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-exec" target="n-ra">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="44" y="1035" /><mxPoint x="44" y="1475" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-exec-ca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.343;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-exec" target="n-ca">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="270" y="1390" /><mxPoint x="560" y="1390" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-ra-ba" value="hereda de" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.000;exitY=0.500;exitDx=0;exitDy=0;entryX=0.241;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ra" target="n-ba">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="44" y="1475" /><mxPoint x="44" y="1085" /><mxPoint x="620" y="1085" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-ca-ba" value="hereda de" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.759;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ca" target="n-ba">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="615" y="1390" /><mxPoint x="44" y="1390" /><mxPoint x="44" y="1085" /><mxPoint x="770" y="1085" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-exec-sr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.000;exitY=0.273;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-exec" target="n-sr">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="500" y="1025" /><mxPoint x="500" y="845" /><mxPoint x="1065" y="845" /></Array></mxGeometry>
         </mxCell>
 
-        <!-- ===================== INFRAESTRUCTURA TRANSVERSAL ===================== -->
-        <mxCell id="e-router-cfg" value="config" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-router" target="n-cfg">
+        
+        <mxCell id="e-ra-ws" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ra" target="n-ws">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="235" y="1415" /><mxPoint x="990" y="1415" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-ra-dg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ra" target="n-dg">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="235" y="1405" /><mxPoint x="1820" y="1405" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-ca-ce" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ca" target="n-ce">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="615" y="1395" /><mxPoint x="1270" y="1395" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-dq-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-dq" target="n-db">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1550" y="1400" /><mxPoint x="1952" y="1400" /><mxPoint x="1952" y="690" /><mxPoint x="540" y="690" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-ws-gh" value="usa" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ws" target="n-gh">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="990" y="1575" /><mxPoint x="210" y="1575" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-dq-sl" value="usa" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-dq" target="n-sl">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1550" y="1575" /><mxPoint x="560" y="1575" /></Array></mxGeometry>
+        </mxCell>
+
+        
+        <mxCell id="e-router-cfg" value="config" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.000;exitY=0.491;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-router" target="n-cfg">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="44" y="897" /><mxPoint x="44" y="1600" /><mxPoint x="980" y="1600" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-ba-mgr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.000;exitY=0.491;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-ba" target="n-mgr">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="850" y="967" /><mxPoint x="850" y="845" /><mxPoint x="1440" y="845" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-mgr-st" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-mgr" target="n-st">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-ba-mgr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ba" target="n-mgr">
+        <mxCell id="e-mgr-lt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.000;exitY=0.491;exitDx=0;exitDy=0;entryX=1.000;entryY=0.455;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-mgr" target="n-lt">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1625" y="897" /><mxPoint x="1625" y="1035" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-exec-prov" value="enruta llamadas a LLM" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1.000;exitY=0.636;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-exec" target="n-prov">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="500" y="1045" /><mxPoint x="500" y="845" /><mxPoint x="1795" y="845" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-prov-cost" value="registra costo/uso" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-prov" target="n-cost">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-mgr-st" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-mgr" target="n-st">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-exec-grd" value="validan" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1.000;exitY=0.545;exitDx=0;exitDy=0;entryX=0.000;entryY=0.909;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-exec" target="n-grd">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="500" y="1040" /><mxPoint x="500" y="1280" /><mxPoint x="522" y="1280" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-mgr-lt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-mgr" target="n-lt">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-exec-perm" value="aplican permisos" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1.000;exitY=0.455;exitDx=0;exitDy=0;entryX=0.000;entryY=0.491;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-exec" target="n-perm">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="500" y="1035" /><mxPoint x="500" y="1187" /><mxPoint x="517" y="1187" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-exec-prov" value="enruta llamadas a LLM" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-prov">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-exec-trc" value="traceado" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1.000;exitY=0.364;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-exec" target="n-trc">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1060" y="1030" /><mxPoint x="1060" y="1150" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-prov-cost" value="registra costo/uso" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-prov" target="n-cost">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-exec-lgr" value="log" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1.000;exitY=0.727;exitDx=0;exitDy=0;entryX=1.000;entryY=0.909;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-exec" target="n-lgr">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1245" y="1050" /><mxPoint x="1245" y="1280" /><mxPoint x="1222" y="1280" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-exec-grd" value="validan" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-grd">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-eval-ra" value="verifica" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.429;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-eval" target="n-ra">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1470" y="1600" /><mxPoint x="210" y="1600" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e-exec-perm" value="aplican permisos" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-perm">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-exec-trc" value="traceado" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-trc">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-exec-lgr" value="log" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-lgr">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-eval-ra" value="verifica" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-eval" target="n-ra">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e-eval-ws" value="verifica" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-eval" target="n-ws">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e-eval-ws" value="verifica" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-eval" target="n-ws">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1470" y="1600" /><mxPoint x="990" y="1600" /></Array></mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
