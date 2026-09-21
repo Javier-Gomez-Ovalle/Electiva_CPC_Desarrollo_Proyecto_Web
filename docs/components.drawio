@@ -1,0 +1,347 @@
+<mxfile host="app.diagrams.net" agent="Big Pickle (opencode)" version="24.7.17">
+  <diagram id="heraueba-components" name="Componentes">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===================== ACTORES ===================== -->
+        <mxCell id="act-ciso" value="CISO / Director TI" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="60" y="20" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="act-coord" value="Coordinador SOC" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="340" y="20" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="act-anal" value="Analista Junior SOC" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="620" y="20" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== PLATAFORMA HERAUEBA ===================== -->
+        <mxCell id="hera" value="HeraUEBA · Monitoreo analítico (sector salud)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="140" width="1930" height="560" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ui" value="interfaces/" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="hera">
+          <mxGeometry x="20" y="60" width="1060" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n-dash" value="Dashboard Web (Streamlit) — Alertas Rojas · filtro 24h" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontStyle=1;" vertex="1" parent="ui">
+          <mxGeometry x="20" y="65" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n-api" value="API REST (FastAPI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="ui">
+          <mxGeometry x="285" y="65" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n-cli" value="CLI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="ui">
+          <mxGeometry x="540" y="65" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n-chat" value="Chat UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="ui">
+          <mxGeometry x="795" y="65" width="230" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n-sso" value="Keycloak SSO + Active Directory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="hera">
+          <mxGeometry x="1130" y="125" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ai" value="Motor híbrido de IA" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="hera">
+          <mxGeometry x="20" y="255" width="790" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n-dt" value="Árbol de Decisión (fuerza bruta)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="ai">
+          <mxGeometry x="20" y="60" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n-if" value="Isolation Forest (viajes imposibles)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="ai">
+          <mxGeometry x="280" y="60" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n-expl" value="Explicabilidad Caja Blanca (FR-004)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="ai">
+          <mxGeometry x="540" y="60" width="230" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n-whl" value="Whitelist Geográfica (FR-008)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="hera">
+          <mxGeometry x="850" y="315" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n-iso" value="Aislamiento Seguro 2 pasos (FR-005/006/007)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="hera">
+          <mxGeometry x="1130" y="315" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n-rba" value="Dataset RBA (enriquecido IPinfo)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="hera">
+          <mxGeometry x="30" y="455" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n-db" value="BD Local: cuarentena simulada + whitelist" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="hera">
+          <mxGeometry x="360" y="455" width="300" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== CORE / INFRAESTRUCTURA ===================== -->
+        <mxCell id="core" value="core/ · Infraestructura compartida del framework" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;fontColor=#4A148C;" vertex="1" parent="1">
+          <mxGeometry x="30" y="740" width="1930" height="600" as="geometry" />
+        </mxCell>
+
+        <mxCell id="orq" value="core/orchestrator" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="core">
+          <mxGeometry x="20" y="70" width="440" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="n-router" value="Router (qué agente atiende)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="orq">
+          <mxGeometry x="20" y="60" width="400" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-planner" value="Planner (descompone tareas)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="orq">
+          <mxGeometry x="20" y="130" width="400" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-exec" value="Executor (reintentos y fallbacks)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="orq">
+          <mxGeometry x="20" y="200" width="400" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ab" value="core/agent_base" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="core">
+          <mxGeometry x="500" y="70" width="330" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="n-ar" value="AgentRegistry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="ab">
+          <mxGeometry x="20" y="60" width="290" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-ba" value="BaseAgent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="ab">
+          <mxGeometry x="20" y="130" width="290" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sb" value="core/skill_base" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="core">
+          <mxGeometry x="870" y="70" width="330" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="n-sr" value="SkillRegistry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="sb">
+          <mxGeometry x="20" y="60" width="290" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-bsk" value="BaseSkill" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="sb">
+          <mxGeometry x="20" y="130" width="290" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="mem" value="core/memory" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="core">
+          <mxGeometry x="1240" y="70" width="340" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="n-mgr" value="MemoryManager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="mem">
+          <mxGeometry x="20" y="60" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-st" value="ShortTerm (sesión)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="mem">
+          <mxGeometry x="20" y="130" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-lt" value="LongTerm (persistente)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="mem">
+          <mxGeometry x="20" y="200" width="300" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="llmg" value="core/llm_gateway" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="core">
+          <mxGeometry x="1620" y="70" width="290" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="n-prov" value="ProviderRouter (Claude/GPT/local)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="llmg">
+          <mxGeometry x="15" y="60" width="260" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-cost" value="CostTracker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="llmg">
+          <mxGeometry x="15" y="130" width="260" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sec" value="core/security" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="core">
+          <mxGeometry x="480" y="360" width="340" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="n-perm" value="Permissions (RBAC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="sec">
+          <mxGeometry x="20" y="60" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-grd" value="Guardrails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="sec">
+          <mxGeometry x="20" y="130" width="300" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="obs" value="core/observability" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;dashed=1;fillColor=#FFFFFF;strokeColor=#90A4AE;" vertex="1" parent="core">
+          <mxGeometry x="860" y="360" width="340" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="n-trc" value="Tracer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="obs">
+          <mxGeometry x="20" y="60" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n-lgr" value="Logger" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="obs">
+          <mxGeometry x="20" y="130" width="300" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== AGENTES ===================== -->
+        <mxCell id="agentsc" value="agents/" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="1">
+          <mxGeometry x="30" y="1380" width="780" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n-ra" value="research_agent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;" vertex="1" parent="agentsc">
+          <mxGeometry x="30" y="65" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n-ca" value="coding_agent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontStyle=1;" vertex="1" parent="agentsc">
+          <mxGeometry x="410" y="65" width="350" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== SKILLS ===================== -->
+        <mxCell id="skills" value="skills/" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#FFF8E1;strokeColor=#F57F17;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="840" y="1380" width="1120" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n-ws" value="web_search" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE8CC;strokeColor=#D79B00;" vertex="1" parent="skills">
+          <mxGeometry x="20" y="65" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n-ce" value="code_executor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE8CC;strokeColor=#D79B00;" vertex="1" parent="skills">
+          <mxGeometry x="300" y="65" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n-dq" value="db_query" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE8CC;strokeColor=#D79B00;" vertex="1" parent="skills">
+          <mxGeometry x="580" y="65" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n-dg" value="document_generator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE8CC;strokeColor=#D79B00;" vertex="1" parent="skills">
+          <mxGeometry x="860" y="65" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== INTEGRACIONES / CONFIG / EVAL ===================== -->
+        <mxCell id="extl" value="Integraciones · Config · Evaluación" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#FBE9E7;strokeColor=#D84315;fontColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="30" y="1560" width="1930" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n-gh" value="tools/github_client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;" vertex="1" parent="extl">
+          <mxGeometry x="20" y="65" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n-sl" value="tools/slack_client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;" vertex="1" parent="extl">
+          <mxGeometry x="370" y="65" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n-cfg" value="config/ (agents.yaml · skills.yaml · environments)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;" vertex="1" parent="extl">
+          <mxGeometry x="720" y="65" width="460" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n-eval" value="evaluations/ (agent_benchmarks · skill_tests)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;" vertex="1" parent="extl">
+          <mxGeometry x="1210" y="65" width="460" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== FLUJO HERAUEBA ===================== -->
+        <mxCell id="e-ciso-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="act-ciso" target="n-dash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-coord-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="act-coord" target="n-dash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-anal-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="act-anal" target="n-dash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-sso-dash" value="autenticación RBAC" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-sso" target="n-dash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-rba-dt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-rba" target="n-dt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-rba-if" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-rba" target="n-if">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dt-expl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dt" target="n-expl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-if-expl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-if" target="n-expl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-expl-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-expl" target="n-dash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-db-dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-db" target="n-dash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dash-whl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dash" target="n-whl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-whl-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-whl" target="n-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dash-iso" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dash" target="n-iso">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-iso-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-iso" target="n-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== INTERFACES -> ORQUESTADOR ===================== -->
+        <mxCell id="e-dash-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dash" target="n-api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-cli-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-cli" target="n-api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-chat-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-chat" target="n-api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-api-router" value="tarea entrante" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-api" target="n-router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== ORQUESTACIÓN ===================== -->
+        <mxCell id="e-router-planner" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-router" target="n-planner">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-planner-exec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-planner" target="n-exec">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-router-ar" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-router" target="n-ar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ar-ra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ar" target="n-ra">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ar-ca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ar" target="n-ca">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-exec-ra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-exec" target="n-ra">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-exec-ca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-exec" target="n-ca">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ra-ba" value="hereda de" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-ra" target="n-ba">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ca-ba" value="hereda de" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-ca" target="n-ba">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-exec-sr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-exec" target="n-sr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== AGENTES -> SKILLS ===================== -->
+        <mxCell id="e-ra-ws" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ra" target="n-ws">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ra-dg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ra" target="n-dg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ca-ce" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ca" target="n-ce">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dq-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-dq" target="n-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ws-gh" value="usa" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-ws" target="n-gh">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dq-sl" value="usa" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-dq" target="n-sl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== INFRAESTRUCTURA TRANSVERSAL ===================== -->
+        <mxCell id="e-router-cfg" value="config" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-router" target="n-cfg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ba-mgr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-ba" target="n-mgr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-mgr-st" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-mgr" target="n-st">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-mgr-lt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n-mgr" target="n-lt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-exec-prov" value="enruta llamadas a LLM" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-prov">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-prov-cost" value="registra costo/uso" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-prov" target="n-cost">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-exec-grd" value="validan" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-grd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-exec-perm" value="aplican permisos" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-perm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-exec-trc" value="traceado" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-trc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-exec-lgr" value="log" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-exec" target="n-lgr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-eval-ra" value="verifica" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-eval" target="n-ra">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-eval-ws" value="verifica" style="edgeStyle=orthogonalEdgeStyle;dashed=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;fontSize=10;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="n-eval" target="n-ws">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
