@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeraUEBA · Prototipo MVP · SOC Salud</title>
+<meta name="description" content="Prototipo navegable de HeraUEBA: plataforma UEBA para Centros de Operaciones de Seguridad del sector salud. Caja blanca, fricción segura y trazabilidad normativa BR-001/BR-002.">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230F4C81'/%3E%3Cpath d='M16 7l7 3v6.2c0 4.3-2.9 7.7-7 8.8-4.1-1.1-7-4.5-7-8.8V10l7-3z' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M16 13v6M13 16h6' stroke='%23fff' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip-link" href="#view">Saltar al contenido principal</a>
+
+<div class="shell">
+
+  <!-- ===================== RAIL DE NAVEGACIÓN ===================== -->
+  <aside class="rail" aria-label="Navegación principal">
+    <div class="rail__brand">
+      <span class="rail__mark" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l7.5 3v6.1c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6L12 3z"/>
+          <path d="M12 9v6M9 12h6"/>
+        </svg>
+      </span>
+      <span>
+        <span class="rail__name">HeraUEBA</span><br>
+        <span class="rail__sub">SOC Salud</span>
+      </span>
+    </div>
+
+    <nav class="rail__nav" id="nav">
+      <p class="rail__group-label">Operación</p>
+      <a class="navlink" href="#/dashboard" data-nav="dashboard">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="11" width="7" height="10" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span>Monitoreo</span>
+        <span class="navlink__count" id="navCriticalCount" title="Alertas críticas abiertas">0</span>
+      </a>
+      <a class="navlink" href="#/historial" data-nav="historial">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20v-1.6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20"/><circle cx="9" cy="7" r="3.4"/><path d="M17 11l2 2 4-4"/></svg>
+        <span>Historial de usuario</span>
+      </a>
+      <a class="navlink" href="#/whitelist" data-nav="whitelist">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.4 5.4 3.4 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.4-5.4-3.4-8.5S9.8 5.9 12 3.5z"/></svg>
+        <span>Whitelist geográfica</span>
+      </a>
+
+      <p class="rail__group-label">Estados del sistema</p>
+      <a class="navlink" href="#/aislamiento" data-nav="aislamiento">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7.6a4 4 0 0 1 8 0v2.9"/></svg>
+        <span>Aislamiento · 2 pasos</span>
+      </a>
+      <a class="navlink" href="#/error-unidad-critica" data-nav="error-unidad-critica">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9L2.5 17.4A2 2 0 0 0 4.2 20.4h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4.5M12 17h.01"/></svg>
+        <span>Error unidad crítica</span>
+      </a>
+
+      <p class="rail__group-label">Documentación</p>
+      <a class="navlink" href="../docs/02-prompts-stitch.md" data-nav="prompts">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+        <span>Prompts de Stitch</span>
+      </a>
+      <a class="navlink" href="../docs/03-trazabilidad.md" data-nav="trazabilidad">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2"/></svg>
+        <span>Matriz de trazabilidad</span>
+      </a>
+    </nav>
+
+    <div class="rail__foot">
+      <div class="rolecard">
+        <div class="rolecard__avatar" id="roleAvatar">CR</div>
+        <div class="rolecard__name" id="roleName">Carla M. Restrepo</div>
+        <div class="rolecard__role" id="roleLabel">Coordinadora SOC</div>
+      </div>
+      <div class="roleswitch">
+        <span class="roleswitch__label" id="roleSwitchLabel">Simular rol</span>
+        <div class="seg" role="group" aria-labelledby="roleSwitchLabel">
+          <button type="button" class="seg__btn" data-role="coordinador" aria-pressed="true">Coordinador</button>
+          <button type="button" class="seg__btn" data-role="junior" aria-pressed="false">Analista Jr.</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================== COLUMNA PRINCIPAL ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar__id">
+        <div>
+          <nav class="crumbs" id="crumbs" aria-label="Ruta de navegación"></nav>
+          <p class="topbar__title" id="topbarTitle">Dashboard de monitoreo</p>
+          <p class="topbar__sub" id="topbarSub">Clínica Central · Nodo SOC-BOG-01</p>
+        </div>
+      </div>
+      <div class="topbar__actions">
+        <span class="live"><span class="live__dot" aria-hidden="true"></span>Ingesta Keycloak activa · <span class="mono tnum">14:32:08</span> COT</span>
+        <button type="button" class="btn btn--secondary btn--sm" id="btnExport">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 10.5L12 15l4.5-4.5M4 20h16"/></svg>
+          Exportar
+        </button>
+      </div>
+    </header>
+
+    <main id="view" class="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+<div id="modalRoot"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/views.js"></script>
+<script src="assets/modals.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

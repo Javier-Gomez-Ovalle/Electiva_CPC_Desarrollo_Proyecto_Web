@@ -1,0 +1,433 @@
+<!DOCTYPE html><html class="h-full" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Confirmar Aislamiento de Cuenta · HeraUEBA SOC</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script>tailwind.config = {darkMode: "class", theme: {extend: {fontFamily: {sans: ["Inter", "sans-serif"], mono: ["JetBrains Mono", "monospace"], "headline-md": ["Inter"], "body-lg": ["Inter"], "label-sm": ["Public Sans"], "display-lg": ["Inter"], "headline-lg": ["Inter"], "label-md": ["Public Sans"], "body-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "body-md": ["Inter"], "headline-sm": ["Inter"], "label-lg": ["Public Sans"]}, colors: {primary: "#00355f", "primary-dark": "#0a365c", "primary-light": "#e8f1f8", surface: "#f7f9fc", "surface-dim": "#d8dadd", "surface-container-low": "#f2f4f7", "surface-container-lowest": "#ffffff", "outline-subtle": "#e2e6eb", "outline-variant": "#c2c7d1", "danger-red": "#dc2626", "danger-dark": "#b91c1c", "danger-light": "#fef2f2", "danger-border": "#fecaca", "amber-warning": "#d97706", "amber-light": "#fffbeb", "emerald-success": "#059669", "emerald-light": "#ecfdf5", "surface-container-high": "#e6e8eb", "surface-variant": "#e0e3e6", "on-surface-variant": "#42474f", "on-surface": "#191c1e", "on-primary-fixed": "#001c37", "inverse-surface": "#2d3133", "on-tertiary-fixed-variant": "#773200", "on-background": "#191c1e", error: "#ba1a1a", "secondary-fixed-dim": "#ffb3ad", "primary-container": "#0f4c81", "error-container": "#ffdad6", "tertiary-fixed-dim": "#ffb68f", "on-tertiary": "#ffffff", "tertiary-container": "#7d3500", "surface-container": "#eceef1", "on-tertiary-container": "#ffa473", "inverse-on-surface": "#eff1f4", "on-secondary-container": "#600008", "on-primary-container": "#8ebdf9", "on-primary-fixed-variant": "#07497d", "surface-bright": "#f7f9fc", "surface-container-highest": "#e0e3e6", "secondary-container": "#ff5a55", "primary-fixed": "#d2e4ff", "on-primary": "#ffffff", "on-secondary-fixed-variant": "#920212", "on-error-container": "#93000a", "primary-fixed-dim": "#a0c9ff", secondary: "#b52426", "on-tertiary-fixed": "#331100", outline: "#727780", "on-secondary": "#ffffff", "on-error": "#ffffff", tertiary: "#5a2400", "on-secondary-fixed": "#410003", "tertiary-fixed": "#ffdbca", background: "#f7f9fc", "inverse-primary": "#a0c9ff", "secondary-fixed": "#ffdad6", "surface-tint": "#2d6197"}, animation: {"modal-in": "modalIn 120ms cubic-bezier(0.16, 1, 0.3, 1) forwards", "overlay-in": "fadeIn 120ms ease-out forwards"}, keyframes: {modalIn: {"0%": {opacity: "0", transform: "scale(0.98) translateY(4px)"}, "100%": {opacity: "1", transform: "scale(1) translateY(0)"}}, fadeIn: {"0%": {opacity: "0"}, "100%": {opacity: "1"}}}, fontSize: {"headline-md": ["1.5rem", {lineHeight: "2rem", fontWeight: "600"}], "body-lg": ["1.125rem", {lineHeight: "1.75rem", fontWeight: "400"}], "label-sm": ["0.6875rem", {lineHeight: "0.875rem", letterSpacing: "0.03em", fontWeight: "500"}], "display-lg": ["3.5rem", {lineHeight: "4rem", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg": ["2rem", {lineHeight: "2.5rem", letterSpacing: "-0.01em", fontWeight: "600"}], "label-md": ["0.75rem", {lineHeight: "1rem", letterSpacing: "0.02em", fontWeight: "600"}], "body-sm": ["0.875rem", {lineHeight: "1.25rem", fontWeight: "400"}], "headline-lg-mobile": ["1.5rem", {lineHeight: "2rem", fontWeight: "600"}], "body-md": ["1rem", {lineHeight: "1.5rem", fontWeight: "400"}], "headline-sm": ["1.25rem", {lineHeight: "1.75rem", fontWeight: "600"}], "label-lg": ["0.875rem", {lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "600"}]}, spacing: {margin: "1rem", "space-md": "1rem", "space-lg": "1.5rem", "margin-desktop": "2rem", "space-xl": "2rem", "space-xs": "0.25rem", "space-sm": "0.5rem", gutter: "1rem", "gutter-desktop": "1.5rem"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}}}};</script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      vertical-align: middle;
+    }
+    .material-symbols-outlined.fill-1 {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-modal-in, .animate-overlay-in {
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="h-full bg-slate-900 font-sans text-slate-800 antialiased overflow-hidden select-none">
+<!-- ======================================================== -->
+<!-- BACKGROUND LAYER: HeraUEBA INCIDENT DETAIL (DIMMED 90%)   -->
+<!-- ======================================================== -->
+<div aria-hidden="true" class="fixed inset-0 flex bg-[#f7f9fc] pointer-events-none filter blur-[1.5px] opacity-40" id="underlying-screen">
+<!-- Mini Left Nav Rail -->
+<aside class="w-60 bg-[#0f4c81] text-white flex flex-col justify-between p-4 shrink-0">
+<div>
+<div class="flex items-center gap-2 mb-8">
+<div class="w-7 h-7 rounded bg-white/20 flex items-center justify-center font-bold text-sm">H</div>
+<div>
+<div class="text-sm font-bold tracking-tight">HeraUEBA</div>
+<div class="text-[10px] text-white/70">SOC Hospitalario v2.4.1</div>
+</div>
+</div>
+<div class="space-y-1 text-xs">
+<div class="px-3 py-2 rounded text-white/70 flex items-center gap-2"><span class="material-symbols-outlined text-sm">dashboard</span> Panel Principal</div>
+<div class="px-3 py-2 rounded bg-white/15 text-white font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">security</span> Alertas e Incidentes</div>
+<div class="px-3 py-2 rounded text-white/70 flex items-center gap-2"><span class="material-symbols-outlined text-sm">group</span> Entidades y Usuarios</div>
+<div class="px-3 py-2 rounded text-white/70 flex items-center gap-2"><span class="material-symbols-outlined text-sm">account_tree</span> Árbol de Decisión</div>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-3 border-t border-white/20 text-xs">
+<div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center font-bold text-[10px]">CR</div>
+<div>
+<div class="font-medium text-[11px] leading-tight">Carla M. Restrepo</div>
+<div class="text-[9px] text-white/60 leading-tight">Coordinadora SOC</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Background Wireframe -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Top Bar -->
+<div class="h-14 bg-white border-b border-slate-200 px-6 flex items-center justify-between">
+<div class="flex items-center gap-2 text-xs text-slate-500">
+<span class="">Monitoreo</span> / <span class="">Alerta crítica</span> / <span class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">INC-2026-0417</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-red-100 text-red-700 text-xs font-semibold">CRÍTICO · 0.94</span>
+<span class="px-3 py-1.5 bg-red-600 text-white rounded text-xs font-medium">Aislar Entidad</span>
+</div>
+</div>
+<!-- Body Grid -->
+<div class="p-6 grid grid-cols-12 gap-6 overflow-hidden">
+<div class="col-span-8 space-y-4">
+<div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm space-y-3">
+<h2 class="text-base font-bold text-slate-900">Intento de acceso no autorizado</h2>
+<div class="h-16 bg-slate-50 rounded border border-slate-100 p-3 text-xs text-slate-500 font-mono">
+              Usuario: mg.ramirez · Unidad: Neurología (Piso 4) · IP: 185.220.101.47 (Alemania)
+            </div>
+</div>
+<div class="bg-slate-950 p-4 rounded-lg text-emerald-400 font-mono text-xs">
+            CAJA BLANCA · Árbol de Decisión: [TRUE] Intentos fallidos &gt; 8, [TRUE] ASN externo...
+          </div>
+</div>
+<div class="col-span-4 bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+<div class="text-xs font-bold text-slate-700 mb-2">Desglose de Factores</div>
+<div class="space-y-2 text-[11px] text-slate-500">
+<div class="h-2 bg-red-500 rounded"></div>
+<div class="h-2 bg-amber-400 rounded"></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- ======================================================== -->
+<!-- MODAL BACKDROP OVERLAY                                   -->
+<!-- ======================================================== -->
+<div class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-slate-950/75 animate-overlay-in overflow-y-auto" id="modal-overlay" style="background-color: rgba(26, 32, 44, 0.55);">
+<!-- Outer Wrapper (Anchor Monospace Caption + Modal Dialog + Trust Footer) -->
+<div class="w-full max-w-[520px] flex flex-col items-center my-auto">
+<!-- 1. OVERLAY CAPTION (Outside modal, top anchor) -->
+<div class="w-full flex items-center justify-between mb-2.5 px-1">
+<div class="flex items-center gap-1.5 text-[11px] font-mono font-medium uppercase tracking-wider text-slate-300">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+<span class="">Detalle de Alerta</span>
+<span class="text-slate-500">·</span>
+<span class="text-amber-300 font-semibold bg-slate-900/80 px-2 py-0.5 rounded border border-slate-700/70">INC-2026-0417</span>
+</div>
+<div class="text-[11px] font-mono text-slate-400">
+          Operador: <span class="text-slate-200 font-medium">Carla M. Restrepo</span>
+</div>
+</div>
+<!-- 2. THE 520px MODAL CARD -->
+<div aria-describedby="step-description" aria-labelledby="modal-headline" aria-modal="true" class="w-full bg-white rounded-xl shadow-2xl border border-slate-200/90 overflow-hidden flex flex-col animate-modal-in focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-900" id="safety-modal" role="dialog" tabindex="-1">
+<!-- Modal Top Safety Stripe -->
+<div class="h-1 w-full bg-[#0F4C81]"></div>
+<div class="p-6 md:p-7 space-y-5">
+<!-- Modal Header & Stepper -->
+<div class="space-y-4">
+<div class="flex items-start justify-between gap-3">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FFF5F5] border border-[#E53E3E] text-[#9B2C2C] text-[10px] font-mono font-bold uppercase tracking-wider"><span class="material-symbols-outlined text-[13px] text-[#E53E3E]">gavel</span> Regla BR-001 · Bloqueo Humano Obligatorio</span>
+</div>
+<h1 class="text-[20px] font-bold text-slate-900 tracking-tight leading-snug" id="modal-headline">
+                  Confirmar aislamiento de cuenta
+                </h1>
+</div>
+<!-- Escape/Close icon button for quick cancellation -->
+<button class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary" onclick="handleCancel('botón de cerrar')" title="Cerrar modal (Esc)" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+<span class="sr-only">Cerrar diálogo de aislamiento</span>
+</button>
+</div>
+<!-- Stepper: 2-step horizontal row with connector line -->
+<div aria-label="Progreso de confirmación de aislamiento" class="pt-1 pb-1">
+<div class="flex items-center justify-between relative">
+<!-- Connector bar between Step 1 and Step 2 -->
+<div class="absolute left-6 right-6 top-4 -translate-y-1/2 h-[2px] bg-slate-200 z-0"></div>
+<!-- Step 1: Active -->
+<div class="relative z-10 flex items-center gap-2.5 bg-white pr-3">
+<div aria-current="step" class="w-8 h-8 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center ring-4 ring-red-100 shadow-sm" style="background-color: rgb(15, 76, 129); box-shadow: rgb(227, 236, 245) 0px 0px 0px 4px;">
+                    1
+                  </div>
+<div>
+<div class="text-[11px] font-bold uppercase tracking-wider text-[#0F4C81]">Paso 1 de 2</div>
+<div class="text-xs font-semibold text-slate-900">Verificación</div>
+</div>
+</div>
+<!-- Step 2: Pending -->
+<div class="relative z-10 flex items-center gap-2.5 bg-white pl-3 text-slate-400">
+<div class="w-8 h-8 rounded-full bg-slate-100 border border-slate-300 text-slate-400 font-bold text-xs flex items-center justify-center">
+                    2
+                  </div>
+<div>
+<div class="text-[11px] font-medium uppercase tracking-wider text-slate-400">Paso 2 de 2</div>
+<div class="text-xs font-medium text-slate-500">Confirmación final</div>
+</div>
+</div>
+</div>
+<div class="sr-only">Paso 1 de 2: Verificación del operador en curso. Paso 2 de 2: Confirmación pendiente.</div>
+</div>
+</div>
+<!-- Step 1 Body: "Verificación del operador" -->
+<div class="space-y-4" id="step-description">
+<!-- (a) Tinted Warning Container with Triangle Icon + Session Metadata -->
+<div class="rounded-lg bg-[#FFF5F5] border border-[#E53E3E] p-3.5 space-y-2"><div class="flex items-start gap-2.5"><span class="material-symbols-outlined fill-1 text-[#E53E3E] text-[20px] shrink-0 mt-0.5">warning</span><p class="text-[12.5px] leading-relaxed text-[#9B2C2C] font-normal">Esta acción revocará la sesión activa y bloqueará el acceso de <strong class="font-semibold text-[#9B2C2C] bg-white px-1 py-0.2 rounded border border-[#E53E3E]/40 font-mono">mg.ramirez</strong> en Keycloak hasta la verificación humana. <span class="font-bold text-[#9B2C2C]">No se puede deshacer automáticamente.</span></p></div><div class="pt-2 border-t border-[#E53E3E]/30 flex items-center justify-between text-[11px] font-mono text-[#9B2C2C]"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-[#E53E3E]">fingerprint</span> Session-ID: <span class="font-semibold text-[#1A202C]">a7f3-91c2-e04b</span></span><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-[#E53E3E]">dns</span> IdP: <span class="font-semibold text-[#1A202C]">keycloak.hospital.local</span></span></div></div>
+<!-- (b) Definition List: Immediate Consequences -->
+<div class="bg-[#F7F9FC] rounded-lg p-3 border border-[#E2E8F0]"><div class="text-[11px] font-bold uppercase tracking-wider text-[#4A5568] mb-2 flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px] text-[#4A5568]">checklist</span> Consecuencias inmediatas del aislamiento:</div><ul class="grid grid-cols-1 gap-1.5 text-xs text-[#4A5568]"><li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-[#E53E3E] shrink-0">logout</span><span class="">Se revocan <strong class="font-semibold text-[#1A202C]">3 sesiones activas</strong></span></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-[#DD6B20] shrink-0">timer</span><span class="">El usuario pierde el acceso en <strong class="font-semibold text-[#1A202C]">4 segundos</strong></span></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-[#4A5568] shrink-0">history_edu</span><span class="">La auditoría registrará tu identidad, la marca de tiempo y el motivo</span></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-[#0F4C81] shrink-0">mark_email_read</span><span class="">El soporte médico-visual recibe una notificación automática</span></li></ul></div>
+<!-- (e) Alert Strip: Critical Unit Policy Check -->
+<div class="rounded-lg bg-[#EFFAF3] border border-[#38A169] px-3 py-2 flex items-start gap-2.5"><span class="material-symbols-outlined fill-1 text-[#38A169] text-[18px] shrink-0 mt-0.5">verified_user</span><p class="text-[11.5px] leading-snug text-[#276749]"><span class="font-bold text-[#276749]">Verificación automática:</span> mg.ramirez <span class="font-semibold underline decoration-[#38A169]">NO pertenece</span> a una unidad crítica (UCI / Quirófano / Urgencias). El aislamiento es procedente de acuerdo con el protocolo médico.</p></div>
+<!-- Form Section -->
+<form class="space-y-3.5 pt-1" id="isolation-form" onsubmit="event.preventDefault(); proceedToStep2();">
+<!-- (c) Required Text Field: Motivo de la aislamiento -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<label class="text-xs font-semibold text-slate-800 flex items-center gap-1" for="reason-input">
+                    Motivo del aislamiento <span aria-hidden="true" class="text-red-600 font-bold">*</span>
+<span class="text-[11px] font-normal text-slate-500">(obligatorio, mín. 20 car.)</span>
+</label>
+<span class="text-[11px] font-mono text-slate-400 transition-colors" id="char-counter">
+                    0 / 20 car.
+                  </span>
+</div>
+<div class="relative">
+<textarea aria-describedby="reason-hint" aria-required="true" class="w-full text-xs font-sans rounded-lg border border-slate-300 p-2.5 text-slate-800 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all resize-none shadow-xs leading-relaxed" id="reason-input" placeholder="Ej. Credencial comprometida confirmada por el árbol de decisión; acceso no autorizado desde ASN externo." required="" rows="2" style="border-color: rgb(138, 148, 166);"></textarea>
+</div>
+<div class="flex items-center gap-1 text-[11px] text-slate-500 font-medium transition-colors" id="reason-hint">
+<span class="material-symbols-outlined text-[13px] text-slate-400" id="reason-hint-icon">info</span>
+<span id="reason-hint-text" class="">El motivo formará parte indeleble del informe de trazabilidad forense.</span>
+</div>
+</div>
+<!-- (d) Required Password Field: Re-autenticación del operador -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<label class="text-xs font-semibold text-slate-800 flex items-center gap-1" for="password-input">
+                    Re-autenticación del operador <span aria-hidden="true" class="text-red-600 font-bold">*</span>
+</label>
+<span class="text-[10px] font-mono uppercase bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded border border-slate-200">
+                    Carla M. Restrepo
+                  </span>
+</div>
+<div class="relative">
+<input aria-describedby="password-helper" aria-required="true" class="w-full text-xs font-sans rounded-lg border border-slate-300 py-2 pl-3 pr-9 text-slate-800 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all shadow-xs" id="password-input" placeholder="Introduce tu contraseña de Keycloak para continuar" required="" type="password" style="border-color: rgb(138, 148, 166);">
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-slate-400" id="lock-icon-container">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-slate-500 font-medium" id="password-helper">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-slate-400">schedule</span>
+<span class="">Tu sesión se mantiene activa; verificación expira en:</span>
+</span>
+<span class="font-mono font-bold text-amber-700 bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200/80" id="timer-countdown" style="background-color: rgb(255, 244, 232); color: rgb(156, 66, 33); border-color: rgb(221, 107, 32);">04:59</span>
+</div>
+</div>
+</form>
+</div>
+<!-- Modal Footer (Destructive Safety Gateway) -->
+<div class="pt-4 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+<!-- Cancel Text Link (strictly never a filled button) -->
+<button class="text-xs font-semibold text-[#4A5568] hover:text-[#1A202C] underline underline-offset-4 decoration-[#8A94A6] hover:decoration-[#1A202C] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8A94A6] rounded px-1 py-0.5" onclick="handleCancel('enlace Cancelar')" type="button">Cancelar y volver</button>
+<!-- Action Area: Disabled Destructive Button + Helper notes -->
+<div class="flex flex-col items-end gap-1 w-full sm:w-auto">
+<button aria-disabled="true" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-slate-200 text-slate-400 text-xs font-bold cursor-not-allowed transition-all duration-150 shadow-none border border-transparent select-none focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-600" disabled="" id="btn-submit" onclick="proceedToStep2()" type="button" style="background-color: rgb(226, 232, 240); color: rgb(160, 174, 192);">
+<span class="">Continuar al paso 2</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<!-- Accessibility & requirement notice -->
+<div class="flex items-center gap-1.5 text-[11px] text-slate-500 text-right">
+<span class="text-amber-800 font-medium bg-amber-50/80 px-1 rounded text-[10.5px]" id="btn-status-subtext" style="background-color: rgb(255, 244, 232); color: rgb(156, 66, 33); border: 1px solid rgb(221, 107, 32);">Requisitos pendientes</span>
+<span class="text-slate-300">·</span>
+<span class="text-slate-500 text-[11px]">Se solicitará la palabra de confirmación en el siguiente paso.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. TRUST FOOTER BELOW THE DIALOG -->
+<div class="w-full mt-3 px-2 flex items-center justify-center gap-1.5 text-center text-[11.5px] text-slate-200 font-medium"><span class="material-symbols-outlined text-[15px] text-[#38A169] shrink-0">shield</span><span class="">Ninguna cuenta se bloquea de forma automática en HeraUEBA. Los bloqueos sólo ocurren por decisión humana registrada.</span></div>
+</div>
+</div>
+<!-- Notification Toast for Simulated Interactions -->
+<div class="fixed bottom-4 right-4 z-50 transform translate-y-16 opacity-0 transition-all duration-200 pointer-events-none bg-slate-900 text-white text-xs px-4 py-3 rounded-lg shadow-xl border border-slate-700 flex items-center gap-2" id="toast">
+<span class="material-symbols-outlined text-amber-400 text-base" id="toast-icon">info</span>
+<span id="toast-message" class="">Mensaje</span>
+</div>
+<!-- Interactive Validation Script (Vanilla JS) -->
+<script>
+    // State preservation for user input
+    let savedState = {
+      reason: '',
+      passwordEntered: false
+    };
+
+    const modal = document.getElementById('safety-modal');
+    const overlay = document.getElementById('modal-overlay');
+    const reasonInput = document.getElementById('reason-input');
+    const charCounter = document.getElementById('char-counter');
+    const reasonHintText = document.getElementById('reason-hint-text');
+    const reasonHintIcon = document.getElementById('reason-hint-icon');
+    const passwordInput = document.getElementById('password-input');
+    const lockIconContainer = document.getElementById('lock-icon-container');
+    const btnSubmit = document.getElementById('btn-submit');
+    const btnStatusSubtext = document.getElementById('btn-status-subtext');
+    const timerCountdown = document.getElementById('timer-countdown');
+
+    // Accessibility: set initial focus inside modal on load
+    window.addEventListener('DOMContentLoaded', () => {
+      // Focus the reason textarea or modal container
+      setTimeout(() => {
+        reasonInput.focus();
+      }, 150);
+      startCountdown(299); // 4:59 in seconds
+    });
+
+    // Countdown Timer logic
+    function startCountdown(duration) {
+      let timer = duration, minutes, seconds;
+      const interval = setInterval(() => {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        timerCountdown.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          clearInterval(interval);
+          timerCountdown.textContent = "00:00 (Expirada)";
+          timerCountdown.className = "font-mono font-bold text-red-700 bg-red-50 px-1.5 py-0.2 rounded border border-red-200";
+          showToast("La ventana de verificación ha expirado. Por seguridad debe reiniciar la acción.", "error");
+          validateForm();
+        }
+      }, 1000);
+    }
+
+    // Input handlers
+    reasonInput.addEventListener('input', () => {
+      const len = reasonInput.value.trim().length;
+      savedState.reason = reasonInput.value;
+      
+      charCounter.textContent = `${len} / 20 car. mín.`;
+      
+      if (len >= 20) {
+        charCounter.className = "text-[11px] font-mono text-emerald-600 font-bold";
+        reasonHintText.textContent = "Requisito de extensión superado satisfactoriamente.";
+        reasonHintText.className = "text-emerald-700 font-medium";
+        reasonHintIcon.textContent = "check_circle";
+        reasonHintIcon.className = "material-symbols-outlined text-[13px] text-emerald-600";
+        reasonInput.classList.remove('border-red-300');
+        reasonInput.classList.add('border-emerald-300');
+      } else if (len > 0) {
+        charCounter.className = "text-[11px] font-mono text-amber-600 font-semibold";
+        reasonHintText.textContent = `Faltan ${20 - len} caracteres para el mínimo reglamentario.`;
+        reasonHintText.className = "text-amber-700 font-medium";
+        reasonHintIcon.textContent = "pending";
+        reasonHintIcon.className = "material-symbols-outlined text-[13px] text-amber-600";
+        reasonInput.classList.remove('border-emerald-300');
+      } else {
+        charCounter.className = "text-[11px] font-mono text-slate-400";
+        reasonHintText.textContent = "El motivo formará parte indeleble del informe de trazabilidad forense.";
+        reasonHintText.className = "text-slate-500 font-medium";
+        reasonHintIcon.textContent = "info";
+        reasonHintIcon.className = "material-symbols-outlined text-[13px] text-slate-400";
+        reasonInput.classList.remove('border-emerald-300', 'border-red-300');
+      }
+      
+      validateForm();
+    });
+
+    passwordInput.addEventListener('input', () => {
+      savedState.passwordEntered = passwordInput.value.length >= 4;
+      if (savedState.passwordEntered) {
+        lockIconContainer.innerHTML = '<span class="material-symbols-outlined text-[18px] text-emerald-600">lock_open</span>';
+        passwordInput.classList.add('border-emerald-300');
+      } else {
+        lockIconContainer.innerHTML = '<span class="material-symbols-outlined text-[18px] text-slate-400">lock</span>';
+        passwordInput.classList.remove('border-emerald-300');
+      }
+      validateForm();
+    });
+
+    function validateForm() {
+      const isReasonValid = reasonInput.value.trim().length >= 20;
+      const isPasswordValid = passwordInput.value.length >= 4;
+
+      if (isReasonValid && isPasswordValid) {
+        // Enable Destructive Button
+        btnSubmit.disabled = false;
+        btnSubmit.removeAttribute('aria-disabled');
+        btnSubmit.className = "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 active:bg-red-800 text-white text-xs font-bold cursor-pointer transition-all duration-150 shadow-md hover:shadow-lg border border-red-700 select-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600";
+        btnStatusSubtext.textContent = "Listo para avanzar";
+        btnStatusSubtext.className = "text-emerald-700 font-bold bg-emerald-50 px-1 rounded text-[10.5px]";
+      } else {
+        // Disabled state with distinguishable visual + accessibility text
+        btnSubmit.disabled = true;
+        btnSubmit.setAttribute('aria-disabled', 'true');
+        btnSubmit.className = "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-slate-200 text-slate-400 text-xs font-bold cursor-not-allowed transition-all duration-150 shadow-none border border-transparent select-none focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-600";
+        
+        let pending = [];
+        if (!isReasonValid) pending.push("motivo ≥20 car.");
+        if (!isPasswordValid) pending.push("contraseña");
+        btnStatusSubtext.textContent = `Pendiente: ${pending.join(', ')}`;
+        btnStatusSubtext.className = "text-amber-800 font-medium bg-amber-50/80 px-1 rounded text-[10.5px]";
+      }
+    }
+
+    // Step 2 Transition (Simulated in accordance with dual confirmation pattern)
+    function proceedToStep2() {
+      if (btnSubmit.disabled) return;
+      showToast("Avanzando a Paso 2: Solicitud de palabra de confirmación...", "warning");
+      // Simulated step 2 indicator
+      setTimeout(() => {
+        alert("Paso 1 Verificado correctamente.\n\nEn el Paso 2 (Confirmación final), el operador debe escribir la palabra 'AISLAR' para confirmar el bloqueo definitivo de mg.ramirez en Keycloak con marca de auditoría BR-001.");
+      }, 250);
+    }
+
+    // Cancellation logic preserving typed reason
+    function handleCancel(source) {
+      const currentReason = reasonInput.value.trim();
+      let msg = `Cancelado mediante ${source}.`;
+      if (currentReason) {
+        msg += ` Tu motivo (${currentReason.substring(0, 18)}...) ha sido preservado en memoria para cuando reabras la acción.`;
+      }
+      showToast(msg, "info");
+      overlay.style.opacity = '0.4';
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+      }, 800);
+    }
+
+    // Escape key listener & Backdrop click handler
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        handleCancel('tecla Escape');
+      }
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        handleCancel('clic en el fondo');
+      }
+    });
+
+    // Toast notification helper
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      const toastIcon = document.getElementById('toast-icon');
+      
+      toastMsg.textContent = message;
+      if (type === 'error') {
+        toastIcon.textContent = 'error';
+        toastIcon.className = 'material-symbols-outlined text-red-400 text-base';
+      } else if (type === 'warning') {
+        toastIcon.textContent = 'warning';
+        toastIcon.className = 'material-symbols-outlined text-amber-400 text-base';
+      } else {
+        toastIcon.textContent = 'info';
+        toastIcon.className = 'material-symbols-outlined text-blue-400 text-base';
+      }
+      
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-16', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+  </script>
+
+
+</body></html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html><html class="h-full" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>HeraUEBA - Aislamiento Bloqueado por Unidad Crítica</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface-variant": "#42474f",
+            "error": "#ba1a1a",
+            "surface-tint": "#2d6197",
+            "surface": "#f7f9fc",
+            "primary-fixed": "#d2e4ff",
+            "surface-container-low": "#f2f4f7",
+            "primary-fixed-dim": "#a0c9ff",
+            "outline-variant": "#c2c7d1",
+            "tertiary-fixed": "#ffdbca",
+            "on-error-container": "#93000a",
+            "on-primary-container": "#8ebdf9",
+            "tertiary": "#5a2400",
+            "primary": "#00355f",
+            "on-primary": "#ffffff",
+            "secondary": "#b52426",
+            "on-tertiary-fixed": "#331100",
+            "outline": "#727780",
+            "on-tertiary-fixed-variant": "#773200",
+            "on-secondary-container": "#600008",
+            "on-primary-fixed-variant": "#07497d",
+            "inverse-surface": "#2d3133",
+            "inverse-on-surface": "#eff1f4",
+            "inverse-primary": "#a0c9ff",
+            "tertiary-container": "#7d3500",
+            "surface-variant": "#e0e3e6",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#ffdad6",
+            "primary-container": "#0f4c81",
+            "on-background": "#191c1e",
+            "surface-container-highest": "#e0e3e6",
+            "background": "#f7f9fc",
+            "secondary-container": "#ff5a55",
+            "surface-container": "#eceef1",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#f7f9fc",
+            "secondary-fixed-dim": "#ffb3ad",
+            "on-surface": "#191c1e",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#d8dadd",
+            "on-primary-fixed": "#001c37",
+            "on-secondary-fixed-variant": "#920212",
+            "tertiary-fixed-dim": "#ffb68f",
+            "surface-container-high": "#e6e8eb",
+            "on-secondary-fixed": "#410003",
+            "on-tertiary-container": "#ffa473",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "margin": "1rem",
+            "gutter": "1rem",
+            "space-lg": "1.5rem",
+            "margin-desktop": "2rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "gutter-desktop": "1.5rem"
+          },
+          "fontFamily": {
+            "label-sm": ["Public Sans"],
+            "body-md": ["Inter"],
+            "label-md": ["Public Sans"],
+            "headline-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "label-lg": ["Public Sans"],
+            "headline-lg-mobile": ["Inter"],
+            "headline-lg": ["Inter"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          "fontSize": {
+            "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.03em", "fontWeight": "500" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "fontWeight": "600" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" }],
+            "display-lg": ["3.5rem", { "lineHeight": "4rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "fontWeight": "600" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="h-full bg-background font-body-md text-on-surface antialiased overflow-hidden select-none">
+<!-- ========================================================================= -->
+<!-- BACKGROUND LAYER: Faintly visible HeraUEBA SOC Alert Detail Workspace   -->
+<!-- ========================================================================= -->
+<div class="relative w-full h-screen overflow-hidden flex filter blur-[1.5px] pointer-events-none opacity-40">
+<!-- HeraUEBA SideNav Anchored Shell -->
+<aside class="fixed top-0 left-0 h-screen w-60 flex flex-col justify-between p-space-md z-10 bg-primary border-r border-outline-variant/30">
+<div class="flex flex-col gap-space-lg">
+<div class="flex items-center gap-space-sm px-space-xs">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary font-bold">H</div>
+<div>
+<span class="text-headline-sm font-headline-sm font-bold text-on-primary tracking-tight">HeraUEBA</span>
+<p class="text-label-sm font-label-sm text-primary-fixed-dim">Carla M. Restrepo · Coordinadora SOC</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-space-sm text-surface-variant px-space-md py-space-sm font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+            Panel Principal
+          </a>
+<!-- Active tab matching incident detail context -->
+<a class="flex items-center gap-space-sm bg-primary-container text-on-primary rounded-lg px-space-md py-space-sm font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">security</span>
+            Alertas e Incidentes
+          </a>
+<a class="flex items-center gap-space-sm text-surface-variant px-space-md py-space-sm font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">group</span>
+            Entidades y Usuarios
+          </a>
+<a class="flex items-center gap-space-sm text-surface-variant px-space-md py-space-sm font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">account_tree</span>
+            Árbol de Decisión
+          </a>
+<a class="flex items-center gap-space-sm text-surface-variant px-space-md py-space-sm font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+            Configuración SOC
+          </a>
+</nav>
+</div>
+<div class="flex flex-col gap-space-md">
+<button class="w-full bg-secondary text-on-secondary rounded-lg py-space-sm text-label-md font-label-md font-semibold flex items-center justify-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+          Aislar Entidad
+        </button>
+<div class="border-t border-outline-variant/20 pt-space-sm flex flex-col gap-1">
+<div class="flex items-center gap-space-sm text-surface-variant px-space-md py-space-xs font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">history</span> Auditoría
+          </div>
+<div class="flex items-center gap-space-sm text-surface-variant px-space-md py-space-xs font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">help</span> Centro de Ayuda
+          </div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar & Background Canvas -->
+<div class="flex-1 ml-60 flex flex-col h-full bg-surface">
+<!-- TopNavBar Component -->
+<header class="h-16 w-full px-space-lg bg-surface-container-lowest border-b border-outline-variant/40 flex justify-between items-center">
+<div class="flex items-center gap-space-md">
+<span class="text-headline-sm font-headline-sm font-bold text-primary">HeraUEBA</span>
+<span class="text-outline-variant">/</span>
+<span class="font-label-lg text-label-lg text-on-surface">INC-2026-0419</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs text-on-surface-variant text-label-md font-label-md">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span class="material-symbols-outlined text-[18px]">shield</span>
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</div>
+<button class="bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md">Exportar Informe</button>
+<button class="bg-secondary text-on-secondary px-space-md py-space-xs rounded-lg font-label-md text-label-md">Bloquear Acceso</button>
+</div>
+</header>
+<!-- Background Incident Canvas Detail -->
+<main class="p-space-lg flex-1 overflow-y-auto space-y-space-md">
+<div class="p-space-lg bg-surface-container-lowest rounded-xl border border-outline-variant/40 shadow-sm">
+<h2 class="text-headline-sm font-headline-sm text-primary mb-2">INC-2026-0419: Acceso anómalo simultáneo a Registro Clínico Urgencias</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Entidad comprometida: enf.castillo · Dra. Elena Carolina Castillo M. · Urgencias Quirúrgicas</p>
+</div>
+<div class="grid grid-cols-3 gap-space-md">
+<div class="h-44 bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md">Árbol de Decisión UEBA</div>
+<div class="h-44 bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md">Vector de Amenaza</div>
+<div class="h-44 bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md">Matriz de Riesgo Paciente</div>
+</div>
+</main>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL SCRIM OVERLAY                                                       -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 bg-[#001c37]/75 flex flex-col items-center justify-center p-space-md overflow-y-auto" style="background-color: rgba(26, 32, 44, 0.55);">
+<!-- Caption above Dialog -->
+<div class="w-full max-w-[520px] mb-space-xs flex items-center justify-between px-space-xs"><span class="font-mono text-[11px] font-semibold text-white/90 uppercase tracking-wider">DETALLE DE ALERTA · INC-2026-0419 · OPERADOR: Carla M. Restrepo</span><span class="inline-flex items-center gap-1 font-mono text-[11px] text-white/90 font-medium"><span class="w-1.5 h-1.5 rounded-full" style="background-color: #C53030;"></span>SOC ACTIVO</span></div>
+<!-- Centered Dialog Container: strictly max 520px width -->
+<div class="w-full max-w-[520px] bg-surface-container-lowest rounded-xl border border-outline-variant/40 shadow-2xl overflow-hidden flex flex-col my-auto animate-in fade-in zoom-in-95 duration-200" style="background-color: rgb(255, 255, 255); border-color: rgb(226, 232, 240);">
+<!-- 1. Modal Header -->
+<div class="p-space-lg pb-space-md flex items-start gap-space-md border-b" style="border-color: rgb(226, 232, 240);"><div class="w-11 h-11 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm mt-0.5" style="background-color: #FFF4E8; border: 1px solid #DD6B20; color: #DD6B20;"><span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">gpp_maybe</span></div><div class="flex-1 pr-space-xs"><h1 class="text-headline-sm font-headline-sm tracking-tight leading-snug" style="color: #0F4C81;">Aislamiento bloqueado por política de unidad crítica</h1><p class="text-body-sm font-body-sm mt-1 leading-relaxed" style="color: #4A5568;">La cuenta seleccionada pertenece a una unidad protegida y no puede ser aislada automáticamente.</p></div></div>
+<!-- Scrollable dialog body -->
+<div class="p-space-lg space-y-space-md overflow-y-auto max-h-[calc(84vh-140px)]"><!-- 2. Subject Card --><div class="rounded-lg p-space-md border flex flex-col gap-space-xs" style="background-color: rgb(248, 250, 252); border-color: rgb(226, 232, 240);"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-full text-white flex items-center justify-center font-label-md text-label-md font-bold tracking-tight" style="background-color: #0F4C81;">EC</div><div><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-[0.9375rem] font-bold leading-none" style="color: #1A202C;">Dra. Elena Carolina Castillo M.</span><span class="font-mono text-label-sm font-medium" style="color: #4A5568;">· enf.castillo</span></div><p class="text-label-sm font-label-sm mt-0.5" style="color: #4A5568;">Enfermera jefe instrumental · Urgencias</p></div></div><!-- Critical Unit Badge (Medium / warning severity) --><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-label-sm font-label-sm font-bold tracking-tight" style="background-color: #FFF4E8; border: 1px solid #DD6B20; color: #9C4221;"><span class="material-symbols-outlined text-[13px]" style="color: #DD6B20; font-variation-settings: 'FILL' 1;">medical_services</span>UNIDAD CRÍTICA · URGENCIAS</span></div><div class="mt-1 pt-1.5 border-t flex items-center justify-between" style="border-color: #E2E8F0;"><span class="font-mono text-[11px]" style="color: #4A5568;">Turno activo: 14:00–22:00 · Pacientes a cargo: 6</span><span class="inline-flex items-center gap-1 text-[11px] font-mono font-semibold" style="color: #9B2C2C;"><span class="w-1.5 h-1.5 rounded-full" style="background-color: #C53030;"></span>En servicio activo</span></div></div><!-- 3. Normative Reason Block (Motivo normativo BR-002) --><div class="border rounded-lg p-space-md space-y-space-xs" style="background-color: rgb(255, 244, 232); border-color: rgb(221, 107, 32);"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]" style="color: #DD6B20;">policy</span><h2 class="font-label-lg text-label-lg font-bold" style="color: #9C4221;">Motivo normativo (BR-002)</h2></div><ul class="space-y-1.5 pt-1 text-body-sm font-body-sm" style="color: #4A5568;"><li class="flex items-start gap-2"><span class="material-symbols-outlined text-[16px] flex-shrink-0 mt-0.5" style="color: #DD6B20;">warning</span><span class="leading-tight">El aislamiento de personal médico en Urgencias puede impedir la atención de un paciente en estado crítico.</span></li><li class="flex items-start gap-2"><span class="material-symbols-outlined text-[16px] flex-shrink-0 mt-0.5" style="color: #DD6B20;">verified_user</span><span class="leading-tight">La política BR-002 del hospital prohíbe el bloqueo de cuentas de UCI, Quirófano y Urgencias sin autorización del Director TI.</span></li><li class="flex items-start gap-2"><span class="material-symbols-outlined text-[16px] flex-shrink-0 mt-0.5" style="color: #DD6B20;">rule</span><span class="leading-tight">Regla de sistema: la evaluación se ejecutó y la cuenta fue marcada como unidad crítica antes de aplicar cualquier bloqueo.</span></li></ul></div><!-- 4. What did happen instead (Mitigación ya aplicada) --><div class="rounded-lg border p-space-md space-y-space-xs" style="background-color: rgb(239, 250, 243); border-color: rgb(226, 232, 240);"><div class="flex items-center justify-between"><h3 class="font-label-lg text-label-lg font-bold flex items-center gap-1.5" style="color: #0F4C81;"><span class="material-symbols-outlined text-[18px]" style="color: #38A169;">task_alt</span>Mitigación ya aplicada</h3><span class="text-label-sm font-label-sm font-bold border px-2 py-0.5 rounded-lg" style="background-color: #EFFAF3; border-color: #38A169; color: #276749;">4/4 ACCIONES SOC</span></div><div class="grid grid-cols-1 gap-1.5 pt-1"><div class="flex items-start gap-2 text-body-sm font-body-sm" style="color: #1A202C;"><span class="material-symbols-outlined text-[17px] flex-shrink-0 mt-0.5" style="color: #38A169; font-variation-settings: 'FILL' 1;">check_circle</span><span class="leading-tight">La sesión sospechosa fue revocada</span></div><div class="flex items-start gap-2 text-body-sm font-body-sm" style="color: #1A202C;"><span class="material-symbols-outlined text-[17px] flex-shrink-0 mt-0.5" style="color: #38A169; font-variation-settings: 'FILL' 1;">check_circle</span><span class="leading-tight">Se forzó el cierre de sesión sin afectar credenciales</span></div><div class="flex items-start gap-2 text-body-sm font-body-sm" style="color: #1A202C;"><span class="material-symbols-outlined text-[17px] flex-shrink-0 mt-0.5" style="color: #38A169; font-variation-settings: 'FILL' 1;">check_circle</span><span class="leading-tight">Se abrió el incidente INC-2026-0419 y se notificó al CISO</span></div><div class="flex items-start gap-2 text-body-sm font-body-sm" style="color: #1A202C;"><span class="material-symbols-outlined text-[17px] flex-shrink-0 mt-0.5" style="color: #38A169; font-variation-settings: 'FILL' 1;">check_circle</span><span class="leading-tight">La cuenta quedó en estado "monitoreo reforzado" con re-autenticación en el próximo acceso</span></div></div></div><!-- 5. Required authorization block --><div class="rounded-lg border p-space-md space-y-space-sm" style="background-color: rgb(255, 255, 255); border-color: rgb(226, 232, 240);"><div class="flex items-center justify-between"><label class="text-label-md font-label-md font-bold" style="color: #1A202C;" for="ciso-code">Para desbloquear esta acción se requiere</label><button class="text-label-sm font-label-sm hover:underline font-semibold flex items-center gap-0.5" style="color: #0F4C81;" type="button"><span class="material-symbols-outlined text-[14px]">help_outline</span>¿Dónde obtengo el código?</button></div><div class="space-y-1.5"><div class="relative"><input class="w-full bg-white text-body-sm font-body-sm rounded-lg py-2 pl-3 pr-24 focus:outline-none placeholder:text-gray-400 font-mono" id="ciso-code" placeholder="Código de autorización del Director TI (CISO)" style="border: 1px solid #8A94A6; color: #1A202C;" type="text"><span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded" style="background-color: #F8FAFC; border: 1px solid #E2E8F0; color: #4A5568;">TOKEN 6-DÍG</span></div><p class="text-label-sm font-label-sm" style="color: #4A5568;">El código se solicita al CISO por el canal institucional y caduca a los 15 minutos. (Ing. Ricardo Salamanca · Director TI / CISO).</p><!-- Live validation alert in danger tint --><div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-label-sm font-label-sm font-semibold" style="background-color: #FFF5F5; border: 1px solid #E53E3E; color: #9B2C2C;"><span class="material-symbols-outlined text-[15px] flex-shrink-0" style="color: #C53030;">error</span><span class="">Ningún código registrado para esta cuenta.</span></div></div></div><!-- 6. Alternative actions section --><div class="space-y-space-xs"><h3 class="text-label-lg font-label-lg font-bold flex items-center gap-1" style="color: #0F4C81;"><span class="material-symbols-outlined text-[18px]" style="color: #0F4C81;">alt_route</span>Rutas alternativas disponibles</h3><div class="space-y-2"><!-- Alternative 1 --><button class="w-full text-left p-space-sm rounded-lg transition-all flex items-center justify-between group" style="background-color: #FFFFFF; border: 1px solid #8A94A6;" type="button"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-105" style="color: #0F4C81;">forward_to_inbox</span><span class="text-body-sm font-body-sm font-medium" style="color: #1A202C;">Escalar al CISO con el resumen del incidente</span></div><span class="material-symbols-outlined text-[18px]" style="color: #4A5568;">chevron_right</span></button><!-- Alternative 2 --><button class="w-full text-left p-space-sm rounded-lg transition-all flex items-center justify-between group" style="background-color: #FFFFFF; border: 1px solid #8A94A6;" type="button"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-105" style="color: #0F4C81;">logout</span><span class="text-body-sm font-body-sm font-medium" style="color: #1A202C;">Solicitar cierre de sesión remoto (sin bloqueo de credenciales)</span></div><span class="material-symbols-outlined text-[18px]" style="color: #4A5568;">chevron_right</span></button><!-- Alternative 3 --><button class="w-full text-left p-space-sm rounded-lg transition-all flex items-center justify-between group" style="background-color: #FFFFFF; border: 1px solid #8A94A6;" type="button"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-105" style="color: #0F4C81;">flaky</span><span class="text-body-sm font-body-sm font-medium" style="color: #1A202C;">Marcar la alerta como falso positivo con justificación</span></div><span class="material-symbols-outlined text-[18px]" style="color: #4A5568;">chevron_right</span></button></div></div></div>
+<!-- 7. Modal Footer -->
+<div class="p-space-md flex items-center justify-between gap-space-md border-t" style="background-color: rgb(255, 255, 255); border-color: rgb(226, 232, 240);"><!-- Left Link --><a class="text-label-md font-label-md font-semibold transition-colors flex items-center gap-1 hover:underline" href="#" style="color: #4A5568;"><span class="material-symbols-outlined text-[16px]">arrow_back</span>Volver al detalle de la alerta</a><!-- Right Action Cluster: Single filled primary button + caption --><div class="flex flex-col items-end gap-1"><button class="font-label-lg text-label-lg px-space-lg py-2 rounded-lg font-semibold transition-all shadow-sm active:scale-95 flex items-center gap-1.5 text-white" style="background-color: #0F4C81;" onmouseover="this.style.backgroundColor='#0B3A63'" onmouseout="this.style.backgroundColor='#0F4C81'" type="button"><span class="material-symbols-outlined text-[18px]">send</span>Escalar al CISO</button><span class="text-[10px] font-label-sm text-right max-w-[240px] leading-tight" style="color: #4A5568;">El aislamiento permanece disponible cuando el CISO registre la autorización.</span></div></div>
+</div>
+<!-- 8. Trust Footer Below Dialog -->
+<div class="w-full max-w-[520px] mt-space-sm text-center"><p class="text-label-sm font-label-sm flex items-center justify-center gap-1.5" style="color: rgb(255, 255, 255);"><span class="material-symbols-outlined text-[15px]" style="color: #E3ECF5;">verified</span><span class="">HeraUEBA nunca bloquea personal de unidades críticas sin autorización humana registrada (BR-002).</span></p></div>
+</div>
+
+
+</body></html>

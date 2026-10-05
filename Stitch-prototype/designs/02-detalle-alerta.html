@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeraUEBA · Detalle de Alerta Crítica (INC-2026-0417)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              canvas: '#F5F7FA',
+              surface: '#FFFFFF',
+              header: '#F5F7FA',
+              primary: '#0F4C81',
+              primaryHover: '#0B3A63',
+              primaryContainer: '#E3ECF5',
+              textPrimary: '#1A202C',
+              textSecondary: '#4A5568',
+              borderLight: '#E2E8F0',
+              borderStrong: '#8A94A6',
+              criticalFill: '#C53030',
+              criticalStripe: '#E53E3E',
+              criticalContainer: '#FFF5F5',
+              criticalText: '#9B2C2C',
+              warningFill: '#DD6B20',
+              warningText: '#9C4221',
+              warningContainer: '#FFF4E8',
+              successFill: '#38A169',
+              successText: '#276749',
+              successContainer: '#EFFAF3',
+              disabledBg: '#E2E8F0',
+              disabledText: '#A0AEC0'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"Fira Code"', 'ui-monospace', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .font-mono-numbers {
+      font-variant-numeric: tabular-nums;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
+      vertical-align: middle;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body class="bg-brand-canvas text-brand-textPrimary font-sans antialiased min-h-screen flex flex-col selection:bg-brand-primaryContainer selection:text-brand-primary">
+
+  <!-- Top Bar / App Shell Wrapper -->
+  <div class="flex flex-1 min-h-screen">
+
+    <!-- 1. Left navigation rail (240px, fixed) -->
+    <aside class="w-60 bg-brand-surface border-r border-brand-borderLight flex flex-col justify-between shrink-0 fixed inset-y-0 left-0 z-30">
+      <div class="flex flex-col">
+        <!-- Logo and SOC label -->
+        <div class="h-16 px-5 border-b border-brand-borderLight flex items-center gap-3">
+          <div class="w-8 h-8 rounded-[4px] bg-brand-primary flex items-center justify-center text-white font-bold text-lg tracking-wider">
+            H
+          </div>
+          <div>
+            <div class="font-bold text-base tracking-tight text-brand-primary leading-none flex items-center gap-1.5">
+              HeraUEBA
+            </div>
+            <div class="text-[11px] font-semibold text-brand-textSecondary tracking-wider uppercase mt-1">
+              SOC Salud
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="p-3 space-y-1">
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-[4px] bg-brand-primaryContainer text-brand-primary font-semibold text-sm border-l-4 border-brand-primary transition-colors">
+            <span class="material-symbols-outlined text-[19px]">dashboard</span>
+            <span>Monitoreo</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-[4px] text-brand-textSecondary hover:bg-brand-canvas hover:text-brand-textPrimary text-sm font-medium transition-colors">
+            <span class="material-symbols-outlined text-[19px]">group</span>
+            <span>Historial de usuarios</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-[4px] text-brand-textSecondary hover:bg-brand-canvas hover:text-brand-textPrimary text-sm font-medium transition-colors">
+            <span class="material-symbols-outlined text-[19px]">public</span>
+            <span>Whitelist geográfica</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-[4px] text-brand-textSecondary hover:bg-brand-canvas hover:text-brand-textPrimary text-sm font-medium transition-colors">
+            <span class="material-symbols-outlined text-[19px]">settings</span>
+            <span>Configuración</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Bottom Identity Block -->
+      <div class="p-3 border-t border-brand-borderLight bg-brand-surface">
+        <div class="p-2 rounded-[4px] bg-brand-canvas border border-brand-borderLight">
+          <div class="flex items-center gap-2 mb-1.5">
+            <div class="w-7 h-7 rounded-[4px] bg-brand-primary text-white font-semibold text-xs flex items-center justify-center">
+              CR
+            </div>
+            <div class="overflow-hidden">
+              <div class="text-xs font-semibold text-brand-textPrimary truncate">Carla M. Restrepo</div>
+              <div class="text-[10px] text-brand-textSecondary truncate">Coordinadora SOC</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-1 border-t border-brand-borderLight/70">
+            <span class="inline-flex items-center gap-1.5 text-[10px] font-mono font-medium text-brand-successText">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-successFill"></span>
+              Keycloak SSO · Activo
+            </span>
+            <span class="material-symbols-outlined text-[14px] text-brand-textSecondary">verified_user</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Container (offset by 240px) -->
+    <div class="flex-1 ml-60 flex flex-col min-w-0">
+
+      <!-- Breadcrumb + Header Header Area -->
+      <header class="bg-brand-surface border-b border-brand-borderLight px-8 py-5">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-xs font-medium text-brand-textSecondary mb-2 font-mono">
+          <a href="#" class="hover:text-brand-primary transition-colors flex items-center gap-1">
+            <span class="material-symbols-outlined text-[14px]">arrow_back</span>
+            Monitoreo
+          </a>
+          <span>/</span>
+          <span class="text-brand-textSecondary">Alerta crítica</span>
+          <span>/</span>
+          <span class="text-brand-textPrimary font-semibold font-mono">INC-2026-0417</span>
+        </nav>
+
+        <!-- H1 and Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-3">
+              <h1 class="text-2xl font-bold text-brand-textPrimary tracking-tight">
+                Intento de acceso no autorizado
+              </h1>
+              <span class="px-2 py-0.5 text-xs font-mono font-bold rounded-[4px] bg-brand-criticalFill text-white tracking-wide inline-flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">report</span>
+                CRÍTICO
+              </span>
+            </div>
+            <!-- Metadata Chips row -->
+            <div class="flex flex-wrap items-center gap-2 mt-2.5 text-xs">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-brand-criticalContainer text-brand-criticalText border border-brand-criticalStripe/30 font-mono font-semibold">
+                <span class="material-symbols-outlined text-[14px] text-brand-criticalStripe">speed</span>
+                Puntaje de riesgo 0.94 / 1.00
+              </span>
+
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-brand-warningContainer text-brand-warningText border border-brand-warningFill/30 font-medium">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-warningFill"></span>
+                Estado: Abierta
+              </span>
+
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-brand-canvas text-brand-textSecondary border border-brand-borderLight font-mono uppercase text-[11px] font-semibold">
+                <span class="material-symbols-outlined text-[13px]">local_hospital</span>
+                DEPARTAMENTO: NEUROLOGÍA
+              </span>
+
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-brand-canvas text-brand-criticalText border border-brand-borderLight font-mono uppercase text-[11px] font-semibold">
+                <span class="material-symbols-outlined text-[13px] text-brand-criticalStripe">not_interested</span>
+                WHITELIST NO APLICABLE
+              </span>
+
+              <span class="text-brand-textSecondary font-mono text-[11px] ml-auto">
+                Detectado: <strong class="text-brand-textPrimary">2026-10-04 14:31:09 COT</strong>
+              </span>
+            </div>
+          </div>
+
+          <!-- Secondary Quick Actions in Header -->
+          <div class="flex items-center gap-2">
+            <button onclick="copyIncidentCode()" id="btn-copy-inc" class="px-3 py-1.5 rounded-[4px] border border-brand-borderStrong text-brand-textPrimary bg-brand-surface hover:bg-brand-canvas text-xs font-semibold font-mono inline-flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary">
+              <span class="material-symbols-outlined text-[15px]">content_copy</span>
+              <span id="txt-copy-inc">Copiar incidente</span>
+            </button>
+            <button class="px-3 py-1.5 rounded-[4px] border border-brand-borderStrong text-brand-textPrimary bg-brand-surface hover:bg-brand-canvas text-xs font-semibold inline-flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary">
+              <span class="material-symbols-outlined text-[15px]">download</span>
+              Exportar STIX / JSON
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area: 2-Column Responsive Layout -->
+      <main class="flex-1 p-8 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-6 items-start max-w-[1600px] w-full mx-auto">
+
+        <!-- ================= LEFT COLUMN (MAIN, FLUID) ================= -->
+        <div class="space-y-6 min-w-0">
+
+          <!-- 3a. User summary card -->
+          <section class="bg-brand-surface border border-brand-borderLight rounded-[6px] p-5 shadow-none">
+            <div class="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-brand-borderLight">
+              <div class="flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-[4px] bg-brand-primaryContainer text-brand-primary border border-brand-primary/20 flex items-center justify-center font-bold text-base">
+                  MR
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h2 class="text-base font-bold text-brand-textPrimary leading-tight">Dra. María Fernanda Ramírez S.</h2>
+                    <span class="px-2 py-0.5 rounded-[4px] bg-brand-canvas border border-brand-borderLight font-mono text-xs font-semibold text-brand-primary">
+                      mg.ramirez
+                    </span>
+                  </div>
+                  <p class="text-xs text-brand-textSecondary mt-0.5">
+                    Médica especialista · Neurología
+                  </p>
+                </div>
+              </div>
+              <div class="text-right shrink-0">
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-brand-successContainer text-brand-successText font-semibold text-xs border border-brand-successFill/20">
+                  <span class="material-symbols-outlined text-[14px]">lock_reset</span>
+                  MFA Activado
+                </span>
+                <div class="text-[11px] font-mono text-brand-textSecondary mt-1">Antigüedad: 4 años</div>
+              </div>
+            </div>
+
+            <!-- Details Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs mb-4">
+              <div>
+                <span class="text-brand-textSecondary uppercase tracking-wider text-[10px] block font-semibold">Departamento</span>
+                <span class="font-medium text-brand-textPrimary mt-0.5 block">Neurología</span>
+              </div>
+              <div>
+                <span class="text-brand-textSecondary uppercase tracking-wider text-[10px] block font-semibold">Unidad Clínica</span>
+                <span class="font-medium text-brand-textPrimary mt-0.5 block">Piso 4 · Ala norte</span>
+              </div>
+              <div>
+                <span class="text-brand-textSecondary uppercase tracking-wider text-[10px] block font-semibold">Turno Habitual</span>
+                <span class="font-medium text-brand-textPrimary mt-0.5 block font-mono-numbers">Mañana 07:00–13:00</span>
+              </div>
+              <div>
+                <span class="text-brand-textSecondary uppercase tracking-wider text-[10px] block font-semibold">Último Login Legítimo</span>
+                <span class="font-mono text-[11px] text-brand-textPrimary mt-0.5 block truncate" title="2026-10-04 07:02 COT desde 190.24.9.14 (Colombia)">
+                  2026-10-04 07:02 COT (CO)
+                </span>
+              </div>
+            </div>
+
+            <!-- Warning container in #FFF5F5 -->
+            <div class="p-3 rounded-[4px] bg-brand-criticalContainer border-l-4 border-brand-criticalStripe flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-brand-criticalStripe text-[18px] shrink-0 mt-0.5">warning</span>
+              <p class="text-xs font-medium text-brand-criticalText leading-relaxed">
+                El acceso actual se produce desde un país fuera de la whitelist del usuario y fuera del patrón histórico validado por el Comité de Ciberseguridad Hospitalaria.
+              </p>
+            </div>
+          </section>
+
+          <!-- 3b. AI decision explanation panel — "Caja Blanca · Árbol de Decisión" (CENTERPIECE) -->
+          <section class="bg-brand-surface border border-brand-borderLight rounded-[6px] overflow-hidden shadow-none">
+            <!-- Header bar of the code block -->
+            <div class="px-5 py-3.5 bg-brand-header border-b border-brand-borderLight flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-brand-primary text-[20px]">account_tree</span>
+                <div>
+                  <h2 class="text-sm font-bold text-brand-textPrimary">Caja Blanca · Árbol de Decisión</h2>
+                  <span class="text-[11px] font-mono text-brand-textSecondary">Modelo inferencial: <strong>dt-ueba v2.4</strong> · Motor explicable determinista</span>
+                </div>
+              </div>
+              <button onclick="copyDecisionTree()" id="btn-copy-rules" class="px-3 py-1 rounded-[4px] border border-brand-borderStrong text-brand-textPrimary bg-brand-surface hover:bg-brand-canvas text-xs font-semibold font-mono inline-flex items-center gap-1.5 transition-all focus:outline-none focus:ring-2 focus:ring-brand-primary">
+                <span class="material-symbols-outlined text-[15px]" id="icon-copy-rules">content_copy</span>
+                <span id="txt-copy-rules">Copiar reglas</span>
+              </button>
+            </div>
+
+            <!-- Visual Monospace Code Block -->
+            <div class="p-5 bg-[#FAFCFF] border-b border-brand-borderLight font-mono text-[13px] leading-relaxed text-brand-textPrimary overflow-x-auto select-text">
+              <div class="space-y-1.5 min-w-[580px]">
+                <div class="flex items-center justify-between py-1 px-2 rounded-[4px] bg-brand-criticalContainer border-l-2 border-brand-criticalStripe">
+                  <span><strong class="text-brand-primary font-bold">NODO 1</strong>  intentos_fallidos_15m &gt; 8</span>
+                  <span class="text-brand-textSecondary">→ observado: <strong class="text-brand-textPrimary font-semibold">14</strong></span>
+                  <span class="px-1.5 py-0.2 rounded bg-brand-criticalFill text-white text-[11px] font-bold">[TRUE]</span>
+                </div>
+
+                <div class="flex items-center justify-between py-1 px-2 pl-6 rounded-[4px] bg-brand-criticalContainer border-l-2 border-brand-criticalStripe">
+                  <span><strong class="text-brand-primary font-bold">NODO 2</strong>  ventana_entre_intentos_min &lt; 2</span>
+                  <span class="text-brand-textSecondary">→ observado: <strong class="text-brand-textPrimary font-semibold">1.4</strong> min</span>
+                  <span class="px-1.5 py-0.2 rounded bg-brand-criticalFill text-white text-[11px] font-bold">[TRUE]</span>
+                </div>
+
+                <div class="flex items-center justify-between py-1 px-2 pl-10 rounded-[4px] bg-brand-criticalContainer border-l-2 border-brand-criticalStripe">
+                  <span><strong class="text-brand-primary font-bold">NODO 3</strong>  pais_origen != whitelist</span>
+                  <span class="text-brand-textSecondary">→ observado: <strong class="text-brand-criticalText font-semibold">Alemania ≠ Colombia</strong></span>
+                  <span class="px-1.5 py-0.2 rounded bg-brand-criticalFill text-white text-[11px] font-bold">[TRUE]</span>
+                </div>
+
+                <div class="flex items-center justify-between py-1 px-2 pl-14 rounded-[4px] bg-brand-warningContainer/70 border-l-2 border-brand-warningFill">
+                  <span><strong class="text-brand-primary font-bold">NODO 4</strong>  mfa_activo == true</span>
+                  <span class="text-brand-textSecondary">→ observado: <strong class="text-brand-warningText font-semibold">false (bypass por API REST)</strong></span>
+                  <span class="px-1.5 py-0.2 rounded bg-brand-warningFill text-white text-[11px] font-bold">[FALSE]</span>
+                </div>
+
+                <div class="flex items-center justify-between py-1 px-2 pl-16 rounded-[4px] bg-brand-canvas border-l-2 border-brand-borderStrong">
+                  <span><strong class="text-brand-primary font-bold">NODO 5</strong>  usuario_unidad_critica?</span>
+                  <span class="text-brand-textSecondary">→ observado: <strong class="text-brand-textPrimary">false (No está en UCI/Quirófano)</strong></span>
+                  <span class="px-1.5 py-0.2 rounded bg-brand-borderStrong text-white text-[11px] font-bold">VERIF</span>
+                </div>
+
+                <!-- Verdict Banner inside code block -->
+                <div class="mt-3 p-2.5 rounded-[4px] bg-brand-criticalFill text-white font-bold flex items-center justify-between text-xs tracking-wider">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">gavel</span>
+                    VEREDICTO DE LA INFERENCIA: CREDENCIAL COMPROMETIDA (FACTOR: 0.94)
+                  </div>
+                  <span class="font-mono text-[11px] bg-black/25 px-2 py-0.5 rounded">INCIDENCIA ALTA</span>
+                </div>
+              </div>
+
+              <!-- Legend / Leyenda & Global Rule -->
+              <div class="mt-4 pt-3 border-t border-brand-borderLight text-xs text-brand-textSecondary grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="space-y-1">
+                  <div class="font-bold text-brand-textPrimary text-[11px] uppercase tracking-wider mb-1">LEYENDA DE EVALUACIÓN</div>
+                  <div class="flex items-center gap-2">
+                    <span class="px-1 bg-brand-criticalFill text-white font-bold text-[10px] rounded">[TRUE]</span>
+                    <span class="text-[11px]">Regla evaluada como verdadera; cada acierto suma al puntaje</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="px-1 bg-brand-warningFill text-white font-bold text-[10px] rounded">[FALSE]</span>
+                    <span class="text-[11px]">Regla evaluada como falsa; se exploró la rama derecha</span>
+                  </div>
+                </div>
+                <div class="p-2 rounded-[4px] bg-brand-canvas border border-brand-borderLight">
+                  <div class="font-bold text-brand-textPrimary text-[11px] uppercase tracking-wider mb-0.5">REGLA GLOBAL DISPARADA</div>
+                  <code class="text-brand-primary font-bold text-[11px] block break-all">
+                    intentos &gt; 8 AND ventana &lt; 2 min AND pais != Colombia
+                  </code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plain Spanish Interpretation Line -->
+            <div class="p-4 bg-brand-surface flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-brand-primary text-[18px] shrink-0 mt-0.5">lightbulb</span>
+              <p class="text-xs text-brand-textPrimary leading-relaxed">
+                <strong>Interpretación clínica del modelo:</strong> El modelo no clasificó este inicio de sesión como anómalo por la IP aislada, sino por la combinación de 14 intentos fallidos concentrados en 90 segundos desde un país no autorizado.
+              </p>
+            </div>
+          </section>
+
+          <!-- 3c. Event timeline card -->
+          <section class="bg-brand-surface border border-brand-borderLight rounded-[6px] p-5 shadow-none">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-brand-borderLight">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-primary text-[19px]">history</span>
+                <h2 class="text-sm font-bold text-brand-textPrimary">Línea de tiempo de eventos (Telemetría SOC)</h2>
+              </div>
+              <span class="text-xs font-mono text-brand-textSecondary">5 eventos registrados</span>
+            </div>
+
+            <ol class="relative border-l-2 border-brand-borderLight ml-3.5 space-y-4 text-xs">
+              <!-- Event 1 -->
+              <li class="pl-5 relative">
+                <div class="absolute -left-[7px] top-0.5 w-3 h-3 rounded-full bg-brand-warningFill border-2 border-white"></div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-brand-textSecondary">
+                  <span class="font-bold text-brand-textPrimary">14:29:51</span>
+                  <span>·</span>
+                  <span class="text-brand-warningText font-semibold">Fallo inicial</span>
+                </div>
+                <p class="text-brand-textPrimary font-medium mt-0.5">
+                  Inicio de sesión — Fallo de autenticación (contraseña incorrecta)
+                </p>
+                <div class="text-[11px] font-mono text-brand-textSecondary mt-0.5">IP 185.220.101.47 · Agente HTTP: curl/7.88.1</div>
+              </li>
+
+              <!-- Event 2 -->
+              <li class="pl-5 relative">
+                <div class="absolute -left-[7px] top-0.5 w-3 h-3 rounded-full bg-brand-warningFill border-2 border-white"></div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-brand-textSecondary">
+                  <span class="font-bold text-brand-textPrimary">14:30:12</span>
+                  <span>·</span>
+                  <span class="text-brand-warningText font-semibold">Repetición rápida</span>
+                </div>
+                <p class="text-brand-textPrimary font-medium mt-0.5">
+                  Segundo intento fallido desde la misma IP
+                </p>
+              </li>
+
+              <!-- Event 3 -->
+              <li class="pl-5 relative">
+                <div class="absolute -left-[7px] top-0.5 w-3 h-3 rounded-full bg-brand-criticalFill border-2 border-white"></div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-brand-textSecondary">
+                  <span class="font-bold text-brand-textPrimary">14:30:48</span>
+                  <span>·</span>
+                  <span class="text-brand-criticalText font-bold">Umbral superado</span>
+                </div>
+                <p class="text-brand-textPrimary font-medium mt-0.5">
+                  14.º intento fallido; se supera el umbral del nodo 1
+                </p>
+                <div class="text-[11px] text-brand-criticalText mt-0.5 font-medium">Frecuencia de ataque detectada: 9.3 intentos/min</div>
+              </li>
+
+              <!-- Event 4 -->
+              <li class="pl-5 relative">
+                <div class="absolute -left-[7px] top-0.5 w-3 h-3 rounded-full bg-brand-primary border-2 border-white"></div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-brand-textSecondary">
+                  <span class="font-bold text-brand-textPrimary">14:31:02</span>
+                  <span>·</span>
+                  <span class="text-brand-primary font-semibold">Control normativo</span>
+                </div>
+                <p class="text-brand-textPrimary font-medium mt-0.5">
+                  Aislamiento automático del modelo rechazado: política BR-001
+                </p>
+                <div class="text-[11px] text-brand-textSecondary mt-0.5">
+                  Regla hospitalaria: El sistema nunca aislará sin confirmación de un operador humano del SOC.
+                </div>
+              </li>
+
+              <!-- Event 5 -->
+              <li class="pl-5 relative">
+                <div class="absolute -left-[7px] top-0.5 w-3 h-3 rounded-full bg-brand-criticalStripe border-2 border-white ring-4 ring-brand-criticalContainer"></div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-brand-criticalText">
+                  <span class="font-bold">14:31:09</span>
+                  <span>·</span>
+                  <span class="font-bold uppercase tracking-wider">Compromiso confirmado</span>
+                </div>
+                <p class="text-brand-textPrimary font-bold mt-0.5">
+                  Inicio de sesión exitoso — credencial comprometida confirmada
+                </p>
+                <div class="text-[11px] font-mono text-brand-criticalText mt-0.5">
+                  Token JWT emitido por Keycloak IdP (auditoría en curso)
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <!-- 3d. IP metadata card -->
+          <section class="bg-brand-surface border border-brand-borderLight rounded-[6px] p-5 shadow-none">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-brand-borderLight">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-primary text-[19px]">language</span>
+                <h2 class="text-sm font-bold text-brand-textPrimary">Metadatos de red e Inteligencia de Amenazas (TI)</h2>
+              </div>
+              <a href="#" class="text-xs font-semibold text-brand-primary hover:underline inline-flex items-center gap-1">
+                Ver historial completo del usuario
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </a>
+            </div>
+
+            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-xs font-mono">
+              <div class="border-b border-brand-borderLight/70 pb-2">
+                <dt class="text-[10px] text-brand-textSecondary uppercase tracking-wider font-sans font-semibold">IP / ASN / Organización</dt>
+                <dd class="text-brand-textPrimary font-bold mt-0.5">185.220.101.47 · ASN 60729 · Zscaler GmbH · Germany</dd>
+              </div>
+
+              <div class="border-b border-brand-borderLight/70 pb-2">
+                <dt class="text-[10px] text-brand-textSecondary uppercase tracking-wider font-sans font-semibold">Clasificación de Endpoint</dt>
+                <dd class="text-brand-criticalText font-semibold mt-0.5 inline-flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-criticalStripe"></span>
+                  Tipo: Tor exit node (lista pública de relays)
+                </dd>
+              </div>
+
+              <div class="border-b border-brand-borderLight/70 pb-2">
+                <dt class="text-[10px] text-brand-textSecondary uppercase tracking-wider font-sans font-semibold">Geolocalización aproximada</dt>
+                <dd class="text-brand-textPrimary mt-0.5">Fráncfort, Hesse (Alemania)</dd>
+              </div>
+
+              <div class="border-b border-brand-borderLight/70 pb-2">
+                <dt class="text-[10px] text-brand-textSecondary uppercase tracking-wider font-sans font-semibold">Uso previo en la organización</dt>
+                <dd class="text-brand-textPrimary mt-0.5">Ninguno (IP desconocida en el hospital)</dd>
+              </div>
+
+              <div class="col-span-1 sm:col-span-2 pt-1">
+                <dt class="text-[10px] text-brand-textSecondary uppercase tracking-wider font-sans font-semibold">Registrada en Whitelist</dt>
+                <dd class="text-brand-criticalText font-semibold mt-0.5">
+                  No (No existe excepción médica ni congreso programado para mg.ramirez en Europa)
+                </dd>
+              </div>
+            </dl>
+          </section>
+
+        </div>
+
+        <!-- ================= RIGHT COLUMN (420px, STICKY) ================= -->
+        <aside class="space-y-6 lg:sticky lg:top-6 min-w-0">
+
+          <!-- 4a. Risk breakdown card -->
+          <section class="bg-brand-surface border border-brand-borderLight rounded-[6px] p-5 shadow-none">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-brand-borderLight">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-primary text-[19px]">tune</span>
+                <h2 class="text-sm font-bold text-brand-textPrimary">Desglose de Factores de Riesgo</h2>
+              </div>
+              <span class="text-[11px] font-mono font-bold text-brand-criticalText bg-brand-criticalContainer px-2 py-0.5 rounded-[4px]">
+                4 / 4 umbrales activos
+              </span>
+            </div>
+
+            <!-- 4 Threshold Bars -->
+            <div class="space-y-4 text-xs">
+              <!-- Factor 1 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-medium text-brand-textPrimary">1. Intentos fallidos</span>
+                  <span class="font-mono font-bold text-brand-criticalText">14 / umbral 8</span>
+                </div>
+                <div class="w-full bg-brand-canvas border border-brand-borderLight h-2 rounded-[2px] overflow-hidden">
+                  <div class="bg-brand-criticalFill h-full rounded-[2px]" style="width: 100%;"></div>
+                </div>
+                <div class="text-[10px] text-brand-criticalText font-mono mt-1">+75% sobre el umbral de bloqueo preventivo</div>
+              </div>
+
+              <!-- Factor 2 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-medium text-brand-textPrimary">2. Ventana temporal</span>
+                  <span class="font-mono font-bold text-brand-criticalText">1.4 min / umbral 2.0</span>
+                </div>
+                <div class="w-full bg-brand-canvas border border-brand-borderLight h-2 rounded-[2px] overflow-hidden">
+                  <div class="bg-brand-criticalFill h-full rounded-[2px]" style="width: 85%;"></div>
+                </div>
+                <div class="text-[10px] text-brand-textSecondary font-mono mt-1">Cadencia rápida incompatible con digitación médica manual</div>
+              </div>
+
+              <!-- Factor 3 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-medium text-brand-textPrimary">3. Desvío geográfico</span>
+                  <span class="font-mono font-bold text-brand-criticalText">8.940 km / umbral 500</span>
+                </div>
+                <div class="w-full bg-brand-canvas border border-brand-borderLight h-2 rounded-[2px] overflow-hidden">
+                  <div class="bg-brand-criticalFill h-full rounded-[2px]" style="width: 100%;"></div>
+                </div>
+                <div class="text-[10px] text-brand-criticalText font-mono mt-1">Alemania (Fráncfort) vs Bogotá D.C. (imposible de viaje)</div>
+              </div>
+
+              <!-- Factor 4 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-medium text-brand-textPrimary">4. Dispositivo nuevo</span>
+                  <span class="font-mono font-bold text-brand-warningText">1.ª vez / umbral 3</span>
+                </div>
+                <div class="w-full bg-brand-canvas border border-brand-borderLight h-2 rounded-[2px] overflow-hidden">
+                  <div class="bg-brand-warningFill h-full rounded-[2px]" style="width: 40%;"></div>
+                </div>
+                <div class="text-[10px] text-brand-textSecondary font-mono mt-1">Sin certificado corporativo ni huella TLS previa</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4b. Recommended analyst actions card -->
+          <section class="bg-brand-surface border border-brand-borderLight rounded-[6px] p-5 shadow-none">
+            <div class="flex items-center gap-2 mb-3 pb-3 border-b border-brand-borderLight">
+              <span class="material-symbols-outlined text-brand-primary text-[19px]">checklist</span>
+              <h2 class="text-sm font-bold text-brand-textPrimary">Acciones Recomendadas para el Analista</h2>
+            </div>
+
+            <div class="space-y-3">
+              <!-- Action 1 -->
+              <button onclick="actionFeedback('Falso positivo')" class="w-full text-left p-3 rounded-[4px] border border-brand-borderStrong bg-brand-surface hover:bg-brand-canvas transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary group">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-brand-textPrimary group-hover:text-brand-primary">Marcar como falso positivo</span>
+                  <span class="material-symbols-outlined text-brand-textSecondary text-[16px] group-hover:text-brand-primary">check_circle</span>
+                </div>
+                <p class="text-[11px] text-brand-textSecondary mt-1">Cierra la alerta y retroalimenta la regla dt-ueba sin alterar credenciales.</p>
+              </button>
+
+              <!-- Action 2 -->
+              <button onclick="actionFeedback('Escalar al CISO')" class="w-full text-left p-3 rounded-[4px] border border-brand-borderStrong bg-brand-surface hover:bg-brand-canvas transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary group">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-brand-textPrimary group-hover:text-brand-primary">Escalar al CISO</span>
+                  <span class="material-symbols-outlined text-brand-textSecondary text-[16px] group-hover:text-brand-primary">notifications_active</span>
+                </div>
+                <p class="text-[11px] text-brand-textSecondary mt-1">Envía notificación de emergencia a gerencia de seguridad hospitalaria.</p>
+              </button>
+
+              <!-- Action 3 -->
+              <button onclick="actionFeedback('Abrir incidente')" class="w-full text-left p-3 rounded-[4px] border border-brand-borderStrong bg-brand-surface hover:bg-brand-canvas transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary group">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-brand-textPrimary font-mono group-hover:text-brand-primary">Abrir incidente INC-2026-0418</span>
+                  <span class="material-symbols-outlined text-brand-textSecondary text-[16px] group-hover:text-brand-primary">add_alert</span>
+                </div>
+                <p class="text-[11px] text-brand-textSecondary mt-1">Crea expediente en Jira SOC con preservación de evidencia forense.</p>
+              </button>
+            </div>
+          </section>
+
+          <!-- 4c. Destructive action block (separated by divider & extra margin) -->
+          <div class="pt-2">
+            <div class="border-t-2 border-dashed border-brand-borderLight pt-6">
+              <section class="bg-brand-surface border border-brand-borderLight rounded-[6px] p-5 shadow-none">
+                <!-- Label & Title -->
+                <div class="flex items-center gap-1.5 text-brand-criticalText text-[11px] font-bold uppercase tracking-wider mb-1">
+                  <span class="material-symbols-outlined text-brand-criticalStripe text-[16px]">warning</span>
+                  Acción destructiva
+                </div>
+                <h3 class="text-base font-bold text-brand-textPrimary mb-2">Aislar Usuario</h3>
+
+                <!-- Warning paragraph -->
+                <p class="text-xs text-brand-textSecondary leading-relaxed mb-4">
+                  El aislamiento revocará la sesión activa y bloqueará el acceso en Keycloak hasta la verificación humana. No se puede deshacer automáticamente.
+                </p>
+
+                <!-- THE ONLY SOLID RED CONTROL ON SCREEN -->
+                <button onclick="openIsolationModal()" class="w-full py-2.5 px-4 rounded-[4px] bg-brand-criticalFill hover:bg-red-800 text-white font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-criticalFill focus:ring-offset-2">
+                  <span class="material-symbols-outlined text-[18px]">block</span>
+                  Aislar Usuario
+                </button>
+
+                <!-- Secondary text link -->
+                <div class="text-center mt-3">
+                  <button onclick="actionFeedback('Solicitar re-autenticación')" class="text-xs font-medium text-brand-primary hover:text-brand-primaryHover hover:underline transition-colors focus:outline-none">
+                    Solicitar re-autenticación al titular
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+
+        </aside>
+
+      </main>
+
+      <!-- 5. Audit footer strip (full width, thin) -->
+      <footer class="mt-auto bg-brand-surface border-t border-brand-borderLight px-8 py-3 flex flex-wrap items-center justify-between text-xs text-brand-textSecondary gap-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[16px] text-brand-textSecondary">verified</span>
+          <span>Toda acción sobre esta alerta queda registrada en la bitácora de auditoría con usuario, marca de tiempo y motivo.</span>
+        </div>
+        <div>
+          <a href="#" class="font-mono text-brand-primary hover:underline font-semibold flex items-center gap-1">
+            <span>Ver bitácora · 7 eventos</span>
+            <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+          </a>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ================= MODAL DE AISLAMIENTO (PASO 1 DE 2) ================= -->
+  <!-- Scrim overlay rgba(26, 32, 44, 0.55) -->
+  <div id="isolationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden" style="background-color: rgba(26, 32, 44, 0.55);">
+    <div class="bg-brand-surface rounded-[6px] border border-brand-borderLight max-w-xl w-full p-6 shadow-xl relative animate-in fade-in zoom-in duration-150">
+      
+      <!-- Close button -->
+      <button onclick="closeIsolationModal()" class="absolute top-4 right-4 text-brand-textSecondary hover:text-brand-textPrimary p-1 rounded hover:bg-brand-canvas focus:outline-none focus:ring-2 focus:ring-brand-primary">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="flex items-center gap-2 text-brand-criticalText text-xs font-bold uppercase tracking-wider mb-1">
+        <span class="material-symbols-outlined text-brand-criticalStripe text-[18px]">security</span>
+        Regla BR-001 · Bloqueo Humano Obligatorio
+      </div>
+      <h2 class="text-xl font-bold text-brand-textPrimary mb-1">Confirmar aislamiento de cuenta</h2>
+      <p class="text-xs text-brand-textSecondary mb-4">
+        Paso 1 de 2: Verificación de elegibilidad clínica y re-autenticación de la coordinadora SOC.
+      </p>
+
+      <!-- Target User Badge -->
+      <div class="p-3 bg-brand-criticalContainer border-l-4 border-brand-criticalStripe rounded-[4px] mb-4 text-xs">
+        <div class="font-bold text-brand-criticalText">Cuenta a aislar: mg.ramirez (Dra. María Fernanda Ramírez S.)</div>
+        <div class="text-brand-textSecondary mt-0.5">Se cerrará inmediatamente la sesión activa en el IdP institucional (Keycloak).</div>
+      </div>
+
+      <!-- Verification Step form -->
+      <form onsubmit="handleModalSubmit(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block text-brand-textPrimary font-semibold mb-1" for="isolationReason">
+            Motivo justificado de la mitigación * (Obligatorio para auditoría MinSalud)
+          </label>
+          <textarea id="isolationReason" rows="3" required placeholder="Describa el vector de ataque verificado (ej. Detección confirmada de spray de contraseñas desde Tor exit node)..." class="w-full p-2.5 rounded-[4px] border border-brand-borderStrong text-brand-textPrimary bg-brand-surface focus:outline-none focus:ring-2 focus:ring-brand-primary font-sans text-xs"></textarea>
+          <div class="text-[10px] text-brand-textSecondary mt-1">Este registro es inmutable y formará parte del expediente de cumplimiento.</div>
+        </div>
+
+        <div>
+          <label class="block text-brand-textPrimary font-semibold mb-1" for="operatorPassword">
+            Contraseña de Keycloak de Carla M. Restrepo *
+          </label>
+          <div class="relative">
+            <input type="password" id="operatorPassword" required placeholder="Introduce tu clave de operador SOC" class="w-full p-2 rounded-[4px] border border-brand-borderStrong text-brand-textPrimary bg-brand-surface focus:outline-none focus:ring-2 focus:ring-brand-primary text-xs">
+            <span class="material-symbols-outlined absolute right-2.5 top-2 text-brand-textSecondary text-[16px]">key</span>
+          </div>
+        </div>
+
+        <!-- Verification Checklist -->
+        <div class="p-2.5 bg-brand-canvas border border-brand-borderLight rounded-[4px] space-y-1.5 text-[11px] text-brand-textSecondary">
+          <div class="flex items-center gap-1.5 text-brand-successText font-medium">
+            <span class="material-symbols-outlined text-[14px] text-brand-successFill">check_circle</span>
+            Verificación automática: La cuenta NO pertenece a Quirófano de Urgencias (Elegible).
+          </div>
+          <div class="flex items-center gap-1.5 text-brand-textPrimary font-medium">
+            <span class="material-symbols-outlined text-[14px] text-brand-primary">info</span>
+            Tiempo estimado de revocación en Keycloak: &lt; 4 segundos.
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-brand-borderLight">
+          <button type="button" onclick="closeIsolationModal()" class="px-4 py-2 rounded-[4px] border border-brand-borderStrong text-brand-textPrimary hover:bg-brand-canvas font-semibold text-xs transition-colors">
+            Cancelar
+          </button>
+          <button type="submit" class="px-4 py-2 rounded-[4px] bg-brand-primary hover:bg-brand-primaryHover text-white font-semibold text-xs flex items-center gap-1.5 transition-colors focus:ring-2 focus:ring-brand-primary">
+            <span>Continuar al Paso 2</span>
+            <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification element -->
+  <div id="toastNotification" class="fixed bottom-12 right-8 bg-brand-surface border border-brand-borderLight px-4 py-3 rounded-[4px] shadow-lg flex items-center gap-2.5 text-xs text-brand-textPrimary z-50 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+    <span class="material-symbols-outlined text-brand-successFill text-[18px]" id="toastIcon">check_circle</span>
+    <span id="toastMessage" class="font-medium">Acción ejecutada correctamente</span>
+  </div>
+
+  <script>
+    // Copy rules button interaction
+    function copyDecisionTree() {
+      const rules = `NODO 1  intentos_fallidos_15m > 8              → observado: 14      [TRUE]
+  NODO 2  ventana_entre_intentos_min < 2       → observado: 1.4    [TRUE]
+    NODO 3  pais_origen != whitelist           → observado: Alemania ≠ Colombia [TRUE]
+      NODO 4  mfa_activo == true              → observado: false   [FALSE]
+        NODO 5  usuario_unidad_critica?        → observado: false
+          VEREDICTO: CREDENCIAL COMPROMETIDA (0.94)
+LEYENDA
+[TRUE]  regla evaluada como verdadera; cada acierto suma al puntaje
+[FALSE] regla evaluada como falsa; se exploró la rama derecha
+REGLA GLOBAL: intentos > 8 AND ventana < 2 min AND pais != Colombia`;
+
+      navigator.clipboard.writeText(rules).then(() => {
+        const btn = document.getElementById('btn-copy-rules');
+        const txt = document.getElementById('txt-copy-rules');
+        const icon = document.getElementById('icon-copy-rules');
+        txt.textContent = '¡Copiado al portapapeles!';
+        icon.textContent = 'done';
+        btn.classList.add('bg-brand-successContainer', 'text-brand-successText', 'border-brand-successFill');
+        showToast('Árbol de decisión copiado con fidelidad monoespaciada', 'done');
+
+        setTimeout(() => {
+          txt.textContent = 'Copiar reglas';
+          icon.textContent = 'content_copy';
+          btn.classList.remove('bg-brand-successContainer', 'text-brand-successText', 'border-brand-successFill');
+        }, 2500);
+      });
+    }
+
+    function copyIncidentCode() {
+      navigator.clipboard.writeText('INC-2026-0417').then(() => {
+        const txt = document.getElementById('txt-copy-inc');
+        txt.textContent = '¡Copiado!';
+        showToast('Código de incidente INC-2026-0417 copiado', 'content_copy');
+        setTimeout(() => {
+          txt.textContent = 'Copiar incidente';
+        }, 2000);
+      });
+    }
+
+    // Modal logic
+    function openIsolationModal() {
+      document.getElementById('isolationModal').classList.remove('hidden');
+    }
+
+    function closeIsolationModal() {
+      document.getElementById('isolationModal').classList.add('hidden');
+    }
+
+    function handleModalSubmit(e) {
+      e.preventDefault();
+      closeIsolationModal();
+      showToast('Paso 1 verificado. Abriendo confirmación final de 2 pasos...', 'verified_user');
+    }
+
+    function actionFeedback(actionName) {
+      showToast('Acción registrada en bitácora: ' + actionName, 'history');
+    }
+
+    function showToast(msg, iconName = 'check_circle') {
+      const toast = document.getElementById('toastNotification');
+      const msgEl = document.getElementById('toastMessage');
+      const iconEl = document.getElementById('toastIcon');
+      msgEl.textContent = msg;
+      iconEl.textContent = iconName;
+      
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

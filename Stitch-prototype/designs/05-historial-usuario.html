@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-[#F5F7FA]" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historial de acceso por usuario — HeraUEBA SOC Salud</title>
+<!-- Google Fonts: Inter & Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-error": "#ffffff",
+            "tertiary-fixed": "#ffdbca",
+            "secondary-container": "#ff5a55",
+            "on-surface-variant": "#42474f",
+            "surface-container": "#eceef1",
+            "secondary-fixed": "#ffdad6",
+            "on-background": "#191c1e",
+            "surface-dim": "#d8dadd",
+            "surface": "#f7f9fc",
+            "primary-container": "#0f4c81",
+            "on-tertiary-fixed": "#331100",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#e6e8eb",
+            "on-error-container": "#93000a",
+            "surface-container-low": "#f2f4f7",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#ffb68f",
+            "tertiary-container": "#7d3500",
+            "on-surface": "#191c1e",
+            "background": "#f7f9fc",
+            "primary-fixed-dim": "#a0c9ff",
+            "outline": "#727780",
+            "inverse-surface": "#2d3133",
+            "surface-container-highest": "#e0e3e6",
+            "tertiary": "#5a2400",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#eff1f4",
+            "secondary": "#b52426",
+            "on-secondary-fixed": "#410003",
+            "primary": "#00355f",
+            "on-tertiary-fixed-variant": "#773200",
+            "on-tertiary-container": "#ffa473",
+            "outline-variant": "#c2c7d1",
+            "surface-tint": "#2d6197",
+            "on-primary-container": "#8ebdf9",
+            "on-secondary-container": "#600008",
+            "on-primary-fixed": "#001c37",
+            "on-secondary": "#ffffff",
+            "surface-variant": "#e0e3e6",
+            "error-container": "#ffdad6",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#920212",
+            "inverse-primary": "#a0c9ff",
+            "surface-bright": "#f7f9fc",
+            "secondary-fixed-dim": "#ffb3ad",
+            "primary-fixed": "#d2e4ff",
+            "on-primary-fixed-variant": "#07497d"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-lg": "1.5rem",
+            "gutter": "1rem",
+            "space-sm": "0.5rem",
+            "margin-desktop": "2rem",
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "display-lg": ["Inter", "sans-serif"],
+            "label-md": ["Public Sans", "sans-serif"],
+            "headline-md": ["Inter", "sans-serif"],
+            "label-sm": ["Public Sans", "sans-serif"],
+            "headline-lg-mobile": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "headline-lg": ["Inter", "sans-serif"],
+            "label-lg": ["Public Sans", "sans-serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"]
+          },
+          fontSize: {
+            "display-lg": ["3.5rem", { lineHeight: "4rem", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "label-md": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.02em", fontWeight: "600" }],
+            "headline-md": ["1.5rem", { lineHeight: "2rem", fontWeight: "600" }],
+            "label-sm": ["0.6875rem", { lineHeight: "0.875rem", letterSpacing: "0.03em", fontWeight: "500" }],
+            "headline-lg-mobile": ["1.5rem", { lineHeight: "2rem", fontWeight: "600" }],
+            "body-md": ["1rem", { lineHeight: "1.5rem", fontWeight: "400" }],
+            "body-lg": ["1.125rem", { lineHeight: "1.75rem", fontWeight: "400" }],
+            "body-sm": ["0.875rem", { lineHeight: "1.25rem", fontWeight: "400" }],
+            "headline-lg": ["2rem", { lineHeight: "2.5rem", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "label-lg": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "600" }],
+            "headline-sm": ["1.25rem", { lineHeight: "1.75rem", fontWeight: "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    .material-symbols-outlined {
+      font-size: 1.125rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Strictly flat styling per specification: No blurred shadows, depth via 1px border */
+    * {
+      box-shadow: none !important;
+    }
+  </style>
+</head>
+<body class="h-full bg-[#F5F7FA] text-[#1A202C] font-body-md text-body-md antialiased flex flex-col md:flex-row">
+<!-- 1. LEFT NAVIGATION RAIL (240px FIXED DESKTOP) -->
+<aside class="w-full md:w-[240px] md:min-w-[240px] md:h-screen md:fixed md:left-0 md:top-0 bg-[#FFFFFF] border-r border-[#E2E8F0] flex flex-col justify-between z-30">
+<div class="flex flex-col">
+<!-- Brand Anchor -->
+<div class="h-16 px-5 border-b border-[#E2E8F0] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-[4px] bg-[#0F4C81] flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="shield_with_heart" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-[#0F4C81] tracking-tight leading-none">HeraUEBA</div>
+<div class="font-label-sm text-label-sm text-[#4A5568] tracking-wider uppercase font-semibold mt-0.5">SOC Salud</div>
+</div>
+</div>
+</div>
+<!-- Navigation Menu -->
+<nav aria-label="Navegación principal" class="p-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-[4px] text-[#4A5568] hover:bg-[#F5F7FA] font-label-md text-label-md transition-colors" href="#monitoreo">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="dashboard">dashboard</span>
+<span>Monitoreo</span>
+</a>
+<!-- Active Item: Historial de usuarios -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-[4px] bg-[#E3ECF5] text-[#0F4C81] font-label-md text-label-md font-semibold border-l-4 border-[#0F4C81]" href="#historial">
+<span class="material-symbols-outlined text-[#0F4C81]" data-icon="manage_accounts">manage_accounts</span>
+<span>Historial de usuarios</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-[4px] text-[#4A5568] hover:bg-[#F5F7FA] font-label-md text-label-md transition-colors" href="#whitelist">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="travel_explore">travel_explore</span>
+<span>Whitelist geográfica</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-[4px] text-[#4A5568] hover:bg-[#F5F7FA] font-label-md text-label-md transition-colors" href="#configuracion">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="settings">settings</span>
+<span>Configuración</span>
+</a>
+</nav>
+</div>
+<!-- User & Auth Session Meta (Bottom rail block) -->
+<div class="p-4 border-t border-[#E2E8F0] bg-[#FFFFFF]">
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169]/30 font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#38A169]"></span>
+          Keycloak SSO · Activo
+        </span>
+</div>
+<div class="text-[#1A202C] font-label-md text-label-md font-medium truncate">Carla M. Restrepo</div>
+<div class="text-[#4A5568] font-label-sm text-label-sm">Coordinadora SOC</div>
+<div class="mt-3 pt-3 border-t border-[#E2E8F0] flex items-center justify-between font-mono text-[11px] text-[#4A5568]">
+<span>NODO: SOC-BOG-01</span>
+<span class="text-[#276749]">TLS 1.3</span>
+</div>
+</div>
+</aside>
+<!-- MAIN WORKSPACE CONTAINER -->
+<div class="flex-1 md:ml-[240px] flex flex-col min-h-screen">
+<!-- 2. TOP HEADER (Docked ml-0 relative to main) -->
+<header class="h-16 bg-[#FFFFFF] border-b border-[#E2E8F0] px-4 md:px-8 flex items-center justify-between sticky top-0 z-20">
+<div>
+<div class="font-label-sm text-label-sm text-[#4A5568] flex items-center gap-1.5 font-medium">
+<span>Investigación</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-[#1A202C] font-semibold">Historial de usuario</span>
+</div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-[#1A202C] tracking-tight">Historial de acceso por usuario</h1>
+</div>
+<div class="flex items-center gap-3">
+<!-- Secondary text button (border #8A94A6) -->
+<button class="h-9 px-3.5 rounded-[4px] border border-[#8A94A6] bg-[#FFFFFF] hover:bg-[#F5F7FA] text-[#1A202C] font-label-md text-label-md inline-flex items-center gap-2 transition-colors cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="file_download">file_download</span>
+<span>Exportar bitácora</span>
+</button>
+<!-- EXACTLY ONE SOLID PRIMARY BUTTON: #0F4C81 -->
+<button class="h-9 px-4 rounded-[4px] bg-[#0F4C81] hover:bg-[#0B3A63] text-white font-label-md text-label-md font-semibold inline-flex items-center gap-2 transition-colors cursor-pointer" type="button">
+<span class="material-symbols-outlined text-white" data-icon="emergency">emergency</span>
+<span>Abrir ticket de incidente</span>
+</button>
+</div>
+</header>
+<!-- CONTENT BODY CANVAS -->
+<main class="flex-1 p-4 md:p-8 space-y-6 max-w-[1440px] mx-auto w-full">
+<!-- 3. SUBJECT IDENTIFICATION STRIP -->
+<section class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<!-- Avatar MR -->
+<div class="w-12 h-12 rounded-full bg-[#E3ECF5] text-[#0F4C81] flex items-center justify-center font-bold text-lg border border-[#0F4C81]/20 shrink-0">
+            MR
+          </div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center gap-2.5">
+<h2 class="text-[17px] font-bold text-[#1A202C] leading-none">Dra. María Fernanda Ramírez S.</h2>
+<span class="font-mono text-[13px] text-[#4A5568] bg-[#F5F7FA] px-2 py-0.5 rounded-[4px] border border-[#E2E8F0]">mg.ramirez@hospital.local</span>
+</div>
+<div class="flex flex-wrap items-center gap-2 pt-0.5">
+<span class="px-2 py-0.5 rounded-[4px] bg-[#F5F7FA] border border-[#E2E8F0] font-label-sm text-label-sm text-[#4A5568] font-medium">Médica especialista</span>
+<span class="px-2 py-0.5 rounded-[4px] bg-[#F5F7FA] border border-[#E2E8F0] font-label-sm text-label-sm text-[#4A5568] font-medium">Neurología</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169]/30 font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px]" data-icon="verified_user">verified_user</span>
+                MFA activado
+              </span>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:items-end gap-1.5 self-stretch md:self-auto pt-3 md:pt-0 border-t md:border-t-0 border-[#E2E8F0]">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169] font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-[#38A169]"></span>
+            Cuenta ACTIVA · no aislada
+          </span>
+<div class="font-mono text-[12px] text-[#4A5568]">
+            Sesión activa: <span class="text-[#1A202C] font-semibold">a7f3-91c2-e04b</span>
+</div>
+</div>
+</section>
+<!-- 4. SEARCH AND SCOPE BAR -->
+<section class="space-y-3">
+<!-- Forensic Scope Alert Container -->
+<div class="bg-[#E3ECF5] border border-[#0F4C81] text-[#0F4C81] rounded-[6px] px-4 py-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-[#0F4C81] mt-0.5 shrink-0" data-icon="policy">policy</span>
+<p class="font-body-sm text-body-sm leading-snug">
+<strong class="font-semibold">Aviso de alcance forense:</strong> Esta vista ignora el filtro global de 24 horas del dashboard. Se consulta la retención completa de 180 días almacenada en el data lake.
+          </p>
+</div>
+<!-- Inputs and Filters Strip -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-3 flex flex-col xl:flex-row items-stretch xl:items-center gap-3">
+<!-- Search input -->
+<div class="relative flex-1">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#4A5568]">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</span>
+<input class="w-full h-9 pl-9 pr-3 rounded-[4px] border border-[#8A94A6] bg-[#FFFFFF] text-[#1A202C] placeholder-[#4A5568] font-mono text-[13px] focus:outline-none focus:ring-1 focus:ring-[#0F4C81] focus:border-[#0F4C81]" placeholder="Buscar por usuario, IP, ASN, código de incidente o dispositivo (Ej. mg.ramirez, 185.220.101.47, INC-2026-0417)" type="text" value="mg.ramirez"/>
+</div>
+<!-- Segmented Group: Ventana de análisis -->
+<div class="flex items-center gap-1 p-1 bg-[#F5F7FA] border border-[#E2E8F0] rounded-[4px]">
+<span class="text-[11px] uppercase font-bold text-[#4A5568] px-2 font-mono">Ventana:</span>
+<button class="px-2.5 py-1 text-xs font-medium rounded-[4px] text-[#4A5568] hover:text-[#1A202C]" type="button">24 horas</button>
+<button class="px-2.5 py-1 text-xs font-medium rounded-[4px] text-[#4A5568] hover:text-[#1A202C]" type="button">7 días</button>
+<button class="px-2.5 py-1 text-xs font-medium rounded-[4px] text-[#4A5568] hover:text-[#1A202C]" type="button">30 días</button>
+<!-- Selected Tab -->
+<button class="px-2.5 py-1 text-xs font-semibold rounded-[4px] bg-[#0F4C81] text-white" type="button">Histórico completo</button>
+</div>
+<!-- Dropdowns -->
+<div class="flex items-center gap-2">
+<div class="relative">
+<select class="h-9 text-xs rounded-[4px] border border-[#8A94A6] bg-[#FFFFFF] text-[#1A202C] pl-2.5 pr-8 py-1 focus:outline-none focus:ring-1 focus:ring-[#0F4C81] font-medium appearance-none cursor-pointer">
+<option>Tipo de evento: Todos</option>
+<option>Inicios de sesión</option>
+<option>Fallos de autenticación</option>
+<option>Desafíos MFA</option>
+<option>Excepciones de Whitelist</option>
+</select>
+<span class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[#4A5568]">
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</span>
+</div>
+<div class="relative">
+<select class="h-9 text-xs rounded-[4px] border border-[#8A94A6] bg-[#FFFFFF] text-[#1A202C] pl-2.5 pr-8 py-1 focus:outline-none focus:ring-1 focus:ring-[#0F4C81] font-medium appearance-none cursor-pointer">
+<option>Resultado: Todos los estados</option>
+<option>Anomalías críticas</option>
+<option>Fallos</option>
+<option>Éxitos confirmados</option>
+</select>
+<span class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[#4A5568]">
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. BEHAVIOUR SUMMARY STRIP (5 NUMERIC BLOCKS, STRICTLY NO CHARTS) -->
+<section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+<!-- Block 1 -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-3.5">
+<div class="font-label-sm text-[12px] uppercase text-[#4A5568] tracking-wider font-semibold">Eventos totales</div>
+<div class="mt-1.5 font-mono text-2xl font-bold text-[#1A202C] tabular-nums">1.284</div>
+<div class="text-[11px] text-[#4A5568] mt-0.5">Retención 180 días</div>
+</div>
+<!-- Block 2 -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-3.5">
+<div class="font-label-sm text-[12px] uppercase text-[#4A5568] tracking-wider font-semibold">Inicios de sesión</div>
+<div class="mt-1.5 font-mono text-2xl font-bold text-[#1A202C] tabular-nums">612</div>
+<div class="text-[11px] text-[#4A5568] mt-0.5">47.6% del volumen</div>
+</div>
+<!-- Block 3: Highlighted Critical Fallos -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-3.5">
+<div class="font-label-sm text-[12px] uppercase text-[#4A5568] tracking-wider font-semibold">Fallos de autenticación</div>
+<div class="mt-1.5 font-mono text-2xl font-bold text-[#C53030] tabular-nums">88</div>
+<div class="text-[11px] text-[#C53030] font-medium mt-0.5">14 ráfagas recientes</div>
+</div>
+<!-- Block 4 -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-3.5">
+<div class="font-label-sm text-[12px] uppercase text-[#4A5568] tracking-wider font-semibold">Países distintos</div>
+<div class="mt-1.5 font-mono text-2xl font-bold text-[#1A202C] tabular-nums">3</div>
+<div class="text-[11px] text-[#4A5568] mt-0.5">CO (98.9%), ES, DE</div>
+</div>
+<!-- Block 5: Alert Ultima Anomalía -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-3.5 col-span-2 sm:col-span-1">
+<div class="font-label-sm text-[12px] uppercase text-[#4A5568] tracking-wider font-semibold">Última anomalía</div>
+<div class="mt-1.5 font-mono text-2xl font-bold text-[#1A202C] flex items-center gap-2">
+<span class="material-symbols-outlined text-[#C53030] text-2xl" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span>hace 2 h</span>
+</div>
+<div class="text-[11px] text-[#C53030] font-semibold mt-0.5">IP Foránea Tor detectada</div>
+</div>
+</section>
+<!-- 6. TWO-COLUMN FORENSIC BODY -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- 6a. LEFT COLUMN: LÍNEA DE TIEMPO DE EVENTOS (8 cols) -->
+<div class="lg:col-span-8 bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px]">
+<!-- Table Header -->
+<div class="bg-[#F5F7FA] border-b border-[#E2E8F0] px-4 py-3 flex items-center justify-between rounded-t-[6px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="timeline">timeline</span>
+<h3 class="font-label-md text-label-md uppercase font-bold text-[#1A202C] tracking-wider">Línea de tiempo de eventos</h3>
+</div>
+<span class="font-mono text-xs text-[#4A5568]">Mostrando 8 de 1.284 eventos</span>
+</div>
+<!-- Events Stack (Newest First) -->
+<div class="divide-y divide-[#E2E8F0]">
+<!-- EVENT 1: Critical Anomaly (Expanded raw JSON) -->
+<article class="p-4 bg-[#FFF5F5] border-l-4 border-[#E53E3E] space-y-3">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex items-start gap-3">
+<div class="font-mono text-sm font-semibold text-[#9B2C2C] tabular-nums whitespace-nowrap pt-0.5">
+                    14:31:09
+                  </div>
+<div class="w-6 h-6 rounded-[4px] bg-[#E53E3E] text-white flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="gpp_bad" style="font-variation-settings: 'FILL' 1;">gpp_bad</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-[#1A202C]">Inicio de sesión exitoso — credencial comprometida detectada</h4>
+<div class="font-mono text-xs text-[#9B2C2C] mt-0.5 font-medium">
+                      185.220.101.47 · ASN 60729 · Alemania · dispositivo nuevo
+                    </div>
+</div>
+</div>
+<div class="sm:text-right shrink-0">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#FFF5F5] text-[#9B2C2C] border border-[#E53E3E] font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[13px]" data-icon="error" style="font-variation-settings: 'FILL' 1;">error</span>
+                    ANOMALÍA
+                  </span>
+</div>
+</div>
+<!-- Interactive Expandable Raw JSON Telemetry -->
+<div class="bg-[#1A202C] text-[#EFF1F4] rounded-[4px] p-3 text-xs font-mono border border-[#4A5568]/40">
+<div class="flex items-center justify-between pb-2 mb-2 border-b border-[#4A5568]/40 text-[#A0AEC0]">
+<span class="text-[11px] font-semibold text-white uppercase tracking-wider flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-[#E53E3E]" data-icon="code">code</span>
+                    Auditoría Forense · Payload de Evento Crudo (JSON)
+                  </span>
+<span class="text-[11px] text-[#A0AEC0]">hash: sha256:7f4a...92b</span>
+</div>
+<pre class="overflow-x-auto text-[11.5px] leading-relaxed text-[#A0C9FF]">{
+  "event_id": "<span class="text-white">EVT-20261003-88219</span>",
+  "client_ip": "<span class="text-white">185.220.101.47</span>",
+  "asn_org": "<span class="text-[#FFB3AD]">Tor Exit Node Network / VPS Host</span>",
+  "risk_score": <span class="text-[#FF5A55] font-bold">0.94</span>,
+  "heuristics": [
+    "<span class="text-[#FFDBCA]">NEW_COUNTRY</span>",
+    "<span class="text-[#FFDBCA]">TOR_KNOWN_EXIT</span>",
+    "<span class="text-[#FFDBCA]">SPRAY_MATCH_CONFIRMED</span>"
+  ],
+  "session_id": "a7f3-91c2-e04b",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0"
+}</pre>
+</div>
+</article>
+<!-- EVENT 2: Fallo Consecutivo -->
+<article class="p-4 hover:bg-[#F5F7FA] transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex items-start gap-3">
+<div class="font-mono text-sm text-[#4A5568] tabular-nums whitespace-nowrap pt-0.5">
+                    14:30:48
+                  </div>
+<div class="w-6 h-6 rounded-[4px] bg-[#FFF5F5] text-[#C53030] border border-[#E53E3E]/40 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="lock_reset">lock_reset</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-[#1A202C]">14.º fallo de autenticación consecutivo</h4>
+<div class="font-mono text-xs text-[#4A5568] mt-0.5">
+                      185.220.101.47 · intento 14/15 · bloqueo inminente
+                    </div>
+</div>
+</div>
+<div class="sm:text-right shrink-0">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#FFF5F5] text-[#9B2C2C] border border-[#C53030]/30 font-label-sm text-label-sm font-semibold">
+                    FALLO
+                  </span>
+</div>
+</div>
+</article>
+<!-- EVENT 3: Fallo password -->
+<article class="p-4 hover:bg-[#F5F7FA] transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex items-start gap-3">
+<div class="font-mono text-sm text-[#4A5568] tabular-nums whitespace-nowrap pt-0.5">
+                    14:29:51
+                  </div>
+<div class="w-6 h-6 rounded-[4px] bg-[#FFF5F5] text-[#C53030] border border-[#E53E3E]/40 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="password">password</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-[#1A202C]">Inicio de sesión — fallo (contraseña incorrecta)</h4>
+<div class="font-mono text-xs text-[#4A5568] mt-0.5">
+                      185.220.101.47 · credenciales de dominio no coincidentes
+                    </div>
+</div>
+</div>
+<div class="sm:text-right shrink-0">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#FFF5F5] text-[#9B2C2C] border border-[#C53030]/30 font-label-sm text-label-sm font-semibold">
+                    FALLO
+                  </span>
+</div>
+</div>
+</article>
+<!-- EVENT 4: Éxito habitual -->
+<article class="p-4 hover:bg-[#F5F7FA] transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex items-start gap-3">
+<div class="font-mono text-sm text-[#4A5568] tabular-nums whitespace-nowrap pt-0.5">
+                    07:02:14
+                  </div>
+<div class="w-6 h-6 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169]/30 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-[#1A202C]">Inicio de sesión exitoso desde el terminal de turno</h4>
+<div class="font-mono text-xs text-[#4A5568] mt-0.5">
+                      190.24.9.14 · Colombia · Chrome 141 / Windows 11
+                    </div>
+</div>
+</div>
+<div class="sm:text-right shrink-0">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169]/30 font-label-sm text-label-sm font-semibold">
+                    ÉXITO
+                  </span>
+</div>
+</div>
+</article>
+<!-- EVENT 5: Fuera de Horario -->
+<article class="p-4 hover:bg-[#F5F7FA] transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex items-start gap-3">
+<div class="font-mono text-sm text-[#4A5568] tabular-nums whitespace-nowrap pt-0.5">
+                    2026-10-03 18:40:02
+                  </div>
+<div class="w-6 h-6 rounded-[4px] bg-[#FFF4E8] text-[#DD6B20] border border-[#DD6B20]/40 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="schedule">schedule</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-[#1A202C]">Inicio de sesión exitoso fuera de horario habitual</h4>
+<div class="font-mono text-xs text-[#4A5568] mt-0.5">
+                      190.24.9.14 · Colombia · IP de guardia médica autorizada
+                    </div>
+</div>
+</div>
+<div class="sm:text-right shrink-0">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#FFF4E8] text-[#9C4221] border border-[#DD6B20]/40 font-label-sm text-label-sm font-semibold">
+                    FUERA DE HORARIO
+                  </span>
+</div>
+</div>
+</article>
+<!-- EVENT 6: Whitelist activa -->
+<article class="p-4 hover:bg-[#F5F7FA] transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex items-start gap-3">
+<div class="font-mono text-sm text-[#4A5568] tabular-nums whitespace-nowrap pt-0.5">
+                    2026-10-01 06:55:30
+                  </div>
+<div class="w-6 h-6 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169]/30 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="flight_takeoff">flight_takeoff</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-[#1A202C]">Inicio de sesión tras viaje internacional (whitelist activa 2026-10-01 → 2026-10-12)</h4>
+<div class="font-mono text-xs text-[#4A5568] mt-0.5">
+                      Excepción WL-GEOMED-041 aprobada por Dr. Velasco
+                    </div>
+</div>
+</div>
+<div class="sm:text-right shrink-0">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169]/30 font-label-sm text-label-sm font-semibold">
+                    WHITELIST
+                  </span>
+</div>
+</div>
+</article>
+<!-- EVENT 7: Dispositivo no registrado -->
+<article class="p-4 hover:bg-[#F5F7FA] transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex items-start gap-3">
+<div class="font-mono text-sm text-[#4A5568] tabular-nums whitespace-nowrap pt-0.5">
+                    2026-09-28 21:12:44
+                  </div>
+<div class="w-6 h-6 rounded-[4px] bg-[#FFF4E8] text-[#DD6B20] border border-[#DD6B20]/40 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="phonelink_erase">phonelink_erase</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-[#1A202C]">Intento de acceso desde dispositivo no registrado</h4>
+<div class="font-mono text-xs text-[#4A5568] mt-0.5">
+                      iPadOS 17.4 · huella digital TLS desconocida · MFA solicitado y cancelado
+                    </div>
+</div>
+</div>
+<div class="sm:text-right shrink-0">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#FFF4E8] text-[#9C4221] border border-[#DD6B20]/40 font-label-sm text-label-sm font-semibold">
+                    RECHAZADO
+                  </span>
+</div>
+</div>
+</article>
+<!-- EVENT 8: Primer evento período -->
+<article class="p-4 hover:bg-[#F5F7FA] transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex items-start gap-3">
+<div class="font-mono text-sm text-[#4A5568] tabular-nums whitespace-nowrap pt-0.5">
+                    2026-09-15 07:00:01
+                  </div>
+<div class="w-6 h-6 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169]/30 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="login">login</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-[#1A202C]">Inicio de sesión — primer evento del período analizado</h4>
+<div class="font-mono text-xs text-[#4A5568] mt-0.5">
+                      190.24.9.14 · Estación médica 4B Neurología
+                    </div>
+</div>
+</div>
+<div class="sm:text-right shrink-0">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-[#EFFAF3] text-[#276749] border border-[#38A169]/30 font-label-sm text-label-sm font-semibold">
+                    ÉXITO
+                  </span>
+</div>
+</div>
+</article>
+</div>
+<!-- End of list trigger button -->
+<div class="p-4 bg-[#F5F7FA] border-t border-[#E2E8F0] text-center rounded-b-[6px]">
+<button class="text-xs font-semibold text-[#0F4C81] hover:underline cursor-pointer inline-flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[15px]" data-icon="expand_more">expand_more</span>
+<span>Cargar 1.276 eventos anteriores</span>
+</button>
+</div>
+</div>
+<!-- 6b. RIGHT COLUMN: 400px STICKY SIDEBAR (4 cols) -->
+<aside class="lg:col-span-4 space-y-4 lg:sticky lg:top-20">
+<!-- Card i. Línea base del usuario -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-4 space-y-3">
+<div class="flex items-center gap-2 pb-2 border-b border-[#E2E8F0]">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="psychology">psychology</span>
+<h3 class="font-label-md text-label-md uppercase font-bold text-[#1A202C] tracking-wider">Línea base del usuario</h3>
+</div>
+<div class="space-y-2.5 text-xs">
+<div class="flex justify-between items-start gap-2">
+<span class="text-[#4A5568] font-medium shrink-0">Horario habitual:</span>
+<span class="font-mono text-[#1A202C] font-semibold text-right">07:00–13:00 y 19:00–22:00</span>
+</div>
+<div class="flex justify-between items-start gap-2 pt-2 border-t border-[#E2E8F0]/60">
+<span class="text-[#4A5568] font-medium shrink-0">Países habituales:</span>
+<span class="font-semibold text-[#1A202C]">Colombia</span>
+</div>
+<div class="flex justify-between items-start gap-2 pt-2 border-t border-[#E2E8F0]/60">
+<span class="text-[#4A5568] font-medium shrink-0">Dispositivos registrados:</span>
+<span class="text-[#1A202C] text-right font-medium">2 (Windows 11 · Chrome 141; iPadOS 18 · Safari)</span>
+</div>
+<div class="flex justify-between items-start gap-2 pt-2 border-t border-[#E2E8F0]/60">
+<span class="text-[#4A5568] font-medium shrink-0">Promedio de fallos por sesión:</span>
+<span class="font-mono text-[#1A202C] font-bold">0.3</span>
+</div>
+<div class="flex justify-between items-start gap-2 pt-2 border-t border-[#E2E8F0]/60">
+<span class="text-[#4A5568] font-medium shrink-0">Última actualización del perfil:</span>
+<span class="font-mono text-[#4A5568]">2026-08-11</span>
+</div>
+</div>
+</div>
+<!-- Card ii. Evaluación del motor -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-4 space-y-3">
+<div class="flex items-center gap-2 pb-2 border-b border-[#E2E8F0]">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="memory">memory</span>
+<h3 class="font-label-md text-label-md uppercase font-bold text-[#1A202C] tracking-wider">Evaluación del motor</h3>
+</div>
+<!-- Monospace telemetry code block -->
+<div class="bg-[#F5F7FA] border border-[#E2E8F0] rounded-[4px] p-3 text-[11px] font-mono text-[#1A202C] leading-relaxed">
+              FEATURES 5 · MODELO dt-ueba v2.4 · IFOREST v1.9 · SCORE HISTÓRICO 0.08 (p50) · <span class="text-[#C53030] font-bold">SCORE ACTUAL 0.94 (p99.7)</span> · DESVIACIÓN 0.86
+            </div>
+<!-- Explanation container -->
+<div class="bg-[#FFF4E8] border border-[#DD6B20]/40 rounded-[4px] p-3 text-xs text-[#9C4221] flex items-start gap-2">
+<span class="material-symbols-outlined text-[#DD6B20] text-base shrink-0 mt-0.5" data-icon="auto_graph">auto_graph</span>
+<p class="font-medium leading-snug">
+                El comportamiento actual se aparta <span class="font-bold underline">11 desviaciones estándar</span> del perfil histórico de la cuenta.
+              </p>
+</div>
+</div>
+<!-- Card iii. Acciones de investigación (Three outlined secondary buttons) -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-[6px] p-4 space-y-3">
+<div class="flex items-center gap-2 pb-2 border-b border-[#E2E8F0]">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="security">security</span>
+<h3 class="font-label-md text-label-md uppercase font-bold text-[#1A202C] tracking-wider">Acciones de investigación</h3>
+</div>
+<div class="space-y-2.5">
+<!-- Action 1 -->
+<button class="w-full text-left p-2.5 rounded-[4px] border border-[#8A94A6] bg-[#FFFFFF] hover:bg-[#F5F7FA] transition-colors cursor-pointer block" type="button">
+<div class="flex items-center justify-between text-xs font-semibold text-[#1A202C]">
+<span>Ver alertas asociadas (12)</span>
+<span class="material-symbols-outlined text-sm text-[#4A5568]" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<p class="text-[11px] text-[#4A5568] mt-0.5">Abre la vista correlacionada en el motor de incidentes</p>
+</button>
+<!-- Action 2 -->
+<button class="w-full text-left p-2.5 rounded-[4px] border border-[#8A94A6] bg-[#FFFFFF] hover:bg-[#F5F7FA] transition-colors cursor-pointer block" type="button">
+<div class="flex items-center justify-between text-xs font-semibold text-[#1A202C]">
+<span>Comparar con línea base</span>
+<span class="material-symbols-outlined text-sm text-[#4A5568]" data-icon="compare_arrows">compare_arrows</span>
+</div>
+<p class="text-[11px] text-[#4A5568] mt-0.5">Contrasta telemetría del turno con la ventana de 90 días</p>
+</button>
+<!-- Action 3 -->
+<button class="w-full text-left p-2.5 rounded-[4px] border border-[#8A94A6] bg-[#FFFFFF] hover:bg-[#F5F7FA] transition-colors cursor-pointer block" type="button">
+<div class="flex items-center justify-between text-xs font-semibold text-[#C53030]">
+<span>Solicitar re-autenticación al titular</span>
+<span class="material-symbols-outlined text-sm text-[#C53030]" data-icon="notification_important">notification_important</span>
+</div>
+<p class="text-[11px] text-[#4A5568] mt-0.5">Dispara desafío biométrico / MFA inmediato en Keycloak</p>
+</button>
+</div>
+</div>
+</aside>
+</section>
+</main>
+<!-- 7. PROVENANCE FOOTER STRIP -->
+<footer class="mt-auto border-t border-[#E2E8F0] bg-[#FFFFFF] px-4 md:px-8 py-3 text-xs text-[#4A5568] flex flex-col sm:flex-row items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#38A169]"></span>
+<span>Fuente: data lake de eventos · retención 180 días · <span class="font-mono tabular-nums font-semibold text-[#1A202C]">412.880</span> registros indexados</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-mono text-[11px] text-[#4A5568]">Normativa HIPAA / GDPR Health · Encriptación AES-GCM 256</span>
+<a class="font-mono text-xs font-semibold text-[#0F4C81] hover:underline" href="#export-raw">Exportar JSON crudo</a>
+</div>
+</footer>
+</div>
+</body></html>

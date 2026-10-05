@@ -1,0 +1,634 @@
+<!DOCTYPE html><html class="h-full bg-background text-on-background" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Dashboard de Monitoreo UEBA - HeraUEBA</title>
+<!-- Google Fonts: Inter & Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-dim": "#d8dadd",
+            "on-background": "#191c1e",
+            "on-surface-variant": "#42474f",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "on-error": "#ffffff",
+            "inverse-primary": "#a0c9ff",
+            "inverse-on-surface": "#eff1f4",
+            "on-tertiary-fixed": "#331100",
+            "on-secondary-fixed": "#410003",
+            "surface": "#f7f9fc",
+            "secondary-container": "#ff5a55",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed-variant": "#920212",
+            "surface-container-low": "#f2f4f7",
+            "on-tertiary-container": "#ffa473",
+            "on-surface": "#191c1e",
+            "on-secondary-container": "#600008",
+            "primary-fixed-dim": "#a0c9ff",
+            "primary": "#00355f",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#773200",
+            "primary-container": "#0f4c81",
+            "on-primary-container": "#8ebdf9",
+            "inverse-surface": "#2d3133",
+            "secondary-fixed": "#ffdad6",
+            "tertiary": "#5a2400",
+            "surface-container": "#eceef1",
+            "background": "#f7f9fc",
+            "on-primary": "#ffffff",
+            "surface-bright": "#f7f9fc",
+            "tertiary-container": "#7d3500",
+            "secondary-fixed-dim": "#ffb3ad",
+            "on-error-container": "#93000a",
+            "surface-tint": "#2d6197",
+            "tertiary-fixed-dim": "#ffb68f",
+            "secondary": "#b52426",
+            "primary-fixed": "#d2e4ff",
+            "outline-variant": "#c2c7d1",
+            "outline": "#727780",
+            "on-primary-fixed-variant": "#07497d",
+            "on-primary-fixed": "#001c37",
+            "surface-variant": "#e0e3e6",
+            "tertiary-fixed": "#ffdbca",
+            "surface-container-high": "#e6e8eb",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#e0e3e6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "gutter-desktop": "1.5rem",
+            "gutter": "1rem",
+            "margin-desktop": "2rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "margin": "1rem"
+          },
+          "fontFamily": {
+            "display-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-lg": ["Public Sans"],
+            "headline-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-md": ["Public Sans"],
+            "headline-lg-mobile": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-sm": ["Public Sans"],
+            "headline-lg": ["Inter"]
+          },
+          "fontSize": {
+            "display-lg": ["3.5rem", { "lineHeight": "4rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "fontWeight": "600" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "fontWeight": "600" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }],
+            "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.03em", "fontWeight": "500" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-sm text-body-sm">
+<!-- 1. LEFT NAVIGATION RAIL (Fixed 240px / w-60) -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-[#FFFFFF] border-r border-[#E2E8F0] flex flex-col justify-between p-space-md select-none">
+<div class="flex flex-col gap-y-4">
+<!-- Wordmark & Healthcare Badge -->
+<div class="px-space-sm pt-space-xs flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-[#0F4C81] text-[#FFFFFF] flex items-center justify-center font-bold font-headline-sm">
+H
+</div>
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-[#0F4C81] tracking-tight leading-none">HeraUEBA</span>
+<span class="text-[10px] font-label-sm font-semibold tracking-wider text-[#4A5568] uppercase mt-0.5">SOC Hospitalario</span>
+</div>
+</div>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-lg text-[10px] font-label-sm font-semibold bg-[#F5F7FA] text-[#0F4C81] border border-[#E2E8F0]">
+SOC Salud
+</span>
+</div>
+<!-- Navigation Menu -->
+<nav aria-label="Navegación principal SOC" class="flex flex-col gap-1 mt-1">
+<!-- Active Tab: Monitoreo -->
+<a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm bg-[#E3ECF5] text-[#0F4C81] font-semibold border-l-4 border-[#0F4C81] rounded-r-lg cursor-pointer" href="#monitoreo">
+<span class="material-symbols-outlined text-[#0F4C81]" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Monitoreo</span>
+</a>
+<!-- Inactive Tab: Historial de usuarios -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-[#4A5568] font-medium rounded-lg hover:bg-[#F5F7FA] hover:text-[#1A202C] transition-colors duration-150 cursor-pointer" href="#historial">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="manage_accounts">manage_accounts</span>
+<span class="font-label-md text-label-md">Historial de usuarios</span>
+</a>
+<!-- Inactive Tab: Whitelist geográfica -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-[#4A5568] font-medium rounded-lg hover:bg-[#F5F7FA] hover:text-[#1A202C] transition-colors duration-150 cursor-pointer" href="#whitelist">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="public">public</span>
+<span class="font-label-md text-label-md">Whitelist geográfica</span>
+</a>
+<!-- Inactive Tab: Dispositivos Médicos (UEBA) -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-[#4A5568] font-medium rounded-lg hover:bg-[#F5F7FA] hover:text-[#1A202C] transition-colors duration-150 cursor-pointer" href="#dispositivos">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="medical_services">medical_services</span>
+<span class="font-label-md text-label-md">Dispositivos Médicos</span>
+</a>
+<!-- Inactive Tab: Configuración -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-[#4A5568] font-medium rounded-lg hover:bg-[#F5F7FA] hover:text-[#1A202C] transition-colors duration-150 cursor-pointer" href="#configuracion">
+<span class="material-symbols-outlined text-[#4A5568]" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Configuración</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Analyst Identity Block & Keycloak Status -->
+<div class="pt-3 border-t border-[#E2E8F0] flex flex-col gap-2.5">
+<div class="flex items-center gap-2.5 px-space-xs">
+<div class="w-9 h-9 rounded-full bg-[#0F4C81] text-[#FFFFFF] flex items-center justify-center font-bold text-xs">
+CR
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-[#1A202C] font-semibold truncate leading-tight">Carla M. Restrepo</span>
+<span class="font-label-sm text-label-sm text-[#4A5568] truncate leading-tight">Coordinadora SOC</span>
+</div>
+</div>
+<!-- Keycloak SSO Status Chip -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#F5F7FA] border border-[#E2E8F0] text-[11px] font-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#38A169]"></span>
+<span class="text-[#4A5568] font-medium">Keycloak SSO</span>
+</div>
+<span class="text-[#276749] font-semibold text-[10px]">Activo</span>
+</div>
+</div>
+</aside>
+<!-- 2. TOP HEADER BAR -->
+<header class="docked full-width top-0 z-20 bg-[#FFFFFF] border-b border-[#E2E8F0] pl-64 pr-space-xl py-3.5 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<h1 class="text-headline-md font-headline-md font-bold tracking-tight text-[#1A202C]">Dashboard de Monitoreo UEBA</h1>
+<span class="text-[11px] font-label-sm bg-[#E3ECF5] text-[#0F4C81] font-semibold px-2 py-0.5 rounded-lg border border-[#0F4C81]/20">
+Clínica Central
+</span>
+</div>
+<div class="flex items-center gap-3">
+<!-- Search input -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-[#4A5568] text-[16px]" data-icon="search">search</span>
+<input class="w-full pl-8 pr-3 py-1.5 text-xs font-body-sm bg-[#FFFFFF] border border-[#8A94A6] rounded-lg text-[#1A202C] placeholder:text-[#4A5568] focus:outline-none focus:border-[#0F4C81]" placeholder="Buscar usuario o IP..." type="text">
+</div>
+<!-- Refresh timestamp -->
+<div class="flex items-center gap-1.5 text-xs text-[#4A5568] font-mono tabular-nums px-2 py-1 rounded bg-[#F5F7FA] border border-[#E2E8F0]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="sync">sync</span>
+<span class="">Actualizado 14:32:08 COT</span>
+</div>
+<!-- Action icons -->
+<button aria-label="Notificaciones" class="p-1.5 text-[#4A5568] hover:text-[#0F4C81] hover:bg-[#F5F7FA] rounded-lg transition-colors duration-150" title="Notificaciones del sistema">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<!-- PRIMARY BUTTON -->
+<button class="flex items-center gap-1.5 bg-[#0F4C81] text-[#FFFFFF] hover:bg-[#0B3A63] px-3.5 py-1.5 rounded-lg text-label-md font-label-md font-semibold transition-colors duration-150">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+<span class="">Exportar informe</span>
+</button>
+</div>
+</header>
+<!-- 3. PERSISTENT FILTER BAR -->
+<section class="pl-64 pr-space-xl py-2 bg-[#F5F7FA] border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center flex-wrap gap-2.5">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFFFFF] border border-[#8A94A6] text-[#0F4C81] font-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px] text-[#0F4C81]" data-icon="schedule">schedule</span>
+<span class="">Filtro activo: Últimas 24 horas</span>
+<button aria-label="Eliminar filtro" class="ml-1 text-[#4A5568] hover:text-[#C53030] inline-flex items-center justify-center p-0.5 rounded focus:outline-none">✕</button>
+</div>
+<div class="h-4 w-px bg-[#E2E8F0]"></div>
+<div class="inline-flex rounded-lg bg-[#E2E8F0] p-0.5 border border-[#8A94A6]/40">
+<button class="px-2.5 py-0.5 rounded text-[#4A5568] hover:text-[#1A202C] font-label-sm text-[11px] transition-colors">1h</button>
+<button class="px-2.5 py-0.5 rounded bg-[#FFFFFF] text-[#0F4C81] font-semibold font-label-sm text-[11px]">24h</button>
+<button class="px-2.5 py-0.5 rounded text-[#4A5568] hover:text-[#1A202C] font-label-sm text-[11px] transition-colors">7d</button>
+<button class="px-2.5 py-0.5 rounded text-[#4A5568] hover:text-[#1A202C] font-label-sm text-[11px] transition-colors">30d</button>
+</div>
+<div class="h-4 w-px bg-[#E2E8F0]"></div>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FFFFFF] border border-[#8A94A6] rounded-lg text-[#1A202C] font-label-sm hover:border-[#0F4C81] transition-colors">
+<span class="">Nivel de riesgo: <strong class="text-[#1A202C]">Todos</strong></span>
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="expand_more">expand_more</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FFFFFF] border border-[#8A94A6] rounded-lg text-[#1A202C] font-label-sm hover:border-[#0F4C81] transition-colors">
+<span class="">Departamento / Unidad: <strong class="text-[#1A202C]">Todos</strong></span>
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="expand_more">expand_more</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FFFFFF] border border-[#8A94A6] rounded-lg text-[#1A202C] font-label-sm hover:border-[#0F4C81] transition-colors">
+<span class="">País de origen: <strong class="text-[#1A202C]">Todos</strong></span>
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<div class="flex items-center gap-2 text-[#4A5568] font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#38A169]"></span>
+<span class="">Flujo de eventos en tiempo real</span>
+</div>
+</section>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="flex-1 w-full pl-64 pr-space-xl py-space-md space-y-4"><!-- 4. METRICS & AI ENGINE ROW -->
+<section aria-label="Indicadores y Motor UEBA" class="grid grid-cols-12 gap-3">
+<!-- 4 Summary Metrics Cards (cols 1 to 9) -->
+<div class="col-span-12 xl:col-span-9 grid grid-cols-2 md:grid-cols-4 gap-3">
+<!-- Metric 1: Alertas Críticas -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg p-3 flex flex-col justify-between border-l-4 border-l-[#E53E3E]">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-[11px] font-semibold tracking-wider text-[#4A5568] uppercase">ALERTAS CRÍTICAS (24H)</span>
+<span class="material-symbols-outlined text-[#E53E3E] text-[18px]" data-icon="warning">warning</span>
+</div>
+<div class="my-1.5">
+<span class="font-mono text-2xl font-bold tabular-nums text-[#9B2C2C]">3</span>
+</div>
+<p class="text-[11px] text-[#4A5568] font-body-sm leading-tight">Requieren decisión del coordinador</p>
+</div>
+<!-- Metric 2: Alertas Medias -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg p-3 flex flex-col justify-between border-l-4 border-l-[#DD6B20]">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-[11px] font-semibold tracking-wider text-[#4A5568] uppercase">ALERTAS MEDIAS (24H)</span>
+<span class="material-symbols-outlined text-[#DD6B20] text-[18px]" data-icon="info">info</span>
+</div>
+<div class="my-1.5">
+<span class="font-mono text-2xl font-bold tabular-nums text-[#9C4221]">7</span>
+</div>
+<p class="text-[11px] text-[#4A5568] font-body-sm leading-tight">En observación activa</p>
+</div>
+<!-- Metric 3: Cuentas Aisladas -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg p-3 flex flex-col justify-between border-l-4 border-l-[#8A94A6]">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-[11px] font-semibold tracking-wider text-[#4A5568] uppercase">CUENTAS AISLADAS (24H)</span>
+<span class="material-symbols-outlined text-[#4A5568] text-[18px]" data-icon="lock">lock</span>
+</div>
+<div class="my-1.5">
+<span class="font-mono text-2xl font-bold tabular-nums text-[#1A202C]">1</span>
+</div>
+<p class="text-[11px] text-[#4A5568] font-body-sm leading-tight">Aislamiento manual confirmado</p>
+</div>
+<!-- Metric 4: Inicios de Sesión Totales -->
+<div class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg p-3 flex flex-col justify-between border-l-4 border-l-[#0F4C81]">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-[11px] font-semibold tracking-wider text-[#4A5568] uppercase">INICIOS DE SESIÓN (24H)</span>
+<span class="material-symbols-outlined text-[#0F4C81] text-[18px]" data-icon="verified_user">verified_user</span>
+</div>
+<div class="my-1.5">
+<span class="font-mono text-2xl font-bold tabular-nums text-[#1A202C]">4.812</span>
+</div>
+<p class="text-[11px] text-[#4A5568] font-body-sm leading-tight">Ingesta Keycloak activa</p>
+</div>
+</div>
+<!-- AI Engine Status Panel (cols 10 to 12) -->
+<div class="col-span-12 xl:col-span-3 bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg p-3 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-1.5 text-[#0F4C81]">
+<span class="material-symbols-outlined text-[16px] text-[#0F4C81]" data-icon="psychology">psychology</span>
+<span class="font-label-md text-label-md font-bold text-[#1A202C]">Estado del motor IA</span>
+</div>
+<span class="font-mono text-[10px] text-[#4A5568] bg-[#F5F7FA] px-1.5 py-0.5 rounded border border-[#E2E8F0]">dt-ueba v2.4</span>
+</div>
+<div class="text-[11px] text-[#4A5568] font-mono mb-2">iforest v1.9 · Pipeline clínico</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="px-1.5 py-0.5 bg-[#F5F7FA] border border-[#E2E8F0] rounded text-[10px] font-mono text-[#4A5568] font-medium">intentos_15m</span>
+<span class="px-1.5 py-0.5 bg-[#F5F7FA] border border-[#E2E8F0] rounded text-[10px] font-mono text-[#4A5568] font-medium">delta_geo</span>
+<span class="px-1.5 py-0.5 bg-[#F5F7FA] border border-[#E2E8F0] rounded text-[10px] font-mono text-[#4A5568] font-medium">mfa_activo</span>
+<span class="px-1.5 py-0.5 bg-[#F5F7FA] border border-[#E2E8F0] rounded text-[10px] font-mono text-[#4A5568] font-medium">horario_historico</span>
+<span class="px-1.5 py-0.5 bg-[#F5F7FA] border border-[#E2E8F0] rounded text-[10px] font-mono text-[#4A5568] font-medium">asn_nuevo</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 text-[11px] text-[#276749] bg-[#EFFAF3] px-2 py-1 rounded font-label-sm font-medium border border-[#38A169]/30">
+<span class="material-symbols-outlined text-[15px] text-[#38A169]" data-icon="check_circle">check_circle</span>
+<span class="">Sin reentrenamiento pendiente</span>
+</div>
+</div>
+</section>
+<!-- 5. CRITICAL ALERTS SECTION -->
+<section aria-label="Alertas Rojas Activas" class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg overflow-hidden">
+<div class="px-4 py-3 border-b border-[#E2E8F0] flex items-center justify-between bg-[#FFFFFF]">
+<div class="flex items-center gap-2">
+<h2 class="text-headline-sm font-headline-sm font-bold text-[#1A202C]">Alertas Rojas Activas</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-label-md font-bold bg-[#C53030] text-[#FFFFFF]">
+3
+</span>
+<span class="text-xs text-[#4A5568] ml-1 font-body-sm">Prioridad alta e inmediata</span>
+</div>
+<a class="text-[#0F4C81] hover:underline font-label-md text-xs font-semibold flex items-center gap-1" href="#todas-rojas">
+<span class="">Ver las 12 del día</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse text-xs">
+<thead>
+<tr class="bg-[#F5F7FA] border-b border-[#E2E8F0] text-[11px] font-label-md text-[#4A5568] uppercase tracking-wider">
+<th class="py-2.5 pl-4 pr-3 font-semibold" scope="col">NIVEL</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">USUARIO</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">UNIDAD</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">IP DE ORIGEN</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">PAÍS</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">REGLA DE IA DETECTADA</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">HORA</th>
+<th class="py-2.5 pl-3 pr-4 text-right font-semibold" scope="col">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E2E8F0] font-body-sm">
+<!-- Row 1: mg.ramirez -->
+<tr class="bg-[#FFF5F5] border-l-4 border-l-[#E53E3E] transition-colors duration-150">
+<td class="py-2.5 pl-4 pr-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#C53030] text-[#FFFFFF] font-label-sm font-bold text-[10px] tracking-wide">
+<span class="material-symbols-outlined text-[13px] text-[#FFFFFF]" data-icon="warning">warning</span>
+CRÍTICO
+</span>
+</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-mono font-semibold text-[#1A202C]">mg.ramirez</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-label-sm font-bold bg-[#E3ECF5] text-[#0F4C81] border border-[#0F4C81]/20">UCI</span>
+</div>
+</td>
+<td class="py-2.5 px-3 text-[#4A5568] whitespace-nowrap">Departamento: Neurología</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#1A202C] whitespace-nowrap">185.220.101.47</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-[#1A202C]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="flag">flag</span>
+Alemania
+</span>
+</td>
+<td class="py-2.5 px-3 text-[#9B2C2C] font-medium">8 intentos fallidos en 2 min + país fuera de la whitelist</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#4A5568] whitespace-nowrap">14:31</td>
+<td class="py-2.5 pl-3 pr-4 text-right whitespace-nowrap">
+<a class="text-[#0F4C81] hover:text-[#0B3A63] font-label-md font-semibold text-xs hover:underline inline-flex items-center gap-0.5" href="#detalle-1">
+Ver detalle
+<span class="material-symbols-outlined text-[13px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</td>
+</tr>
+<!-- Row 2: enf.castillo -->
+<tr class="bg-[#FFF5F5] border-l-4 border-l-[#E53E3E] transition-colors duration-150">
+<td class="py-2.5 pl-4 pr-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#C53030] text-[#FFFFFF] font-label-sm font-bold text-[10px] tracking-wide">
+<span class="material-symbols-outlined text-[13px] text-[#FFFFFF]" data-icon="warning">warning</span>
+CRÍTICO
+</span>
+</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-mono font-semibold text-[#1A202C]">enf.castillo</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-label-sm font-bold bg-[#FFF4E8] text-[#9C4221] border border-[#DD6B20]/30">UNIDAD CRÍTICA</span>
+</div>
+</td>
+<td class="py-2.5 px-3 text-[#4A5568] whitespace-nowrap">Unidad: Urgencias</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#1A202C] whitespace-nowrap">45.132.192.10</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-[#1A202C]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="flag">flag</span>
+Países Bajos
+</span>
+</td>
+<td class="py-2.5 px-3 text-[#9B2C2C] font-medium">Login desde ASN de Proveedor + dispositivo nunca visto</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#4A5568] whitespace-nowrap">14:12</td>
+<td class="py-2.5 pl-3 pr-4 text-right whitespace-nowrap">
+<a class="text-[#0F4C81] hover:text-[#0B3A63] font-label-md font-semibold text-xs hover:underline inline-flex items-center gap-0.5" href="#detalle-2">
+Ver detalle
+<span class="material-symbols-outlined text-[13px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</td>
+</tr>
+<!-- Row 3: adm.sistema -->
+<tr class="bg-[#FFF5F5] border-l-4 border-l-[#E53E3E] transition-colors duration-150">
+<td class="py-2.5 pl-4 pr-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#C53030] text-[#FFFFFF] font-label-sm font-bold text-[10px] tracking-wide">
+<span class="material-symbols-outlined text-[13px] text-[#FFFFFF]" data-icon="warning">warning</span>
+CRÍTICO
+</span>
+</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-mono font-semibold text-[#1A202C]">adm.sistema</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-label-sm font-bold bg-[#E3ECF5] text-[#0F4C81] border border-[#0F4C81]/20">QUIRÓFANO</span>
+</div>
+</td>
+<td class="py-2.5 px-3 text-[#4A5568] whitespace-nowrap">TI · Infraestructura</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#1A202C] whitespace-nowrap">103.27.184.6</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-[#1A202C]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="flag">flag</span>
+Vietnam
+</span>
+</td>
+<td class="py-2.5 px-3 text-[#9B2C2C] font-medium">Aislamiento fallido 3 veces + MFA deshabilitado</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#4A5568] whitespace-nowrap">13:47</td>
+<td class="py-2.5 pl-3 pr-4 text-right whitespace-nowrap">
+<a class="text-[#0F4C81] hover:text-[#0B3A63] font-label-md font-semibold text-xs hover:underline inline-flex items-center gap-0.5" href="#detalle-3">
+Ver detalle
+<span class="material-symbols-outlined text-[13px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 6. FOLD LINE INDICATOR -->
+<div class="py-2 flex items-center justify-center gap-2 text-xs text-[#4A5568] font-label-md select-none border-y border-dashed border-[#E2E8F0] my-2 bg-[#FFFFFF]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="arrow_downward">arrow_downward</span>
+<span class="">12 alertas de prioridad media e informativa requieren desplazamiento</span>
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="arrow_downward">arrow_downward</span>
+</div>
+<!-- 7. BELOW THE FOLD - ANALYSIS QUEUE -->
+<section aria-label="Cola de análisis" class="bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg overflow-hidden">
+<div class="px-4 py-3 border-b border-[#E2E8F0] flex items-center justify-between bg-[#FFFFFF]">
+<div class="flex items-center gap-2">
+<h2 class="text-headline-sm font-headline-sm font-bold text-[#1A202C]">Cola de análisis</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-label-md font-bold bg-[#FFF4E8] text-[#9C4221] border border-[#DD6B20]/30">
+4
+</span>
+<span class="text-xs text-[#4A5568] ml-1 font-body-sm">Alertas en observación y anomalías heurísticas</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-[#4A5568]">Filtrar por severidad media</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse text-xs">
+<thead>
+<tr class="bg-[#F5F7FA] border-b border-[#E2E8F0] text-[11px] font-label-md text-[#4A5568] uppercase tracking-wider">
+<th class="py-2.5 pl-4 pr-3 font-semibold" scope="col">SEVERIDAD</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">USUARIO</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">UNIDAD</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">PAÍS</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">PATRÓN DETECTADO</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">HORA</th>
+<th class="py-2.5 pl-3 pr-4 text-right font-semibold" scope="col">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E2E8F0] font-body-sm">
+<!-- Row 1: enf.mendoza -->
+<tr class="hover:bg-[#F5F7FA] border-l-4 border-l-[#DD6B20] transition-colors duration-150">
+<td class="py-2.5 pl-4 pr-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FFF4E8] text-[#9C4221] font-label-sm font-bold text-[10px] tracking-wide border border-[#DD6B20]/30">
+<span class="material-symbols-outlined text-[13px] text-[#DD6B20]" data-icon="info">info</span>
+ALERTA
+</span>
+</td>
+<td class="py-2.5 px-3 font-mono font-medium text-[#1A202C] whitespace-nowrap">enf.mendoza</td>
+<td class="py-2.5 px-3 text-[#4A5568] whitespace-nowrap">Urgencias</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-[#1A202C]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="flag">flag</span>
+Panamá
+</span>
+</td>
+<td class="py-2.5 px-3 text-[#4A5568]">Imposible de viaje (desplazamiento físico inconsistente)</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#4A5568] whitespace-nowrap">13:20</td>
+<td class="py-2.5 pl-3 pr-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-2">
+<button class="px-2.5 py-1 text-xs font-label-md font-medium text-[#4A5568] border border-[#8A94A6] hover:text-[#1A202C] hover:bg-[#F5F7FA] rounded transition-colors duration-150">
+Ignorar
+</button>
+<button class="px-2.5 py-1 text-xs font-label-md font-semibold text-[#0F4C81] border border-[#0F4C81] hover:text-[#FFFFFF] hover:bg-[#0F4C81] bg-[#E3ECF5] rounded transition-colors duration-150">
+Escalar
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: lab.tech -->
+<tr class="hover:bg-[#F5F7FA] border-l-4 border-l-[#DD6B20] transition-colors duration-150">
+<td class="py-2.5 pl-4 pr-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FFF4E8] text-[#9C4221] font-label-sm font-bold text-[10px] tracking-wide border border-[#DD6B20]/30">
+<span class="material-symbols-outlined text-[13px] text-[#DD6B20]" data-icon="info">info</span>
+ALERTA
+</span>
+</td>
+<td class="py-2.5 px-3 font-mono font-medium text-[#1A202C] whitespace-nowrap">lab.tech</td>
+<td class="py-2.5 px-3 text-[#4A5568] whitespace-nowrap">Laboratorio</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-[#1A202C]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="flag">flag</span>
+España
+</span>
+</td>
+<td class="py-2.5 px-3 text-[#4A5568]">Geovelocidad anómala entre dos sesiones activas</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#4A5568] whitespace-nowrap">12:58</td>
+<td class="py-2.5 pl-3 pr-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-2">
+<button class="px-2.5 py-1 text-xs font-label-md font-medium text-[#4A5568] border border-[#8A94A6] hover:text-[#1A202C] hover:bg-[#F5F7FA] rounded transition-colors duration-150">
+Ignorar
+</button>
+<button class="px-2.5 py-1 text-xs font-label-md font-semibold text-[#0F4C81] border border-[#0F4C81] hover:text-[#FFFFFF] hover:bg-[#0F4C81] bg-[#E3ECF5] rounded transition-colors duration-150">
+Escalar
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: mg.torres -->
+<tr class="hover:bg-[#F5F7FA] border-l-4 border-l-[#DD6B20] transition-colors duration-150">
+<td class="py-2.5 pl-4 pr-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FFF4E8] text-[#9C4221] font-label-sm font-bold text-[10px] tracking-wide border border-[#DD6B20]/30">
+<span class="material-symbols-outlined text-[13px] text-[#DD6B20]" data-icon="info">info</span>
+ALERTA
+</span>
+</td>
+<td class="py-2.5 px-3 font-mono font-medium text-[#1A202C] whitespace-nowrap">mg.torres</td>
+<td class="py-2.5 px-3 text-[#4A5568] whitespace-nowrap">Cardiología</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-[#1A202C]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="flag">flag</span>
+Chile
+</span>
+</td>
+<td class="py-2.5 px-3 text-[#4A5568]">Horario fuera de patrón de turno habitual</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#4A5568] whitespace-nowrap">11:44</td>
+<td class="py-2.5 pl-3 pr-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-2">
+<button class="px-2.5 py-1 text-xs font-label-md font-medium text-[#4A5568] border border-[#8A94A6] hover:text-[#1A202C] hover:bg-[#F5F7FA] rounded transition-colors duration-150">
+Ignorar
+</button>
+<button class="px-2.5 py-1 text-xs font-label-md font-semibold text-[#0F4C81] border border-[#0F4C81] hover:text-[#FFFFFF] hover:bg-[#0F4C81] bg-[#E3ECF5] rounded transition-colors duration-150">
+Escalar
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: sys.backup -->
+<tr class="hover:bg-[#F5F7FA] border-l-4 border-l-[#DD6B20] transition-colors duration-150">
+<td class="py-2.5 pl-4 pr-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FFF4E8] text-[#9C4221] font-label-sm font-bold text-[10px] tracking-wide border border-[#DD6B20]/30">
+<span class="material-symbols-outlined text-[13px] text-[#DD6B20]" data-icon="info">info</span>
+ALERTA
+</span>
+</td>
+<td class="py-2.5 px-3 font-mono font-medium text-[#1A202C] whitespace-nowrap">sys.backup</td>
+<td class="py-2.5 px-3 text-[#4A5568] whitespace-nowrap">TI · Infraestructura</td>
+<td class="py-2.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-[#1A202C]">
+<span class="material-symbols-outlined text-[14px] text-[#4A5568]" data-icon="lan">lan</span>
+Red Local
+</span>
+</td>
+<td class="py-2.5 px-3 text-[#4A5568]">Cuenta de servicio en horario atípico de mantenimiento</td>
+<td class="py-2.5 px-3 font-mono tabular-nums text-[#4A5568] whitespace-nowrap">10:02</td>
+<td class="py-2.5 pl-3 pr-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-2">
+<button class="px-2.5 py-1 text-xs font-label-md font-medium text-[#4A5568] border border-[#8A94A6] hover:text-[#1A202C] hover:bg-[#F5F7FA] rounded transition-colors duration-150">
+Ignorar
+</button>
+<button class="px-2.5 py-1 text-xs font-label-md font-semibold text-[#0F4C81] border border-[#0F4C81] hover:text-[#FFFFFF] hover:bg-[#0F4C81] bg-[#E3ECF5] rounded transition-colors duration-150">
+Escalar
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section></main>
+<!-- 8. THIN COMPLIANCE FOOTER BAR -->
+<footer class="w-full py-space-sm pl-64 pr-space-xl border-t border-[#E2E8F0] bg-[#F5F7FA] text-xs text-[#4A5568] flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-[#0F4C81]">HeraUEBA</span>
+<span class="text-[#E2E8F0]">|</span>
+<span class="font-body-sm text-[11px]">Monitoreo UEBA para sector salud · Cumplimiento MinSalud y Circular 007 Supersalud Colombia</span>
+</div>
+<div class="font-mono text-[11px] text-[#4A5568] bg-[#FFFFFF] px-2 py-0.5 rounded border border-[#E2E8F0]">
+BR-001: Sin bloqueo automático de cuentas · Todo aislamiento queda registrado en auditoría
+</div>
+</footer>
+
+
+</body></html>

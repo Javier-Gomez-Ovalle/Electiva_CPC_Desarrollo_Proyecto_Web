@@ -1,0 +1,181 @@
+erDiagram
+    %% === ROLES Y UNIDADES ===
+    ROLES {
+        int role_id PK "ID único del rol"
+        varchar role_name UK "Nombre del rol (Analyst_Junior, Coordinator_SOC)"
+        varchar description "Descripción del rol"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    UNITS {
+        int unit_id PK "ID único de unidad"
+        varchar unit_name UK "Nombre de unidad"
+        boolean is_critical "Indica si es unidad crítica (UCI, Quirófanos, Urgencias)"
+        enum unit_type "Tipo: ICU, OR, ER, OTHER"
+        varchar department "Departamento asociado"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    USERS {
+        int user_id PK "ID único del usuario"
+        varchar username UK "Nombre de usuario"
+        varchar email UK "Correo electrónico"
+        varchar full_name "Nombre completo"
+        int unit_id FK "Unidad a la que pertenece"
+        int role_id FK "Rol asignado (RBAC)"
+        boolean active "Estado del usuario"
+        varchar keycloak_id UK "ID en Keycloak (SSO)"
+        varchar ad_guid UK "GUID en Active Directory"
+        timestamp last_login_at
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    %% === EVENTOS DE AUTENTICACIÓN ===
+    AUTH_EVENTS {
+        bigint event_id PK "ID único del evento"
+        int user_id FK "Usuario asociado (puede ser null para intentos fallidos)"
+        varchar username_attempt "Usuario intentado (para fallidos)"
+        timestamp event_timestamp "Fecha y hora del evento"
+        varchar ip_address "Dirección IP"
+        varchar geo_country "País (ISO 2/3)"
+        varchar geo_region "Región/Estado"
+        varchar geo_city "Ciudad"
+        varchar asn "Número de Sistema Autónomo (ASN)"
+        varchar isp "Proveedor de Internet"
+        boolean is_vpn "Indicador de VPN/Proxy"
+        boolean is_tor "Indicador de Tor"
+        varchar outcome "Resultado: success, failed, blocked"
+        varchar auth_method "Método: password, mfa, sso"
+        int failure_count_window "Conteo fallidos en ventana (para detección)"
+        jsonb raw_json "Payload original de Keycloak (IPinfo enriquecido)"
+        timestamp ingested_at
+    }
+    
+    %% === ALERTAS DE UEBA ===
+    ALERTS {
+        bigint alert_id PK "ID único de alerta"
+        bigint event_id FK "Evento que generó la alerta (opcional)"
+        int user_id FK "Usuario afectado"
+        enum severity "Severidad: CRITICAL, HIGH, MEDIUM, LOW"
+        enum alert_status "Estado: NEW, INVESTIGATING, ESCALATED, DISMISSED, ISOLATED, FALSE_POSITIVE"
+        enum model_type "Modelo: DECISION_TREE, ISOLATION_FOREST, HYBRID"
+        varchar title "Título de la alerta"
+        text description "Descripción de la alerta"
+        float risk_score "Puntaje de riesgo (0-1)"
+        timestamp alert_timestamp "Momento de detección"
+        int investigated_by FK "Analista que investigó (null si no investigada)"
+        timestamp investigated_at
+        int dismissed_by FK "Quien descartó (null si activa)"
+        timestamp dismissed_at
+        varchar dismissal_reason "Razón de descarte"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    %% === EXPLICABILIDAD - CAMINO DE DECISIÓN (CAJA BLANCA) ===
+    DECISION_PATHS {
+        bigint path_id PK "ID único del nodo del camino"
+        bigint alert_id FK "Alerta asociada"
+        int node_index "Orden del nodo en el camino (0-based)"
+        varchar node_id "ID del nodo en árbol (ej. root, node_001)"
+        varchar node_name "Nombre del nodo"
+        varchar split_feature "Característica evaluada (ip_count, failures, time_gap, etc.)"
+        varchar split_condition "Condición lógica (>, <, ==, IN, BETWEEN)"
+        varchar split_value "Valor de comparación"
+        varchar node_outcome "Resultado: true/false/leaf"
+        boolean is_leaf "Es nodo hoja"
+        varchar leaf_class "Clase: ANOMALOUS, NORMAL, SUSPICIOUS"
+        varchar rule_explanation "Explicación legible para auditoría (FR-004)"
+        float confidence "Confianza del nodo"
+        timestamp created_at
+    }
+    
+    %% === WHITELIST GEOGRÁFICA ===
+    WHITELIST_ENTRIES {
+        int whitelist_id PK "ID único de excepción"
+        int user_id FK "Usuario con excepción"
+        varchar country "País permitido (ISO 2/3)"
+        varchar region "Región permitida (opcional)"
+        varchar city "Ciudad permitida (opcional)"
+        varchar asn "ASN permitido (opcional - VPN específica)"
+        varchar ip_range_start "Rango IP inicio (opcional)"
+        varchar ip_range_end "Rango IP fin (opcional)"
+        date start_date "Fecha inicio validez"
+        date end_date "Fecha fin validez"
+        boolean active "Entrada activa"
+        text reason "Justificación (congreso, VPN legítima, etc.)"
+        int created_by FK "Coordinador SOC que creó"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    %% === ACCIONES DE AISLAMIENTO (SIMULADO) ===
+    QUARANTINE_ACTIONS {
+        bigint action_id PK "ID único de acción"
+        int user_id FK "Usuario a aislar"
+        bigint alert_id FK "Alerta que motivó el aislamiento"
+        enum action_status "Estado: PENDING, APPROVED, REJECTED, EXECUTED, CANCELLED"
+        text reason "Motivo del aislamiento"
+        int requested_by FK "Quien solicitó (debe ser Coordinador SOC)"
+        timestamp requested_at
+        int approved_by FK "Quien aprobó (Coordinador SOC)"
+        timestamp approved_at
+        boolean two_step_confirmed "Confirmación de 2 pasos (FR-006)"
+        timestamp two_step_confirmed_at "Momento de confirmación 2 pasos"
+        boolean blocked_due_to_critical_unit "Bloqueado por unidad crítica (FR-007)"
+        text rejection_reason "Razón de rechazo (si aplica)"
+        boolean simulated "Acción simulada (MVP - BR-001)"
+        timestamp executed_at "Momento de ejecución simulada en BD"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    %% === AUDITORÍA Y TRAZABILIDAD (NFR-004) ===
+    AUDIT_LOGS {
+        bigint log_id PK "ID único de log de auditoría"
+        varchar actor_username "Usuario que realizó acción"
+        int actor_user_id FK "ID del actor (opcional)"
+        enum action_type "Acción: CREATE, READ, UPDATE, DELETE, APPROVE, REJECT, LOGIN, LOGOUT"
+        varchar resource_type "Recurso: USER, ALERT, WHITELIST, QUARANTINE, DECISION_PATH"
+        varchar resource_id "ID del recurso afectado"
+        text action_description "Descripción legible de la acción"
+        jsonb details "Detalles adicionales (antes/después, IP, user_agent)"
+        varchar client_ip "IP desde donde se realizó"
+        varchar user_agent "Navegador/Cliente"
+        boolean success "Acción exitosa"
+        text failure_reason "Razón de fallo"
+        timestamp created_at
+    }
+    
+    %% === TABLA DE CONFIGURACIÓN DE REGLAS (Opcional) ===
+    DETECTION_RULES {
+        int rule_id PK "ID de regla de detección"
+        varchar rule_name UK "Nombre de regla"
+        enum model_type "Modelo asociado"
+        text rule_condition "Condición lógica"
+        enum severity "Severidad asignada"
+        boolean active "Regla activa"
+        text description "Descripción de la regla"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    %% === RELACIONES ===
+    ROLES ||--o{ USERS : "asigna"
+    UNITS ||--o{ USERS : "pertenece_a"
+    USERS ||--o{ AUTH_EVENTS : "genera_eventos"
+    USERS ||--o{ ALERTS : "recibe"
+    AUTH_EVENTS ||--o{ ALERTS : "origina"
+    ALERTS ||--|{ DECISION_PATHS : "explicado_por"
+    USERS ||--o{ WHITELIST_ENTRIES : "tiene_excepcion"
+    USERS ||--o{ WHITELIST_ENTRIES : "creado_por"
+    USERS ||--o{ ALERTS : "investiga"
+    USERS ||--o{ ALERTS : "descarta"
+    USERS ||--o{ QUARANTINE_ACTIONS : "aislado"
+    ALERTS ||--o{ QUARANTINE_ACTIONS : "motiva"
+    USERS ||--o{ QUARANTINE_ACTIONS : "solicita"
+    USERS ||--o{ QUARANTINE_ACTIONS : "aprueba"
+    USERS ||--o{ AUDIT_LOGS : "registra"
