@@ -1,0 +1,13 @@
+{
+  "name": "heraueba-prototipo-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Prototipo navegable del MVP de HeraUEBA (UEBA para SOC del sector salud)",
+  "scripts": {
+    "verificar": "node verificar.js",
+    "color": "python3 docs/contraste-wcag.py"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.12.0"
+  }
+}

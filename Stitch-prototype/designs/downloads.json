@@ -1,0 +1,77 @@
+{
+  "stitchProject": {
+    "name": "heraueba-mvp2",
+    "resourceName": "projects/17613471581774097288",
+    "designSystem": "assets/11805437672466652191"
+  },
+  "note": "Las URLs de descarga de Stitch (htmlCode.downloadUrl / screenshot.downloadUrl) son efimeras y de un solo uso: caducan minutos despues de generarse. Por eso NO se guardan aqui. Los identificadores de pantalla y de archivo SI son estables y permiten volver a obtener las URLs con get_screen. Para re-descargar: get_screen(name) -> fetch(url) inmediatamente.",
+  "regenerateHint": "tools.stitch.get_screen({ name: 'projects/17613471581774097288/screens/<screenId>' }) devuelve htmlCode.downloadUrl (text/html) y screenshot.downloadUrl (image/png).",
+  "screens": [
+    {
+      "slug": "01-dashboard-principal",
+      "view": "View 1 - Dashboard Principal",
+      "screenId": "a463578e59d247d8bc7b24815af7337f",
+      "title": "Dashboard de Monitoreo UEBA - HeraUEBA SOC",
+      "stitchSize": "2560x2482",
+      "htmlFile": "projects/17613471581774097288/files/02e6eebf750f48d5a0803543ff30a084",
+      "pngFile": "projects/17613471581774097288/files/16930419c27b4504823593fa4eccc5a4",
+      "artifacts": ["01-dashboard-principal.html", "01-dashboard-principal.png"],
+      "pass": "edit_screens (inyeccion de tokens de marca + correccion de contraste)"
+    },
+    {
+      "slug": "02-detalle-alerta",
+      "view": "View 2 - Detalle de Alerta (Caja Blanca)",
+      "screenId": "72ab6327dd324609b66151899f714239",
+      "title": "HeraUEBA · Detalle de Alerta Crítica (INC-2026-0417) - White-Box Decision Tree",
+      "stitchSize": "2560x4112",
+      "htmlFile": "projects/17613471581774097288/files/fdc8c02e15e84f4c9b82c6167bde86fb",
+      "pngFile": "projects/17613471581774097288/files/616b8c0641cd4a9199a01c724d94b723",
+      "artifacts": ["02-detalle-alerta.html", "02-detalle-alerta.png"],
+      "pass": "regeneracion (generate_screen_from_text con paleta embebida en el prompt)"
+    },
+    {
+      "slug": "03-modal-aislamiento-paso1",
+      "view": "View 3 (Estado) - Modal de Aislamiento 2 Pasos",
+      "screenId": "8770084ac639451bb758b8093d832107",
+      "title": "HeraUEBA · Modal de Aislamiento de Cuenta (Paso 1 de 2)",
+      "stitchSize": "2560x2144",
+      "htmlFile": "projects/17613471581774097288/files/acce4ef0c614453f800d3a88da562446",
+      "pngFile": "projects/17613471581774097288/files/101c6f542ae94b9b9d3b0a61dcc793fc",
+      "artifacts": ["03-modal-aislamiento-paso1.html", "03-modal-aislamiento-paso1.png"],
+      "pass": "edit_screens (inyeccion de tokens de marca)"
+    },
+    {
+      "slug": "04-whitelist-geografica",
+      "view": "View 4 - Gestion de Whitelist",
+      "screenId": "0953b1d002fd4d23a0becd96efc6b812",
+      "title": "HeraUEBA · Whitelist Geográfica",
+      "stitchSize": "2560x2048",
+      "htmlFile": "projects/17613471581774097288/files/b933b7f466ae46b7a6dcb7365853670f",
+      "pngFile": "projects/17613471581774097288/files/eddd492f8cb648938cc028cdad83186c",
+      "artifacts": ["04-whitelist-geografica.html", "04-whitelist-geografica.png"],
+      "pass": "edit_screens (inyeccion de tokens de marca)"
+    },
+    {
+      "slug": "05-historial-usuario",
+      "view": "View 5 - Historial de Usuario",
+      "screenId": "d55a28b5653b4e0a8a319d336ccba92b",
+      "title": "HeraUEBA · Historial Forense de Usuario (mg.ramirez)",
+      "stitchSize": "2560x2048",
+      "htmlFile": "projects/17613471581774097288/files/944ac9631dc1477784eaaee88003744b",
+      "pngFile": "projects/17613471581774097288/files/e75a628c051544238bd6030bd925fc49",
+      "artifacts": ["05-historial-usuario.html", "05-historial-usuario.png"],
+      "pass": "regeneracion (generate_screen_from_text con paleta embebida en el prompt)"
+    },
+    {
+      "slug": "06-error-unidad-critica",
+      "view": "View 6 (Estado) - Error de Unidad Critica",
+      "screenId": "029deac3b91e4a5bb07d948d9877ac14",
+      "title": "HeraUEBA · Modal de Bloqueo por Unidad Crítica (BR-002)",
+      "stitchSize": "2560x2048",
+      "htmlFile": "projects/17613471581774097288/files/adf05382b6f84f908a6af02a9b4b3992",
+      "pngFile": "projects/17613471581774097288/files/44c3323668f84810aa71695dd7a7b6b8",
+      "artifacts": ["06-error-unidad-critica.html", "06-error-unidad-critica.png"],
+      "pass": "edit_screens (inyeccion de tokens de marca)"
+    }
+  ]
+}

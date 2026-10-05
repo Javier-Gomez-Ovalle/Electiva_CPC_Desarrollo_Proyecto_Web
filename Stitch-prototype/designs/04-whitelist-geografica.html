@@ -1,0 +1,643 @@
+<!DOCTYPE html><html class="h-full" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>HeraUEBA · Whitelist Geográfica</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<!-- Google Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script>tailwind.config = {darkMode: "class", theme: {extend: {fontFamily: {sans: ["Inter", "system-ui", "sans-serif"], mono: ["JetBrains Mono", "monospace"], "headline-md": ["Inter"], "body-lg": ["Inter"], "label-sm": ["Public Sans"], "display-lg": ["Inter"], "headline-lg": ["Inter"], "label-md": ["Public Sans"], "body-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "body-md": ["Inter"], "headline-sm": ["Inter"], "label-lg": ["Public Sans"]}, colors: {primary: "#00355f", surface: "#f7f9fc", "surface-container-lowest": "#ffffff", "surface-container-high": "#e6e8eb", "surface-variant": "#e0e3e6", "outline-variant": "#c2c7d1", "on-surface-variant": "#42474f", "on-surface": "#191c1e", "on-primary-fixed": "#001c37", "inverse-surface": "#2d3133", "on-tertiary-fixed-variant": "#773200", "surface-dim": "#d8dadd", "on-background": "#191c1e", error: "#ba1a1a", "secondary-fixed-dim": "#ffb3ad", "primary-container": "#0f4c81", "surface-container-low": "#f2f4f7", "error-container": "#ffdad6", "tertiary-fixed-dim": "#ffb68f", "on-tertiary": "#ffffff", "tertiary-container": "#7d3500", "surface-container": "#eceef1", "on-tertiary-container": "#ffa473", "inverse-on-surface": "#eff1f4", "on-secondary-container": "#600008", "on-primary-container": "#8ebdf9", "on-primary-fixed-variant": "#07497d", "surface-bright": "#f7f9fc", "surface-container-highest": "#e0e3e6", "secondary-container": "#ff5a55", "primary-fixed": "#d2e4ff", "on-primary": "#ffffff", "on-secondary-fixed-variant": "#920212", "on-error-container": "#93000a", "primary-fixed-dim": "#a0c9ff", secondary: "#b52426", "on-tertiary-fixed": "#331100", outline: "#727780", "on-secondary": "#ffffff", "on-error": "#ffffff", tertiary: "#5a2400", "on-secondary-fixed": "#410003", "tertiary-fixed": "#ffdbca", background: "#f7f9fc", "inverse-primary": "#a0c9ff", "secondary-fixed": "#ffdad6", "surface-tint": "#2d6197"}, fontSize: {"headline-md": ["1.5rem", {lineHeight: "2rem", fontWeight: "600"}], "body-lg": ["1.125rem", {lineHeight: "1.75rem", fontWeight: "400"}], "label-sm": ["0.6875rem", {lineHeight: "0.875rem", letterSpacing: "0.03em", fontWeight: "500"}], "display-lg": ["3.5rem", {lineHeight: "4rem", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg": ["2rem", {lineHeight: "2.5rem", letterSpacing: "-0.01em", fontWeight: "600"}], "label-md": ["0.75rem", {lineHeight: "1rem", letterSpacing: "0.02em", fontWeight: "600"}], "body-sm": ["0.875rem", {lineHeight: "1.25rem", fontWeight: "400"}], "headline-lg-mobile": ["1.5rem", {lineHeight: "2rem", fontWeight: "600"}], "body-md": ["1rem", {lineHeight: "1.5rem", fontWeight: "400"}], "headline-sm": ["1.25rem", {lineHeight: "1.75rem", fontWeight: "600"}], "label-lg": ["0.875rem", {lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "600"}]}, spacing: {margin: "1rem", "space-md": "1rem", "space-lg": "1.5rem", "margin-desktop": "2rem", "space-xl": "2rem", "space-xs": "0.25rem", "space-sm": "0.5rem", gutter: "1rem", "gutter-desktop": "1.5rem"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}}}};</script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      vertical-align: middle;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f4f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c5cbd5;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9aa2b1;
+    }
+  </style>
+</head>
+<body class="h-full bg-[#f7f9fc] text-slate-800 font-sans antialiased flex flex-col min-h-screen" style="background-color: rgb(245, 247, 250); color: rgb(26, 32, 44);">
+<div class="flex-1 flex overflow-hidden">
+<!-- 1. LEFT NAVIGATION RAIL (240px FIXED) -->
+<aside class="w-60 flex-shrink-0 bg-white border-r border-slate-200 flex flex-col justify-between z-20 select-none">
+<div>
+<!-- Brand Header -->
+<div class="p-4 border-b border-slate-100 flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#0f4c81] text-white font-bold flex items-center justify-center text-lg shadow-sm">
+            H
+          </div>
+<div>
+<div class="text-base font-bold text-[#0f4c81] tracking-tight leading-tight">HeraUEBA</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">SOC Salud</span>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+</div>
+</div>
+</div>
+<!-- Menu Navigation -->
+<nav class="p-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-400">dashboard</span>
+<span class="">Monitoreo</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-400">group</span>
+<span class="">Historial de usuarios</span>
+</a>
+<!-- Active Menu Item: Whitelist geográfica -->
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-[#0f4c81] bg-[#e7eff7] border-l-4 border-[#0f4c81] rounded-r-lg shadow-sm" href="#" style="background-color: rgb(227, 236, 245); color: rgb(15, 76, 129); border-color: rgb(15, 76, 129);">
+<span class="material-symbols-outlined text-[20px] text-[#0f4c81]">public</span>
+<span class="">Whitelist geográfica</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-400">medical_services</span>
+<span class="">Dispositivos Médicos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-400">settings</span>
+<span class="">Configuración</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Identity Block -->
+<div class="p-4 border-t border-slate-100 bg-slate-50/70">
+<div class="flex items-center gap-3 mb-2.5">
+<div class="w-8 h-8 rounded-full bg-[#0f4c81] text-white flex items-center justify-center font-semibold text-xs tracking-wider ring-2 ring-white">
+            CR
+          </div>
+<div class="truncate">
+<div class="text-xs font-semibold text-slate-900 truncate">Carla M. Restrepo</div>
+<div class="text-[11px] text-slate-500 truncate">Coordinadora SOC</div>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-emerald-200 rounded-md text-[11px] font-medium text-emerald-800 shadow-2xs w-full justify-between" style="background-color: rgb(239, 250, 243); border-color: rgb(56, 161, 105); color: rgb(39, 103, 73);">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="">Keycloak SSO</span>
+</div>
+<span class="text-[10px] font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-1 rounded border border-emerald-100" style="background-color: rgb(56, 161, 105); color: rgb(255, 255, 255); border-color: rgb(56, 161, 105);">Activo</span>
+</div>
+</div>
+</aside>
+<!-- MAIN SCROLLABLE CONTENT AREA -->
+<main class="flex-1 overflow-y-auto bg-[#f7f9fc]" style="background-color: rgb(245, 247, 250);">
+<div class="max-w-[1200px] mx-auto px-6 py-5">
+<!-- 2. TOP HEADER -->
+<header class="mb-5 pb-4 border-b border-slate-200">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-1.5 text-xs text-slate-500 mb-1 font-medium">
+<span class="hover:text-slate-700 cursor-pointer">Seguridad</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-slate-700">Configuración de excepciones</span>
+</nav>
+<!-- H1 and supporting line -->
+<h1 class="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                Whitelist geográfica
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-50 text-[#0f4c81] border border-blue-200">Módulo UEBA</span>
+</h1>
+<p class="text-xs text-slate-600 mt-0.5" style="color: rgb(74, 85, 104);">
+                Reduce falsos positivos por viajes médicos, misiones quirúrgicas y rotación clínica.
+              </p>
+</div>
+<!-- Compact KPI Trio as inline stat pairs -->
+<div class="flex flex-wrap items-center gap-2.5 bg-white p-2 rounded-lg border border-slate-200 shadow-2xs" style="background-color: rgb(255, 255, 255); border-color: rgb(226, 232, 240);">
+<div class="flex items-center gap-2 px-3 py-1 bg-slate-50 rounded border border-slate-100">
+<span class="material-symbols-outlined text-[17px] text-emerald-600">verified</span>
+<span class="text-xs text-slate-600 font-medium">Excepciones activas:</span>
+<span class="font-mono text-xs font-bold text-slate-900 bg-white px-1.5 py-0.5 rounded border border-slate-200">12</span>
+</div>
+<div class="h-4 w-px bg-slate-200"></div>
+<div class="flex items-center gap-2 px-3 py-1 bg-slate-50 rounded border border-slate-100">
+<span class="material-symbols-outlined text-[17px] text-blue-600">badge</span>
+<span class="text-xs text-slate-600 font-medium">Usuarios cubiertos:</span>
+<span class="font-mono text-xs font-bold text-slate-900 bg-white px-1.5 py-0.5 rounded border border-slate-200">9</span>
+</div>
+<div class="h-4 w-px bg-slate-200"></div>
+<div class="flex items-center gap-2 px-3 py-1 bg-amber-50 rounded border border-amber-100">
+<span class="material-symbols-outlined text-[17px] text-amber-600">notification_important</span>
+<span class="text-xs text-amber-800 font-medium">Vencen en 30 días:</span>
+<span class="font-mono text-xs font-bold text-amber-900 bg-white px-1.5 py-0.5 rounded border border-amber-200">3</span>
+</div>
+</div>
+</div>
+</header>
+<!-- 3. SECTION A — EXCEPCIONES VIGENTES -->
+<section class="bg-white rounded-xl border border-slate-200 shadow-xs mb-6 overflow-hidden">
+<!-- Section Bar / Filter Bar -->
+<div class="p-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-slate-50/50" style="background-color: rgb(245, 247, 250); border-color: rgb(226, 232, 240);">
+<div>
+<h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#0f4c81]">rule</span>
+                Excepciones vigentes y programadas
+                <span class="text-xs font-normal text-slate-500 font-mono">(5 registradas)</span>
+</h2>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap items-center gap-2.5">
+<!-- Search Input -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+<input class="pl-8 pr-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/30 focus:border-[#0f4c81] w-52 transition" id="tableFilterInput" placeholder="Buscar por usuario o país" type="text" style="border-color: rgb(138, 148, 166); color: rgb(26, 32, 44);">
+</div>
+<!-- Dropdown Estado -->
+<div class="relative">
+<select class="pl-2.5 pr-7 py-1.5 text-xs bg-white border border-slate-200 rounded-lg text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/30 focus:border-[#0f4c81] appearance-none cursor-pointer" id="stateFilterSelect" style="border-color: rgb(138, 148, 166); color: rgb(26, 32, 44);">
+<option value="todas">Estado: Todas</option>
+<option value="vigente">Estado: Vigente</option>
+<option value="por_vencer">Estado: Por vencer</option>
+<option value="vencida">Estado: Vencida</option>
+<option value="programada">Estado: Programada</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px] pointer-events-none">expand_more</span>
+</div>
+<!-- Date-range hint / refresh button -->
+<div class="inline-flex items-center gap-1.5 text-[11px] font-mono text-slate-500 bg-slate-100/90 px-2.5 py-1.5 rounded-lg border border-slate-200/80">
+<span class="material-symbols-outlined text-[15px] text-slate-400">calendar_today</span>
+<span class="">Oct 2026 (En curso)</span>
+</div>
+</div>
+</div>
+<!-- Data Table (Desktop) / Cards (Mobile Responsive) -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[760px] md:min-w-full">
+<thead>
+<tr class="bg-slate-50 text-[11px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200 select-none" style="background-color: rgb(245, 247, 250); color: rgb(74, 85, 104); border-color: rgb(226, 232, 240);">
+<th class="py-2.5 px-4" scope="col">Usuario</th>
+<th class="py-2.5 px-4" scope="col">País / Región</th>
+<th class="py-2.5 px-4" scope="col">Tipo de Excepción</th>
+<th class="py-2.5 px-4" scope="col">Desde</th>
+<th class="py-2.5 px-4" scope="col">Hasta</th>
+<th class="py-2.5 px-4" scope="col">Estado</th>
+<th class="py-2.5 px-4 text-right" scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-xs">
+<!-- Row 1: mg.ramirez · Alemania -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3 px-4 font-mono font-semibold text-slate-900">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-slate-100 text-slate-700 flex items-center justify-center font-sans text-[11px] font-bold">MR</div>
+<div>
+<span class="">mg.ramirez</span>
+<div class="text-[10px] font-sans text-slate-500 font-normal">Dra. María F. Ramírez (Neurología)</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5 font-medium text-slate-800">
+<span class="text-sm">🇩🇪</span>
+<span class="">Alemania</span>
+<span class="text-[10px] text-slate-400 font-mono">(DE)</span>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-700">Misión quirúrgica</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-10-01</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-10-12</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200" style="background-color: rgb(239, 250, 243); color: rgb(39, 103, 73); border: 1px solid rgb(56, 161, 105);">
+<span class="material-symbols-outlined text-[14px]" style="background-color: rgb(239, 250, 243); color: rgb(39, 103, 73); border: 1px solid rgb(56, 161, 105);">check_circle</span>
+                      VIGENTE
+                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="inline-flex items-center gap-2.5">
+<button class="text-[#0f4c81] hover:underline font-medium focus:outline-none" type="button">Editar</button>
+<span class="text-slate-300">|</span>
+<button class="text-rose-600 hover:underline font-medium focus:outline-none" type="button">Revocar</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: enf.castillo · Panamá -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3 px-4 font-mono font-semibold text-slate-900">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-slate-100 text-slate-700 flex items-center justify-center font-sans text-[11px] font-bold">EC</div>
+<div>
+<span class="">enf.castillo</span>
+<div class="text-[10px] font-sans text-slate-500 font-normal">Enf. Elena Castillo (Urgencias)</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5 font-medium text-slate-800">
+<span class="text-sm">🇵🇦</span>
+<span class="">Panamá</span>
+<span class="text-[10px] text-slate-400 font-mono">(PA)</span>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-700">Congreso de enfermería</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-10-04</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-10-18</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200" style="background-color: rgb(239, 250, 243); color: rgb(39, 103, 73); border: 1px solid rgb(56, 161, 105);">
+<span class="material-symbols-outlined text-[14px]" style="background-color: rgb(239, 250, 243); color: rgb(39, 103, 73); border: 1px solid rgb(56, 161, 105);">check_circle</span>
+                      VIGENTE
+                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="inline-flex items-center gap-2.5">
+<button class="text-[#0f4c81] hover:underline font-medium focus:outline-none" type="button">Editar</button>
+<span class="text-slate-300">|</span>
+<button class="text-rose-600 hover:underline font-medium focus:outline-none" type="button">Revocar</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: dr.velasco · España (Vencida - tinted danger container) -->
+<tr class="bg-rose-50/40 hover:bg-rose-50/70 transition-colors group" style="background-color: rgb(255, 245, 245);">
+<td class="py-3 px-4 font-mono font-semibold text-slate-900">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-rose-100 text-rose-800 flex items-center justify-center font-sans text-[11px] font-bold">DV</div>
+<div>
+<span class="">dr.velasco</span>
+<div class="text-[10px] font-sans text-slate-500 font-normal">Dr. Rodrigo Velasco (Cardiología)</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5 font-medium text-slate-800">
+<span class="text-sm">🇪🇸</span>
+<span class="">España</span>
+<span class="text-[10px] text-slate-400 font-mono">(ES)</span>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-700">Rotación clínica</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-09-15</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-09-30</td>
+<td class="py-3 px-4">
+<div class="flex flex-col gap-0.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wide bg-rose-100 text-rose-800 border border-rose-200 w-fit" style="background-color: rgb(197, 48, 48); color: rgb(255, 255, 255); border: 1px solid rgb(229, 62, 62);">
+<span class="material-symbols-outlined text-[14px]">cancel</span>
+                        VENCIDA
+                      </span>
+<span class="font-mono text-[10px] font-medium text-rose-700" style="color: rgb(155, 44, 44);">Venció hace 6 días</span>
+</div>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="inline-flex items-center gap-2.5">
+<button class="text-[#0f4c81] hover:underline font-medium focus:outline-none" type="button">Editar</button>
+<span class="text-slate-300">|</span>
+<button class="text-emerald-700 hover:underline font-semibold focus:outline-none" type="button">Renovar</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: mg.torres · Chile (Programada) -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3 px-4 font-mono font-semibold text-slate-900">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-slate-100 text-slate-700 flex items-center justify-center font-sans text-[11px] font-bold">MT</div>
+<div>
+<span class="">mg.torres</span>
+<div class="text-[10px] font-sans text-slate-500 font-normal">Dr. Martín Torres (Cirugía Pediátrica)</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5 font-medium text-slate-800">
+<span class="text-sm">🇨🇱</span>
+<span class="">Chile</span>
+<span class="text-[10px] text-slate-400 font-mono">(CL)</span>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-700">Viaje médico</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-11-01</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-11-15</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide bg-blue-50 text-blue-700 border border-blue-200" style="background-color: rgb(227, 236, 245); color: rgb(15, 76, 129); border: 1px solid rgba(15, 76, 129, 0.3);">
+<span class="material-symbols-outlined text-[14px]" style="background-color: rgb(227, 236, 245); color: rgb(15, 76, 129); border: 1px solid rgba(15, 76, 129, 0.3);">schedule</span>
+                      PROGRAMADA
+                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="inline-flex items-center gap-2.5">
+<button class="text-[#0f4c81] hover:underline font-medium focus:outline-none" type="button">Editar</button>
+<span class="text-slate-300">|</span>
+<button class="text-rose-600 hover:underline font-medium focus:outline-none" type="button">Revocar</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: lab.tech · Estados Unidos (Por vencer - tinted warning container) -->
+<tr class="bg-amber-50/40 hover:bg-amber-50/70 transition-colors group" style="background-color: rgb(255, 244, 232);">
+<td class="py-3 px-4 font-mono font-semibold text-slate-900">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-amber-100 text-amber-800 flex items-center justify-center font-sans text-[11px] font-bold">LT</div>
+<div>
+<span class="">lab.tech</span>
+<div class="text-[10px] font-sans text-slate-500 font-normal">Ing. Camilo Soto (Laboratorio Clínico)</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5 font-medium text-slate-800">
+<span class="text-sm">🇺🇸</span>
+<span class="">Estados Unidos</span>
+<span class="text-[10px] text-slate-400 font-mono">(US)</span>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-700">Capacitación técnica</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-10-06</td>
+<td class="py-3 px-4 font-mono text-slate-600">2026-10-09</td>
+<td class="py-3 px-4">
+<div class="flex flex-col gap-0.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wide bg-amber-100 text-amber-800 border border-amber-200 w-fit" style="background-color: rgb(255, 244, 232); color: rgb(156, 66, 33); border: 1px solid rgb(221, 107, 32);">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                        POR VENCER
+                      </span>
+<span class="font-mono text-[10px] font-medium text-amber-800" style="color: rgb(156, 66, 33);">Vence en 3 días</span>
+</div>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="inline-flex items-center gap-2.5">
+<button class="text-[#0f4c81] hover:underline font-medium focus:outline-none" type="button">Editar</button>
+<span class="text-slate-300">|</span>
+<button class="text-rose-600 hover:underline font-medium focus:outline-none" type="button">Revocar</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 4. SECTION B — NUEVA EXCEPCIÓN (FORM CARD) -->
+<section class="bg-white rounded-xl border border-slate-200 shadow-xs p-6 mb-4">
+<!-- Section Title & Help line -->
+<div class="mb-5 pb-3 border-b border-slate-100">
+<h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-[#0f4c81]">add_circle</span>
+              Registrar excepción geográfica
+            </h2>
+<p class="text-xs text-slate-500 mt-1">
+              La excepción sólo aplica dentro del rango de fechas. Fuera de ese rango, el motor evalúa con normalidad.
+            </p>
+</div>
+<!-- Form Element -->
+<form id="exceptionForm" onsubmit="event.preventDefault(); handleFormSubmit();">
+<!-- Two-column grid on desktop, single column when stacked -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- LEFT COLUMN: INPUT FIELDS -->
+<div class="space-y-4">
+<!-- b. Field: Usuario o entidad (obligatorio) -->
+<div>
+<label class="block text-xs font-semibold text-slate-800 mb-1" for="userSelect">
+                    Usuario o entidad <span class="text-rose-600 font-bold">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3 pr-8 py-2 text-xs bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/30 focus:border-[#0f4c81] appearance-none cursor-pointer transition shadow-2xs" id="userSelect" onchange="updateLivePreview()" required="" style="border-color: rgb(138, 148, 166); color: rgb(26, 32, 44);">
+<option disabled="" selected="" value="">Buscar en el directorio de Keycloak…</option>
+<option data-dept="Neurología" data-name="Dra. María Fernanda Ramírez S." value="mg.ramirez">mg.ramirez — Dra. María F. Ramírez (Neurología)</option>
+<option data-dept="Urgencias" data-name="Enf. Elena Castillo" value="enf.castillo">enf.castillo — Enf. Elena Castillo (Urgencias)</option>
+<option data-dept="Cardiología" data-name="Dr. Rodrigo Velasco" value="dr.velasco">dr.velasco — Dr. Rodrigo Velasco (Cardiología)</option>
+<option data-dept="Cirugía" data-name="Dr. Martín Torres" value="mg.torres">mg.torres — Dr. Martín Torres (Cirugía)</option>
+<option data-dept="Laboratorio" data-name="Ing. Camilo Soto" value="lab.tech">lab.tech — Ing. Camilo Soto (Laboratorio)</option>
+<option data-dept="Oncología" data-name="Dr. Alejandro Gutiérrez" value="dr.gutierrez">dr.gutierrez — Dr. Alejandro Gutiérrez (Oncología)</option>
+<option data-dept="Pediatría" data-name="Enf. Patricia Mendoza" value="enf.mendoza">enf.mendoza — Enf. Patricia Mendoza (Pediatría)</option>
+<option data-dept="Ortopedia" data-name="Dr. Juan Carlos Herrera" value="dr.herrera">dr.herrera — Dr. Juan Carlos Herrera (Ortopedia)</option>
+<option data-dept="UCI Adultos" data-name="Enf. Carolina Zapata" value="enf.zapata">enf.zapata — Enf. Carolina Zapata (UCI)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px] pointer-events-none">expand_more</span>
+</div>
+<p class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-slate-400">info</span>
+<span class="">9 usuarios elegibles · 3 excluidos por rol de servicio</span>
+</p>
+</div>
+<!-- c. Field: País o región (obligatorio) -->
+<div>
+<label class="block text-xs font-semibold text-slate-800 mb-1" for="countrySelect">
+                    País o región <span class="text-rose-600 font-bold">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3 pr-8 py-2 text-xs bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/30 focus:border-[#0f4c81] appearance-none cursor-pointer transition shadow-2xs" id="countrySelect" onchange="updateLivePreview()" required="" style="border-color: rgb(138, 148, 166); color: rgb(26, 32, 44);">
+<option disabled="" selected="" value="">Selecciona un país</option>
+<option data-asn="185.220.x.x, 45.132.x.x" value="DE">🇩🇪 Alemania (DE)</option>
+<option data-asn="190.14.x.x, 200.46.x.x" value="PA">🇵🇦 Panamá (PA)</option>
+<option data-asn="80.58.x.x, 213.0.x.x" value="ES">🇪🇸 España (ES)</option>
+<option data-asn="190.160.x.x, 200.75.x.x" value="CL">🇨🇱 Chile (CL)</option>
+<option data-asn="198.51.x.x, 203.0.x.x" value="US">🇺🇸 Estados Unidos (US)</option>
+<option data-asn="194.2.x.x, 195.154.x.x" value="FR">🇫🇷 Francia (FR)</option>
+<option data-asn="189.130.x.x, 201.120.x.x" value="MX">🇲🇽 México (MX)</option>
+<option data-asn="177.18.x.x, 189.40.x.x" value="BR">🇧🇷 Brasil (BR)</option>
+<option data-asn="142.250.x.x, 199.16.x.x" value="CA">🇨🇦 Canadá (CA)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px] pointer-events-none">expand_more</span>
+</div>
+<p class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-slate-400">public</span>
+<span class="">El país se compara contra el valor de geolocalización de Keycloak (ISO 3166-1 alpha-2)</span>
+</p>
+</div>
+<!-- d. Field: Tipo de excepción -->
+<div>
+<label class="block text-xs font-semibold text-slate-800 mb-1" for="exceptionTypeSelect">
+                    Tipo de excepción <span class="text-rose-600 font-bold">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3 pr-8 py-2 text-xs bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/30 focus:border-[#0f4c81] appearance-none cursor-pointer transition shadow-2xs" id="exceptionTypeSelect" required="" style="border-color: rgb(138, 148, 166); color: rgb(26, 32, 44);">
+<option disabled="" selected="" value="">Selecciona tipo de excepción</option>
+<option value="viaje_medico">Viaje médico</option>
+<option selected="" value="mision_quirurgica">Misión quirúrgica</option>
+<option value="congreso_workmanship">Congreso o workmanship</option>
+<option value="rotacion_clinica">Rotación clínica</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- e. Two fields side by side: Desde and Hasta -->
+<div>
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-semibold text-slate-800 mb-1" for="startDateInput">
+                        Desde (fecha) <span class="text-rose-600 font-bold">*</span>
+</label>
+<input class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg text-slate-800 font-mono focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/30 focus:border-[#0f4c81] transition shadow-2xs" id="startDateInput" onchange="recalculateDates()" required="" type="date" value="2026-10-01" style="border-color: rgb(138, 148, 166); color: rgb(26, 32, 44);">
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-800 mb-1" for="endDateInput">
+                        Hasta (fecha) <span class="text-rose-600 font-bold">*</span>
+</label>
+<input class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg text-slate-800 font-mono focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/30 focus:border-[#0f4c81] transition shadow-2xs" id="endDateInput" onchange="recalculateDates()" required="" type="date" value="2026-10-12" style="border-color: rgb(138, 148, 166); color: rgb(26, 32, 44);">
+</div>
+</div>
+<!-- Helper line with live calculation & 90 day limit note -->
+<div class="flex items-center justify-between text-[11px] text-slate-500 mt-1.5 px-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-slate-400">timer</span>
+                      Rango máximo permitido: 90 días
+                    </span>
+<span class="font-mono font-semibold text-[#0f4c81] bg-[#e7eff7] px-2 py-0.5 rounded border border-[#0f4c81]/20" id="calculatedDaysBadge" style="background-color: rgb(227, 236, 245); color: rgb(15, 76, 129); border-color: rgba(15, 76, 129, 0.3);">
+                      Días de excepción: 12
+                    </span>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: JUSTIFICATION & LIVE PREVIEW -->
+<div class="space-y-4 flex flex-col justify-between">
+<!-- f. Field: Justificación (obligatorio) -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="text-xs font-semibold text-slate-800" for="justificationTextarea">
+                      Justificación <span class="text-rose-600 font-bold">*</span>
+</label>
+<span class="text-[11px] font-mono text-slate-400" id="charCounter">142 / 300</span>
+</div>
+<textarea class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/30 focus:border-[#0f4c81] transition shadow-2xs resize-none" id="justificationTextarea" maxlength="300" oninput="handleCharCount(this)" placeholder="Describe el motivo clínico, misión o comisión médica..." required="" rows="3" style="border-color: rgb(138, 148, 166); color: rgb(26, 32, 44);">Participación en brigada de neurocirugía intervencionista en el Hospital Universitario de Heidelberg con autorización de la Dirección Médica.</textarea>
+<p class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-slate-400">history_edu</span>
+<span class="">Se incluye en el informe de auditoría</span>
+</p>
+</div>
+<!-- g. Preview Container: Vista previa del efecto (Monospace, selectable) -->
+<div class="bg-slate-900 text-slate-100 rounded-lg p-3.5 border border-slate-800 shadow-sm select-text">
+<div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2.5">
+<span class="font-mono text-[11px] uppercase tracking-wider font-semibold text-emerald-400 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                      Vista previa del efecto
+                    </span>
+<span class="font-mono text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded">dt-ueba v2.4</span>
+</div>
+<div class="font-mono text-xs space-y-2 text-slate-300 leading-relaxed">
+<div class="flex items-start gap-2">
+<span class="text-emerald-400 font-bold">›</span>
+<span id="previewBeforeAfter" class="">Antes: 4 alertas/año · Después de la excepción: 0</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-blue-400 font-bold">›</span>
+<span id="previewScope" class="">Alcance: 185.220.x.x, 45.132.x.x (ASNs del país seleccionado)</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-amber-400 font-bold">›</span>
+<span id="previewExpiry" class="">La excepción caduca automáticamente el 2026-10-12 a las 23:59 COT</span>
+</div>
+</div>
+</div>
+<!-- h. Footer of the form -->
+<div class="pt-2 border-t border-slate-100">
+<div class="flex items-center justify-end gap-3 mb-2">
+<button class="px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 active:bg-slate-100 transition focus:outline-none focus:ring-2 focus:ring-slate-300" onclick="resetFormDefaults()" type="button" style="border-color: rgb(138, 148, 166); color: rgb(74, 85, 104);">
+                      Cancelar
+                    </button>
+<button class="px-5 py-2 text-xs font-semibold text-white bg-[#0f4c81] hover:bg-[#0a365c] active:bg-[#082b4a] rounded-lg shadow-sm transition focus:outline-none focus:ring-2 focus:ring-[#0f4c81]/40 flex items-center gap-1.5" type="submit" style="background-color: rgb(15, 76, 129); color: rgb(255, 255, 255);">
+<span class="material-symbols-outlined text-[16px]">save</span>
+                      Guardar excepción
+                    </button>
+</div>
+<p class="text-[12px] text-slate-500 text-right">
+                    Guardar requiere rol Coordinador SOC. Los cambios se aplican al motor en menos de 60 segundos.
+                  </p>
+</div>
+</div>
+</div>
+</form>
+</section>
+</div>
+</main>
+</div>
+<!-- 5. AUDIT STRIP (FULL WIDTH, THIN) -->
+<footer class="w-full bg-slate-100 border-t border-slate-200 py-2 px-6 text-xs text-slate-600 flex flex-col sm:flex-row items-center justify-between gap-2 select-none z-30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">notifications_active</span>
+<span class="">Cambios en la whitelist notificados a los 9 usuarios afectados</span>
+</div>
+<div>
+<a class="font-mono text-xs text-[#0f4c81] hover:underline flex items-center gap-1 font-medium" href="#">
+<span class="">Ver bitácora de configuración · 34 eventos</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</footer>
+<!-- Interactivity Script -->
+<script>
+    function handleCharCount(textarea) {
+      const counter = document.getElementById('charCounter');
+      counter.textContent = `${textarea.value.length} / 300`;
+    }
+
+    function recalculateDates() {
+      const startVal = document.getElementById('startDateInput').value;
+      const endVal = document.getElementById('endDateInput').value;
+      const badge = document.getElementById('calculatedDaysBadge');
+      const previewExpiry = document.getElementById('previewExpiry');
+
+      if (!startVal || !endVal) return;
+
+      const d1 = new Date(startVal);
+      const d2 = new Date(endVal);
+      const diffTime = d2.getTime() - d1.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+      if (diffDays > 0) {
+        badge.textContent = `Días de excepción: ${diffDays}`;
+        if (diffDays > 90) {
+          badge.className = "font-mono font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200";
+          badge.textContent = `Excede límite: ${diffDays} días (> 90)`;
+        } else {
+          badge.className = "font-mono font-semibold text-[#0f4c81] bg-[#e7eff7] px-2 py-0.5 rounded border border-[#0f4c81]/20";
+        }
+        previewExpiry.textContent = `La excepción caduca automáticamente el ${endVal} a las 23:59 COT`;
+      } else {
+        badge.textContent = "Fecha 'Hasta' debe ser posterior a 'Desde'";
+        badge.className = "font-mono font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200";
+      }
+    }
+
+    function updateLivePreview() {
+      const userSelect = document.getElementById('userSelect');
+      const countrySelect = document.getElementById('countrySelect');
+      const previewScope = document.getElementById('previewScope');
+      const previewBeforeAfter = document.getElementById('previewBeforeAfter');
+
+      const selectedCountry = countrySelect.options[countrySelect.selectedIndex];
+      const asn = selectedCountry.getAttribute('data-asn') || '185.220.x.x, 45.132.x.x';
+      const countryName = countrySelect.value ? selectedCountry.text : 'del país seleccionado';
+
+      previewScope.textContent = `Alcance: ${asn} (ASNs ${countryName})`;
+
+      if (userSelect.value) {
+        previewBeforeAfter.textContent = `Antes: 4 alertas/año (${userSelect.value}) · Después de la excepción: 0`;
+      }
+    }
+
+    function resetFormDefaults() {
+      document.getElementById('exceptionForm').reset();
+      document.getElementById('charCounter').textContent = '0 / 300';
+      recalculateDates();
+    }
+
+    function handleFormSubmit() {
+      const user = document.getElementById('userSelect').value;
+      const country = document.getElementById('countrySelect').value;
+      const start = document.getElementById('startDateInput').value;
+      const end = document.getElementById('endDateInput').value;
+
+      if (!user || !country || !start || !end) {
+        alert("Por favor diligencie todos los campos obligatorios.");
+        return;
+      }
+
+      alert("Excepción guardada con éxito. Los cambios se sincronizarán con el motor UEBA en menos de 60 segundos.");
+    }
+  </script>
+
+
+</body></html>
