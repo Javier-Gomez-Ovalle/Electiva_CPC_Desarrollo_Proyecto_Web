@@ -164,3 +164,7 @@ mitigación aplicada.
 Inter y Fira Code se cargan desde Google Fonts. Sin conexión, el sistema cae a
 `system-ui` y a la monoespaciada del sistema. **Los tokens no cambian**, así que el
 contraste se mantiene; lo único que se degrada es la métrica tipográfica.
+
+## Link Stitch
+
+https://stitch.withgoogle.com/projects/17613471581774097288?pli=1
