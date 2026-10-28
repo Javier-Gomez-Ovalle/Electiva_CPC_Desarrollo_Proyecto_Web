@@ -27,7 +27,7 @@ const path = require('path');
 const fs = require('fs');
 
 const ROOT = path.resolve(__dirname, 'prototype');
-const URL = 'file://' + path.join(ROOT, 'index.html');
+const URL = process.env.HERA_URL || ('file://' + path.join(ROOT, 'index.html'));
 const OUT = path.join(__dirname, 'capturas');
 
 const VIEWPORTS = [
