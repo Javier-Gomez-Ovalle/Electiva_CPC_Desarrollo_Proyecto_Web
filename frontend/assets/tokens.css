@@ -1,0 +1,119 @@
+/* =========================================================================
+   HeraUEBA · tokens.css
+   Sistema de diseño "HeraUEBA Clinical SOC" — fuente de verdad: ../DESIGN.md
+   Todo el color, la tipografía, el espaciado y la elevación del prototipo
+   salen de aquí. No hay literales de color fuera de este archivo.
+   ========================================================================= */
+
+:root {
+  /* --- Marca / primarios ------------------------------------------- */
+  --primary: #0F4C81;
+  --primary-hover: #0B3A63;
+  --primary-active: #082D4E;
+  --primary-container: #E3ECF5;
+  --on-primary-container: #0B3A63;
+  --on-primary: #FFFFFF;
+
+  /* --- Superficies y texto ----------------------------------------- */
+  --background: #F5F7FA;
+  --surface: #FFFFFF;
+  --surface-dim: #F5F7FA;
+  --surface-raised: #FFFFFF;
+  --on-surface: #1A202C;
+  --on-surface-variant: #4A5568;
+  --on-surface-muted: #5F6B7D;     /* 5.40:1 sobre #FFFFFF · 5.04:1 sobre #F5F7FA */
+  --outline: #E2E8F0;
+  --outline-strong: #8A94A6;
+
+  /* --- Semánticos de severidad ------------------------------------- */
+  /* Relleno de texto blanco: cumple AA (>= 4.5:1) */
+  --error: #C53030;              /* 5.47:1 con #FFFFFF */
+  --on-error: #FFFFFF;
+  --error-container: #FFF5F5;
+  --on-error-container: #9B2C2C;/* 7.04:1 sobre #FFF5F5 */
+  --error-indicator: #E53E3E;    /* sólo elementos NO textuales */
+
+  --warning: #B45309;            /* 5.02:1 con #FFFFFF */
+  --on-warning: #FFFFFF;
+  --warning-container: #FFF4E8;
+  --on-warning-container: #9C4221;/* 6.53:1 sobre #FFF4E8 */
+  --warning-indicator: #DD6B20;  /* sólo elementos NO textuales */
+
+  --success: #2C7A4B;            /* 5.26:1 con #FFFFFF */
+  --on-success: #FFFFFF;
+  --success-container: #EFFAF3;
+  --on-success-container: #276749;
+  --success-indicator: #38A169;  /* sólo elementos NO textuales */
+
+  /* --- Control deshabilitado --------------------------------------- */
+  /* WCAG 1.4.3 exime el texto de un componente inactivo, pero un botón
+     deshabilitado cuya etiqueta es ilegible no explica nada. #6B7688 da
+     3.73:1 sobre #E2E8F0: sigue leyéndose como apagado, pero se lee. */
+  --disabled-bg: #E2E8F0;
+  --disabled-fg: #6B7688;
+  --disabled-border: #CBD5E0;
+
+  /* --- Tipografía --------------------------------------------------- */
+  --font-ui: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Fira Code', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --fs-display-lg: 1.5rem;   /* 24px */
+  --lh-display-lg: 2rem;
+  --fs-headline-lg: 1.125rem;/* 18px */
+  --lh-headline-lg: 1.5rem;
+  --fs-headline-md: 1rem;    /* 16px */
+  --lh-headline-md: 1.5rem;
+  --fs-body-lg: 0.875rem;    /* 14px */
+  --lh-body-lg: 1.25rem;
+  --fs-body-sm: 0.75rem;     /* 12px */
+  --lh-body-sm: 1rem;
+  --fs-label: 0.75rem;
+  --lh-label: 1rem;
+  --fs-code: 0.8125rem;      /* 13px */
+  --lh-code: 1.375rem;
+
+  /* --- Espaciado (múltiplos de 4) ---------------------------------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --gutter: 16px;
+  --margin-page: 24px;
+
+  /* --- Radios ------------------------------------------------------- */
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-full: 9999px;
+
+  /* --- Elevación (capas tonales, nunca sombras suaves) -------------- */
+  --lift-1: 0 1px 0 rgba(26, 32, 44, 0.04);
+  --lift-2: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --lift-3: 0 12px 24px rgba(26, 32, 44, 0.18);
+  --scrim: rgba(26, 32, 44, 0.55);
+
+  /* --- Movimiento ---------------------------------------------------- */
+  --dur: 150ms;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* --- Métricas de layout -------------------------------------------- */
+  --rail-w: 240px;
+  --max-w: 1440px;
+  --row-h: 44px;
+  --control-h: 40px;
+}
+
+/* Radios de marca reducidos: la concavidad mínima es una decisión de marca */
+@media (max-width: 1279px) {
+  :root { --rail-w: 72px; }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --rail-w: 0px;
+    --margin-page: 16px;
+    --control-h: 44px; /* área táctil mínima */
+  }
+}
