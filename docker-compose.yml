@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: heraueba-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-heraueba}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-heraueba_secret_2026}
+      POSTGRES_DB: ${POSTGRES_DB:-heraueba}
+    ports:
+      - "5433:5432"
+    volumes:
+      - heraueba_pgdata:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-heraueba} -d ${POSTGRES_DB:-heraueba}"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: heraueba-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-heraueba}:${POSTGRES_PASSWORD:-heraueba_secret_2026}@postgres:5432/${POSTGRES_DB:-heraueba}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-heraueba}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-heraueba_secret_2026}
+      POSTGRES_DB: ${POSTGRES_DB:-heraueba}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    image: caddy:2.10.0-alpine
+    container_name: heraueba-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./frontend:/srv/frontend:ro
+      - ./frontend/Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - backend
+
+volumes:
+  heraueba_pgdata:
