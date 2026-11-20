@@ -1,3 +1,7 @@
+import csv
+import io
+import zipfile
+from xml.sax.saxutils import escape as xml_escape
 import json
 import re
 from typing import Any, Dict, List, Optional
@@ -407,3 +411,105 @@ async def export_alert_stix(
         },
         "incident": detail,
     }
+
+
+def _col_letter(idx: int) -> str:
+    res = ""
+    n = idx + 1
+    while n > 0:
+        m = (n - 1) % 26
+        res = chr(65 + m) + res
+        n = (n - 1) // 26
+    return res
+
+
+def build_xlsx_bytes(sheet_title: str, headers: list, rows: list) -> bytes:
+    all_rows = [headers] + list(rows)
+    row_xml_parts = []
+    for r_idx, row in enumerate(all_rows, start=1):
+        cells = []
+        for c_idx, val in enumerate(row):
+            ref = f"{_col_letter(c_idx)}{r_idx}"
+            if isinstance(val, (int, float)) and not isinstance(val, bool):
+                cells.append(f'<c r="{ref}"><v>{val}</v></c>')
+            else:
+                text = xml_escape(str("" if val is None else val))
+                cells.append(f'<c r="{ref}" t="inlineStr"><is><t>{text}</t></is></c>')
+        row_xml_parts.append(f'<row r="{r_idx}">{"".join(cells)}</row>')
+
+    safe_sheet = xml_escape((sheet_title or "Reporte SOC")[:31])
+    content_types = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+        '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+        '<Default Extension="xml" ContentType="application/xml"/>'
+        '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+        '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+        '</Types>'
+    )
+    rels = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+        '</Relationships>'
+    )
+    wb_rels = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'
+        '</Relationships>'
+    )
+    workbook = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+        'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+        f'<sheets><sheet name="{safe_sheet}" sheetId="1" r:id="rId1"/></sheets>'
+        '</workbook>'
+    )
+    sheet = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+        f'<sheetData>{"".join(row_xml_parts)}</sheetData>'
+        '</worksheet>'
+    )
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("[Content_Types].xml", content_types)
+        zf.writestr("_rels/.rels", rels)
+        zf.writestr("xl/_rels/workbook.xml.rels", wb_rels)
+        zf.writestr("xl/workbook.xml", workbook)
+        zf.writestr("xl/worksheets/sheet1.xml", sheet)
+    return buf.getvalue()
+
+
+def build_csv_bytes(headers: list, rows: list) -> bytes:
+    buf = io.StringIO()
+    writer = csv.writer(buf)
+    writer.writerow(headers)
+    writer.writerows(rows)
+    return ("﻿" + buf.getvalue()).encode("utf-8")
+
+
+def alert_package_to_table(package: Dict[str, Any]) -> tuple[list, list]:
+    inc = package["incident"]
+    subj = inc["subject"]
+    dp = inc.get("decision_path") or {}
+    nodes = dp.get("nodes") or []
+    headers = [
+        "Incidente", "Fecha_COT", "Severidad", "Riesgo", "Usuario", "Titular",
+        "Unidad", "Unidad_Critica_BR002", "IP_Origen", "Pais", "ASN",
+        "Nodo", "Condicion_Split", "Valor_Observado", "Resultado_Nodo", "Veredicto_Modelo"
+    ]
+    is_crit = "SI (Protegida BR-002)" if subj.get("is_critical_unit") else "NO"
+    rows = [
+        [
+            inc["incident_code"], inc["at"], inc["severity"], inc["risk_score"],
+            inc["username"], subj["full"], subj["unit"], is_crit,
+            inc["ip"], inc["country"], inc["asn"],
+            f"N{n['node_index']}", n["rule_explanation"], n["observed_value"],
+            n["node_outcome"], dp.get("verdict", "")
+        ]
+        for n in nodes
+    ]
+    return headers, rows

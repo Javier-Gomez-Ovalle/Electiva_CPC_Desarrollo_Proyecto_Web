@@ -1,9 +1,13 @@
 from typing import Any, Dict, Optional
 import asyncpg
 from fastapi import APIRouter, Depends, Query
+from fastapi.responses import Response
 from app.core.database import get_db
 from app.core.security import RequireRole
 from app.services.alert_service import (
+    alert_package_to_table,
+    build_csv_bytes,
+    build_xlsx_bytes,
     export_alert_stix,
     get_alert_detail,
     get_dashboard_kpis,
@@ -78,10 +82,29 @@ async def read_alert_decision_path(
 @router.get("/alerts/{alert_id}/export")
 async def export_alert(
     alert_id: str,
+    format: str = Query(default="json", pattern="^(?i)(json|csv|xlsx)$"),
     conn: asyncpg.Connection = Depends(get_db),
     user: Dict[str, Any] = Depends(RequireRole(*ALLOWED_READ_ROLES)),
-) -> Dict[str, Any]:
+) -> Any:
     package = await export_alert_stix(conn, alert_id, actor=user)
+    fmt = (format or "json").lower()
+    code = package["incident"]["incident_code"].lower()
+    if fmt == "csv":
+        headers, rows = alert_package_to_table(package)
+        data = build_csv_bytes(headers, rows)
+        return Response(
+            content=data,
+            media_type="text/csv; charset=utf-8",
+            headers={"Content-Disposition": f'attachment; filename="heraueba-{code}.csv"'},
+        )
+    if fmt == "xlsx":
+        headers, rows = alert_package_to_table(package)
+        data = build_xlsx_bytes(package["incident"]["incident_code"], headers, rows)
+        return Response(
+            content=data,
+            media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            headers={"Content-Disposition": f'attachment; filename="heraueba-{code}.xlsx"'},
+        )
     return {"success": True, "data": package}
 
 
