@@ -13,3 +13,5 @@ services:
         generateValue: true
       - key: ENVIRONMENT
         value: production
+      - key: CORS_ORIGINS
+        value: https://heraueba-frontend.netlify.app

@@ -23,9 +23,8 @@ class ApiResponse(BaseModel, Generic[T]):
 
 
 class LoginRequest(BaseModel):
-    username: Optional[str] = "carla.restrepo"
-    password: Optional[str] = "demo-pass-2026"
-    role: Optional[str] = None
+    username: str = Field(..., min_length=1, max_length=64)
+    password: str = Field(..., min_length=1, max_length=256)
 
 
 class UserProfileUpdateDTO(BaseModel):

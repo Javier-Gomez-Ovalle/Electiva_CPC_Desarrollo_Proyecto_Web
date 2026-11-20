@@ -1,3 +1,5 @@
+import time
+from collections import defaultdict, deque
 from datetime import datetime, timedelta, timezone
 from typing import Any, Callable, Dict, Optional
 import jwt
@@ -53,20 +55,6 @@ ROLE_MAPPING = {
         "shift_schedule": "Turno Nocturno 18:00–06:00",
         "can_isolate": False,
     },
-    "ciso": {
-        "username": "ciso.hospital",
-        "user_id": 8,
-        "role_name": "CISO",
-        "role_key": "ciso",
-        "full_name": "Dr. Roberto Gómez (CISO)",
-        "initials": "RG",
-        "email": "ciso@hospital.local",
-        "institution": "Clínica Central · Dirección General",
-        "phone": "+57 300 211 9001",
-        "job_title": "CISO / Director TI",
-        "shift_schedule": "Ejecutivo",
-        "can_isolate": False,
-    },
 }
 
 
@@ -75,14 +63,69 @@ def hash_password(password: str) -> str:
 
 
 def verify_password(plain_password: str, stored_hash: str) -> bool:
-    if not plain_password or len(plain_password) < 6:
+    if not plain_password or not stored_hash:
         return False
-    if stored_hash == plain_password:
-        return True
     try:
         return ph.verify(stored_hash, plain_password)
     except (VerifyMismatchError, InvalidHashError):
-        return plain_password == "demo-pass-2026" or len(plain_password) >= 6
+        return False
+
+
+# Credenciales de los 3 perfiles SOC (solo hashes argon2id; nunca contraseñas en texto plano).
+CREDENTIALS = {
+    "carla.restrepo": {
+        "role_key": "coordinador",
+        "hash": "$argon2id$v=19$m=65536,t=3,p=4$Puv1BMhsAOMIcKC4SzM4UA$3sgESe9UtJx1sJaRMsUIbi2RIF7dQ4g7WkYW0gQzQQY",
+    },
+    "diego.fuentes": {
+        "role_key": "junior",
+        "hash": "$argon2id$v=19$m=65536,t=3,p=4$jDL51lUrEav5I0AoK54pOA$NcDwyGJX8EMDj/Dk1G/Nl8ZgoUeXjQJDTu/6/3XSBUI",
+    },
+    "valeria.soto": {
+        "role_key": "senior",
+        "hash": "$argon2id$v=19$m=65536,t=3,p=4$P7vmhd5vsOUIZACNIiWHRA$HKwPQLJQNJVGHBaSvpXxaYCM14e3a7Z2jsD0sd1980E",
+    },
+}
+
+# Hash de relleno para igualar el tiempo de respuesta cuando el usuario no existe.
+_DUMMY_HASH = CREDENTIALS["carla.restrepo"]["hash"]
+
+
+# Límite de intentos fallidos: 5 por ventana de 5 minutos, por usuario y por IP.
+MAX_FAILED_ATTEMPTS = 5
+LOCKOUT_WINDOW_SECONDS = 300
+_failed_attempts: Dict[str, deque] = defaultdict(deque)
+
+
+def _prune(key: str) -> deque:
+    q = _failed_attempts[key]
+    cutoff = time.monotonic() - LOCKOUT_WINDOW_SECONDS
+    while q and q[0] < cutoff:
+        q.popleft()
+    return q
+
+
+def is_locked_out(*keys: str) -> bool:
+    return any(len(_prune(k)) >= MAX_FAILED_ATTEMPTS for k in keys)
+
+
+def register_failure(*keys: str) -> None:
+    for k in keys:
+        _prune(k).append(time.monotonic())
+
+
+def clear_failures(*keys: str) -> None:
+    for k in keys:
+        _failed_attempts.pop(k, None)
+
+
+def authenticate(username: str, password: str) -> Optional[Dict[str, Any]]:
+    """Devuelve el perfil si usuario y contraseña son válidos; None en caso contrario."""
+    entry = CREDENTIALS.get((username or "").strip().lower())
+    ok = verify_password(password or "", entry["hash"] if entry else _DUMMY_HASH)
+    if entry and ok:
+        return dict(ROLE_MAPPING[entry["role_key"]])
+    return None
 
 
 def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta] = None) -> str:
@@ -112,42 +155,29 @@ async def get_current_user(
     request: Request,
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security_scheme),
 ) -> Dict[str, Any]:
-    # 1. Check Bearer JWT token
     token = None
     if credentials and credentials.credentials:
         token = credentials.credentials
     elif "hera_token" in request.cookies:
         token = request.cookies.get("hera_token")
 
-    if token:
-        payload = decode_access_token(token)
-        role_key = payload.get("role_key", "coordinador")
-        if role_key in ROLE_MAPPING:
-            return ROLE_MAPPING[role_key]
-        return {
-            "username": payload.get("sub", "carla.restrepo"),
-            "user_id": payload.get("user_id", 6),
-            "role_name": payload.get("role_name", "Coordinador SOC"),
-            "role_key": role_key,
-            "full_name": payload.get("full_name", "Carla M. Restrepo"),
-            "initials": payload.get("initials", "CR"),
-            "email": payload.get("email", "carla.restrepo@hospital.local"),
-            "can_isolate": payload.get("role_name") == "Coordinador SOC",
-        }
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail={
+                "code": "AUTH_REQUIRED",
+                "message": "Autenticación requerida. Inicia sesión para continuar.",
+            },
+        )
 
-    # 2. Check X-Hera-Role header for seamless role switching in SOC console / tests
-    role_header = (request.headers.get("X-Hera-Role") or "").strip().lower()
-    if role_header in ("junior", "analista junior soc", "analista_junior"):
-        return ROLE_MAPPING["junior"]
-    if role_header in ("senior", "analista senior soc", "analista_senior"):
-        return ROLE_MAPPING["senior"]
-    if role_header in ("ciso", "director ti"):
-        return ROLE_MAPPING["ciso"]
-    if role_header in ("coordinador", "coordinador soc", "coordinator_soc"):
-        return ROLE_MAPPING["coordinador"]
-
-    # Default authenticated operator in SOC console is Coordinador SOC unless overridden
-    return ROLE_MAPPING["coordinador"]
+    payload = decode_access_token(token)
+    role_key = payload.get("role_key")
+    if role_key not in ROLE_MAPPING:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail={"code": "INVALID_TOKEN", "message": "Token de sesión inválido."},
+        )
+    return ROLE_MAPPING[role_key]
 
 
 def RequireRole(*allowed_roles: str) -> Callable:

@@ -1,12 +1,15 @@
 from typing import Any, Dict
 import asyncpg
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from app.core.database import get_db
 from app.core.security import (
     ROLE_MAPPING,
+    authenticate,
+    clear_failures,
     create_access_token,
+    is_locked_out,
+    register_failure,
     get_current_user,
-    verify_password,
 )
 from app.schemas import ApiResponse, LoginRequest, UserProfileUpdateDTO
 from app.services.audit_service import record_audit_log
@@ -17,31 +20,34 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 @router.post("/login")
 async def login(
     payload: LoginRequest,
+    request: Request,
     response: Response,
     conn: asyncpg.Connection = Depends(get_db),
 ) -> Dict[str, Any]:
-    role_key = (payload.role or "").strip().lower()
     uname = (payload.username or "").strip().lower()
+    client_ip = request.client.host if request.client else "unknown"
+    keys = (f"user:{uname}", f"ip:{client_ip}")
 
-    if role_key in ROLE_MAPPING:
-        profile = dict(ROLE_MAPPING[role_key])
-    elif "diego" in uname or "junior" in uname:
-        profile = dict(ROLE_MAPPING["junior"])
-    elif "valeria" in uname or "senior" in uname:
-        profile = dict(ROLE_MAPPING["senior"])
-    elif "ciso" in uname:
-        profile = dict(ROLE_MAPPING["ciso"])
-    else:
-        profile = dict(ROLE_MAPPING["coordinador"])
-
-    if payload.password and not verify_password(payload.password, "demo-pass-2026"):
-        return {
-            "success": False,
-            "error": {
-                "code": "INVALID_CREDENTIALS",
-                "message": "Credenciales de dominio inválidas.",
+    if is_locked_out(*keys):
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "code": "TOO_MANY_ATTEMPTS",
+                "message": "Demasiados intentos fallidos. Espera 5 minutos antes de reintentar.",
             },
-        }
+        )
+
+    profile = authenticate(uname, payload.password or "")
+    if profile is None:
+        register_failure(*keys)
+        raise HTTPException(
+            status_code=401,
+            detail={
+                "code": "INVALID_CREDENTIALS",
+                "message": "Permission denied, please try again.",
+            },
+        )
+    clear_failures(*keys)
 
     # Check if updated profile values exist in PostgreSQL users table
     db_user = await conn.fetchrow(

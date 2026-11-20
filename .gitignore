@@ -76,3 +76,4 @@ Desktop.ini
 *.bak
 .Trash/
 nohup.out
+.credentials.local

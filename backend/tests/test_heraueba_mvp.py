@@ -9,8 +9,15 @@ os.environ.setdefault(
 )
 
 from app.core.database import close_db_pool, init_db_pool
+from app.core.security import CREDENTIALS, ph
 from app.main import app
 from app.seed import reset_demo_state
+
+
+TEST_PASSWORD = "Test-Only-Pass-2026!"
+_test_hash = ph.hash(TEST_PASSWORD)
+for _entry in CREDENTIALS.values():
+    _entry["hash"] = _test_hash
 
 
 async def _run_with_fresh_db(coro_fn):
@@ -21,6 +28,12 @@ async def _run_with_fresh_db(coro_fn):
     try:
         transport = ASGITransport(app=app)
         async with AsyncClient(transport=transport, base_url="http://testserver") as client:
+            res = await client.post(
+                "/api/v1/auth/login",
+                json={"username": "carla.restrepo", "password": TEST_PASSWORD},
+            )
+            assert res.status_code == 200
+            client.headers["Authorization"] = f"Bearer {res.json()['data']['access_token']}"
             return await coro_fn(client, pool)
     finally:
         await close_db_pool()
@@ -80,7 +93,7 @@ def test_t03_junior_role_isolation_forbidden_rbac():
         # Authenticate as Junior Analyst
         login_res = await client.post(
             "/api/v1/auth/login",
-            json={"username": "diego.fuentes", "password": "demo-pass-2026", "role": "junior"},
+            json={"username": "diego.fuentes", "password": TEST_PASSWORD},
         )
         assert login_res.status_code == 200
         token = login_res.json()["data"]["access_token"]
@@ -92,7 +105,7 @@ def test_t03_junior_role_isolation_forbidden_rbac():
                 "username": "mg.ramirez",
                 "alert_id": "INC-2026-0417",
                 "reason": "Intento de aislamiento desde cuenta de analista junior no autorizado.",
-                "reauth_password": "demo-pass-2026",
+                "reauth_password": TEST_PASSWORD,
                 "confirmation_word": "AISLAR",
                 "two_step_confirmed": True,
             },
@@ -111,12 +124,11 @@ def test_t04_coordinator_isolation_critical_unit_br002_violation():
         # enf.castillo belongs to Urgencias (critical unit)
         res = await client.post(
             "/api/v1/actions/isolate",
-            headers={"X-Hera-Role": "coordinador"},
             json={
                 "username": "enf.castillo",
                 "alert_id": "INC-2026-0418",
                 "reason": "Credencial comprometida desde Países Bajos con dispositivo no registrado.",
-                "reauth_password": "demo-pass-2026",
+                "reauth_password": TEST_PASSWORD,
                 "confirmation_word": "AISLAR",
                 "two_step_confirmed": True,
             },
@@ -144,12 +156,11 @@ def test_t05_coordinator_isolation_non_critical_succeeds_and_audits():
         # mg.ramirez belongs to Neurología (non-critical unit)
         res = await client.post(
             "/api/v1/actions/isolate",
-            headers={"X-Hera-Role": "coordinador"},
             json={
                 "username": "mg.ramirez",
                 "alert_id": "INC-2026-0417",
                 "reason": "Credencial comprometida confirmada: 14 intentos fallidos desde nodo Tor en Alemania.",
-                "reauth_password": "demo-pass-2026",
+                "reauth_password": TEST_PASSWORD,
                 "confirmation_word": "AISLAR",
                 "two_step_confirmed": True,
                 "notify_clinical": True,
@@ -191,7 +202,6 @@ def test_t06_whitelist_validation_and_forensics():
         # 1. Invalid CIDR
         bad_cidr = await client.post(
             "/api/v1/whitelist",
-            headers={"X-Hera-Role": "coordinador"},
             json={
                 "cidr": "invalid-cidr",
                 "country": "Colombia",
@@ -207,7 +217,6 @@ def test_t06_whitelist_validation_and_forensics():
         # 2. Missing expiration date
         no_date = await client.post(
             "/api/v1/whitelist",
-            headers={"X-Hera-Role": "coordinador"},
             json={
                 "cidr": "192.168.44.0/24",
                 "country": "Colombia",
@@ -222,7 +231,6 @@ def test_t06_whitelist_validation_and_forensics():
         # 3. Valid Whitelist Creation
         ok_wl = await client.post(
             "/api/v1/whitelist",
-            headers={"X-Hera-Role": "coordinador"},
             json={
                 "cidr": "192.168.44.0/24",
                 "country": "Colombia",
@@ -256,7 +264,7 @@ def test_t07_senior_role_and_profile_configuration():
         # 1. Login as Senior Analyst
         login_res = await client.post(
             "/api/v1/auth/login",
-            json={"username": "valeria.soto", "password": "demo-pass-2026", "role": "senior"},
+            json={"username": "valeria.soto", "password": TEST_PASSWORD},
         )
         assert login_res.status_code == 200
         user_data = login_res.json()["data"]["user"]
@@ -267,7 +275,6 @@ def test_t07_senior_role_and_profile_configuration():
         # 2. Update profile as Coordinator
         upd_res = await client.put(
             "/api/v1/auth/profile",
-            headers={"X-Hera-Role": "coordinador"},
             json={
                 "full_name": "Carla Restrepo Gómez",
                 "institution": "Hospital Universitario San Ignacio",
@@ -290,3 +297,20 @@ def test_t07_senior_role_and_profile_configuration():
 
     asyncio.run(_run_with_fresh_db(_test))
 
+
+
+def test_t08_unauthenticated_and_bad_credentials_rejected():
+    """T-08: sin sesión no hay acceso; credenciales inválidas devuelven 401; no existe login por clic."""
+    async def _test(client: AsyncClient, pool):
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://testserver") as anon:
+            res = await anon.get("/api/v1/alerts")
+            assert res.status_code == 401
+            res = await anon.get("/api/v1/alerts", headers={"X-Hera-Role": "coordinador"})
+            assert res.status_code == 401
+            res = await anon.post("/api/v1/auth/login", json={"username": "carla.restrepo", "password": "incorrecta"})
+            assert res.status_code == 401
+            res = await anon.post("/api/v1/auth/login", json={"username": "ciso", "password": TEST_PASSWORD})
+            assert res.status_code == 401
+            res = await anon.post("/api/v1/auth/login", json={"role": "coordinador"})
+            assert res.status_code == 422
+    asyncio.run(_run_with_fresh_db(_test))

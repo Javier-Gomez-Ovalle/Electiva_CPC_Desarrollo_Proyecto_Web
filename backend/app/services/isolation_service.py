@@ -2,7 +2,7 @@ from typing import Any, Dict
 import asyncpg
 from fastapi import HTTPException, status
 from app.core.config import settings
-from app.core.security import verify_password
+from app.core.security import CREDENTIALS, verify_password
 from app.schemas import IsolationRequestDTO
 from app.services.audit_service import record_audit_log
 
@@ -113,7 +113,8 @@ async def execute_two_step_isolation(
             },
         )
 
-    if not verify_password(payload.reauth_password, "demo-pass-2026"):
+    operator_hash = (CREDENTIALS.get(operator["username"]) or {}).get("hash", "")
+    if not verify_password(payload.reauth_password, operator_hash):
         raise HTTPException(
             status_code=422,
             detail={
