@@ -937,3 +937,63 @@ a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset
   .rail, .topbar__actions, .toasts { display: none; }
   body { background: #FFFFFF; }
 }
+
+/* Login tipo SSH (terminal) */
+.term-wrap {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: var(--sp-5, 24px) 16px;
+}
+.term {
+  background: #0b1220;
+  color: #d6e2f0;
+  border-radius: 10px;
+  border: 1px solid #243247;
+  box-shadow: 0 18px 48px rgba(8, 15, 30, 0.35);
+  font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.55;
+  overflow: hidden;
+}
+.term__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #121c2e;
+  border-bottom: 1px solid #243247;
+  color: #8fa3bd;
+  font-size: 12px;
+}
+.term__dots { display: inline-flex; gap: 6px; }
+.term__dots i { width: 10px; height: 10px; border-radius: 50%; background: #3a4a63; display: block; }
+.term__screen {
+  padding: 16px 16px 4px;
+  min-height: 220px;
+  max-height: 52vh;
+  overflow-y: auto;
+}
+.term__row { white-space: pre-wrap; word-break: break-word; }
+.term__row--info { color: #7cc4ff; }
+.term__row--dim { color: #8fa3bd; }
+.term__row--ok { color: #6ee7a8; }
+.term__row--err { color: #ff8a8a; }
+.term__line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 16px;
+}
+.term__prompt { color: #6ee7a8; white-space: nowrap; }
+.term__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: #d6e2f0;
+  font: inherit;
+  caret-color: #6ee7a8;
+}
+.term__input:focus-visible { outline: 0; }
+.term:focus-within { border-color: #4a90d9; }

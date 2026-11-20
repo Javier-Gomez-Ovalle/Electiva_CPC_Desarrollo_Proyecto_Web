@@ -10,9 +10,8 @@
 
   /* --- Estado ------------------------------------------------------------ */
   const state = {
-    authenticated: true,
+    authenticated: false,
     role: 'coordinador',
-    loginFormRole: 'coordinador',
     window: 24,
     windowAlertsCount: D.ALERTS.length,
     risk: 'all',
@@ -115,8 +114,6 @@
         av.textContent = r.initials;
       }
     }
-    $$('.seg__btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.role === state.role)));
-    if (D.API) D.API.setRole(state.role);
   }
 
   /* --- Sincronización asíncrona con el Backend /api/v1 ------------------- */
@@ -167,10 +164,16 @@
     const view = $('#view');
     const shell = $('#appShell');
 
-    if (root === 'login' || !state.authenticated) {
+    if (state.authenticated && root === 'login') {
+      go('#/dashboard');
+      return;
+    }
+
+    if (!state.authenticated) {
       if (shell) shell.classList.add('shell--login');
       view.innerHTML = V.loginView(state);
       view.scrollTop = 0;
+      initTerminal();
       return;
     }
 
@@ -395,29 +398,121 @@
   }
 
   /* --- Inicio de sesión y configuración de cuenta ------------------------ */
-  function submitLogin(form) {
-    const picked = form.login_role ? form.login_role.value : state.loginFormRole;
-    const roleKey = D.ROLES[picked] ? picked : 'coordinador';
-    const pass = form.password ? form.password.value : '';
-    if (!pass || pass.length < 4) {
-      setFieldError('eLoginPass', 'Ingresa tu contraseña institucional.');
-      return;
-    }
-    setFieldError('eLoginPass', '');
-
-    state.role = roleKey;
-    state.loginFormRole = roleKey;
+  /* --- Sesión autenticada ------------------------------------------------ */
+  function applySession(user) {
+    const key = user && user.role_key;
+    const r = key && D.ROLES[key];
+    if (!r) return false;
+    r.name = user.full_name || r.name;
+    r.initials = user.initials || r.initials;
+    r.mail = user.email || r.mail;
+    r.institution = user.institution || r.institution;
+    r.phone = user.phone || r.phone;
+    if (user.avatar_url) r.avatarUrl = user.avatar_url;
+    state.role = key;
     state.authenticated = true;
     syncRole();
+    return true;
+  }
 
-    if (D.API) {
-      D.API.login(roleKey, pass).catch(() => {});
+  /* --- Terminal SSH de inicio de sesión ---------------------------------- */
+  const HOST = 'soc-bog-01';
+  const term = { stage: 'user', username: '', attempts: 0, busy: false };
+
+  function termPrint(text, cls) {
+    const scr = $('#termScreen');
+    if (!scr) return;
+    const row = document.createElement('div');
+    row.className = 'term__row' + (cls ? ' term__row--' + cls : '');
+    row.textContent = text;
+    scr.appendChild(row);
+    scr.scrollTop = scr.scrollHeight;
+  }
+
+  function termPrompt(stage) {
+    term.stage = stage;
+    const label = $('#termPrompt'), input = $('#termInput');
+    if (!label || !input) return;
+    if (stage === 'pass') {
+      label.textContent = term.username + '@' + HOST + "'s password:";
+      input.type = 'password';
+      input.autocomplete = 'current-password';
+    } else {
+      label.textContent = 'login as:';
+      input.type = 'text';
+      input.autocomplete = 'off';
+    }
+    input.value = '';
+    input.disabled = false;
+    input.focus();
+  }
+
+  function initTerminal() {
+    term.stage = 'user'; term.username = ''; term.attempts = 0; term.busy = false;
+    termPrint('HeraUEBA · Consola SOC Salud · Nodo ' + HOST + ' (TLS 1.3)', 'info');
+    termPrint('Acceso restringido a personal autorizado. Toda actividad queda auditada', 'dim');
+    termPrint('(Ley 1581 de 2012 · HIPAA Security Rule · BR-001 / BR-002).', 'dim');
+    termPrint('');
+    termPrompt('user');
+    const screen = $('#term');
+    if (screen) screen.addEventListener('click', () => { const i = $('#termInput'); if (i && !i.disabled) i.focus(); });
+  }
+
+  function termFail(message) {
+    term.attempts += 1;
+    termPrint(message, 'err');
+    if (term.attempts >= 3) {
+      termPrint('Too many authentication failures. Connection to ' + HOST + ' closed.', 'err');
+      const input = $('#termInput');
+      if (input) input.disabled = true;
+      setTimeout(() => { if (!state.authenticated) render(); }, 1800);
+      return;
+    }
+    termPrompt('pass');
+  }
+
+  function submitTerminal(form) {
+    if (term.busy) return;
+    const input = form.term_input;
+    const value = input.value;
+
+    if (term.stage === 'user') {
+      const user = value.trim();
+      if (!user) return;
+      term.username = user;
+      termPrint('login as: ' + user);
+      termPrompt('pass');
+      return;
     }
 
-    const r = D.ROLES[roleKey];
-    toast('ok', 'Sesión iniciada · ' + r.label,
-      'Bienvenido(a), ' + r.name + ' (' + (r.institution || 'Clínica Central') + ').');
-    go('#/dashboard');
+    termPrint(term.username + '@' + HOST + "'s password:");
+    if (!value) { termFail('Permission denied, please try again.'); return; }
+    term.busy = true;
+    input.disabled = true;
+    input.value = '';
+    termPrint('Autenticando…', 'dim');
+
+    D.API.login(term.username, value).then(data => {
+      if (!data || !data.user) throw new Error('Sin respuesta del servidor.');
+      if (!applySession(data.user)) throw new Error('Perfil no reconocido.');
+      term.busy = false;
+      termPrint('Access granted.', 'ok');
+      termPrint('Bienvenido(a), ' + data.user.full_name + ' · ' + data.user.role_name, 'ok');
+      syncFromBackend();
+      setTimeout(() => go('#/dashboard'), 700);
+    }).catch(err => {
+      term.busy = false;
+      if (err && err.status === 429) {
+        termPrint(err.message, 'err');
+        termPrint('Connection to ' + HOST + ' closed.', 'err');
+        setTimeout(() => { if (!state.authenticated) render(); }, 1800);
+      } else if (err && err.status) {
+        termFail('Permission denied, please try again.');
+      } else {
+        termPrint('ssh: connect to host ' + HOST + ': no se pudo contactar con el servidor.', 'err');
+        termPrompt('pass');
+      }
+    });
   }
 
   function submitProfile(form) {
@@ -472,18 +567,6 @@
   /* --- Delegación de eventos --------------------------------------------- */
   document.addEventListener('click', ev => {
     const t = ev.target;
-
-    const seg = t.closest('.seg__btn');
-    if (seg) {
-      state.role = seg.dataset.role;
-      syncRole();
-      toast('info', 'Rol cambiado: ' + D.ROLES[state.role].label,
-        D.ROLES[state.role].canIsolate
-          ? 'Ahora puede ordenar el aislamiento de cuentas.'
-          : 'El aislamiento de cuentas queda bloqueado por RBAC.');
-      if (!document.getElementById('modalRoot').innerHTML) render();
-      return;
-    }
 
     const row = t.closest('tr[data-goto]');
     if (row && !t.closest('a,button')) { go(row.dataset.goto); return; }
@@ -645,8 +728,8 @@
         break;
 
       case 'logout':
-        state.authenticated = false;
         if (D.API) D.API.logout().catch(() => {});
+        state.authenticated = false;
         toast('info', 'Sesión cerrada', 'Se ha cerrado la sesión del operador de forma segura.');
         go('#/login');
         break;
@@ -673,17 +756,6 @@
         const selText = t.options && t.selectedIndex >= 0 ? t.options[t.selectedIndex].text : t.value;
         toast('info', 'Filtro temporal actualizado', 'Mostrando eventos para: ' + selText);
       }
-      return;
-    }
-    if (t.name === 'login_role') {
-      state.loginFormRole = t.value;
-      const r = D.ROLES[t.value];
-      const lUser = document.getElementById('lUser');
-      if (r && lUser) lUser.value = r.mail;
-      $$('#loginRolePicker .role-option').forEach(opt => {
-        if (opt.dataset.roleOption === t.value) opt.classList.add('role-option--active');
-        else opt.classList.remove('role-option--active');
-      });
       return;
     }
     if (t.id === 'pAvatarFile' && t.files && t.files[0]) {
@@ -749,7 +821,7 @@
 
   document.addEventListener('submit', ev => {
     if (ev.target.id === 'wlForm') { ev.preventDefault(); submitWhitelist(ev.target); }
-    if (ev.target.id === 'loginForm') { ev.preventDefault(); submitLogin(ev.target); }
+    if (ev.target.id === 'termForm') { ev.preventDefault(); submitTerminal(ev.target); }
     if (ev.target.id === 'profileForm') { ev.preventDefault(); submitProfile(ev.target); }
   });
 
@@ -767,8 +839,22 @@
 
   /* --- Arranque ---------------------------------------------------------- */
   window.addEventListener('hashchange', render);
-  syncRole();
-  syncFromBackend();
-  if (!location.hash) location.hash = '#/dashboard';
-  render();
+  window.addEventListener('hera:unauthorized', () => {
+    if (!state.authenticated) return;
+    state.authenticated = false;
+    toast('warn', 'Sesión expirada', 'Vuelve a iniciar sesión para continuar.');
+    go('#/login');
+  });
+
+  if (D.API && D.API.hasSession()) {
+    /* Restaura una sesión previa solo si el servidor valida el token. */
+    D.API.getMe().then(user => {
+      if (user && applySession(user)) syncFromBackend();
+    }).catch(() => {}).then(() => {
+      if (state.authenticated && (!location.hash || location.hash === '#/login')) location.hash = '#/dashboard';
+      render();
+    });
+  } else {
+    render();
+  }
 })();

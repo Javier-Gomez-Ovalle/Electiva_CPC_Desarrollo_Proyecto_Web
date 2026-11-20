@@ -9,7 +9,7 @@
    - Error Unidad Crítica BR-002 · Vista Completa (#/error-unidad-critica)
    - Matriz de Trazabilidad Normativa (#/trazabilidad)
    - Configurar Cuenta (#/perfil)
-   - Inicio de Sesión SOC con Selección de Rol (#/login)
+   - Inicio de Sesión SOC tipo SSH (#/login)
    ========================================================================= */
 window.VIEWS = (function () {
   'use strict';
@@ -553,7 +553,7 @@ window.VIEWS = (function () {
         + '<div class="field">'
         + '<label class="field__label" for="mReauth">Re-autenticación del operador <span class="field__req" aria-hidden="true">*</span></label>'
         + '<input class="input" type="password" id="mReauth" name="reauth" autocomplete="current-password" value="' + esc(f.reauth)
-        + '" aria-describedby="mReauthHelp mReauthErr" placeholder="Contraseña de dominio (demo-pass-2026)">'
+        + '" aria-describedby="mReauthHelp mReauthErr" placeholder="Contraseña de tu cuenta">'
         + '<span class="field__hint" id="mReauthHelp">Se valida contra Keycloak antes de habilitar el paso 2. Se guarda sólo el resultado en AUDIT_LOGS, nunca el secreto.</span>'
         + '<span class="field__error" id="mReauthErr"' + (err.reauth ? '' : ' hidden') + '>' + (err.reauth ? icon('triangle', 14) + esc(err.reauth) : '') + '</span>'
         + '</div>'
@@ -911,81 +911,23 @@ window.VIEWS = (function () {
   }
 
   /* -----------------------------------------------------------------------
-     Vista 9 · Inicio de Sesión SOC (#/login)
-     Soporta Coordinador SOC y Analista SOC (Junior y Senior).
+     Vista 9 · Inicio de Sesión SOC tipo SSH (#/login)
+     Terminal interactiva: pide usuario y contraseña (sin eco) y autentica
+     contra POST /api/v1/auth/login. No hay selección de perfil ni valores
+     precargados. La lógica de la terminal vive en app.js (initTerminal).
      --------------------------------------------------------------------- */
-  function loginView(state) {
-    const selectedRole = state.loginFormRole || state.role || 'coordinador';
-    const r = D.ROLES[selectedRole] || D.ROLES.coordinador;
-
-    const roleOptions = [
-      {
-        key: 'coordinador',
-        title: 'Coordinador SOC (Resolutivo)',
-        user: 'carla.restrepo@hospital.local',
-        desc: 'Carla M. Restrepo · Facultada para ejecutar aislamiento en 2 pasos (FR-005/006) y administrar Whitelist (FR-008).'
-      },
-      {
-        key: 'junior',
-        title: 'Analista SOC · Nivel Junior',
-        user: 'diego.fuentes@hospital.local',
-        desc: 'Diego A. Fuentes · Monitoreo de alertas críticas en turno, inspección de caja blanca y exportación. Sin bloqueo (NFR-003).'
-      },
-      {
-        key: 'senior',
-        title: 'Analista SOC · Nivel Senior',
-        user: 'valeria.soto@hospital.local',
-        desc: 'Ing. Valeria Soto M. · Investigación forense de 180 días, correlación de telemetría y escalamiento al CISO. Sin bloqueo (NFR-003).'
-      }
-    ];
-
-    return ''
-      + '<div class="login-wrap">'
-      + '<section class="card card--raised">'
-      + '<div class="card__head" style="background:var(--primary);color:#FFFFFF;border-radius:var(--r-md) var(--r-md) 0 0;padding:20px 24px">'
-      + '<div class="row" style="gap:12px">'
-      + '<span class="rail__mark" aria-hidden="true">' + icon('shield', 18) + '</span>'
-      + '<div><h1 class="h-card" style="color:#FFFFFF">HeraUEBA · Consola Clínica SOC</h1>'
-      + '<p class="tiny" style="color:rgba(255,255,255,0.82)">Autenticación Federada Keycloak SSO · Clínica Central · Nodo SOC-BOG-01</p></div>'
-      + '</div></div>'
-
-      + '<form class="card__body stack stack--md" id="loginForm" novalidate>'
-      + U.notice('rule', 'shield',
-        '<strong>Control de acceso basado en roles (NFR-003).</strong> Selecciona el perfil operativo con el que deseas iniciar turno: '
-        + '<strong>Coordinador SOC</strong> o <strong>Analista SOC (Junior / Senior)</strong>.')
-
-      + '<div class="field">'
-      + '<span class="field__label">Rol y operador de turno <span class="field__req" aria-hidden="true">*</span></span>'
-      + '<div class="role-picker" role="radiogroup" aria-label="Seleccionar rol de inicio de sesión">'
-      + roleOptions.map(opt =>
-        '<label class="role-option" data-selected="' + (selectedRole === opt.key) + '">'
-        + '<input type="radio" name="login_role" value="' + esc(opt.key) + '"' + (selectedRole === opt.key ? ' checked' : '') + '>'
-        + '<div class="grow">'
-        + '<div class="row row--between"><strong style="font-size:14px">' + esc(opt.title) + '</strong>'
-        + '<span class="mono tiny">' + esc(opt.user) + '</span></div>'
-        + '<p class="meta" style="margin-top:4px">' + esc(opt.desc) + '</p>'
-        + '</div></label>'
-      ).join('')
-      + '</div></div>'
-
-      + '<div class="grid grid--2">'
-      + '<label class="field"><span class="field__label">Cuenta institucional</span>'
-      + '<input class="input input--mono" type="email" name="username" id="lUser" value="' + esc(r.mail) + '" required>'
-      + '</label>'
-      + '<label class="field"><span class="field__label">Contraseña de dominio <span class="field__req" aria-hidden="true">*</span></span>'
-      + '<input class="input" type="password" name="password" id="lPass" value="demo-pass-2026" required>'
-      + '</label>'
-      + '</div>'
-
-      + '<span class="field__error" id="lErr" hidden></span>'
-
-      + '<button type="submit" class="btn btn--primary btn--block">'
-      + icon('lock', 16) + 'Iniciar sesión en el SOC</button>'
-      + '</form>'
-      + '<div class="card__foot row row--between">'
-      + '<span>' + icon('info', 13) + ' Cumplimiento normativo Ley 1581 de 2012 · HIPAA Security Rule</span>'
-      + '<span class="mono tiny"> demo-pass-2026</span>'
-      + '</div></section></div>';
+  function loginView() {
+    return '<div class="term-wrap">'
+      + '<section class="term" id="term" aria-label="Terminal de acceso SSH al SOC">'
+      + '<header class="term__bar"><span class="term__dots" aria-hidden="true"><i></i><i></i><i></i></span>'
+      + '<span class="term__title">operador@soc-bog-01 — ssh</span></header>'
+      + '<div class="term__screen" id="termScreen" role="log" aria-live="polite"></div>'
+      + '<form class="term__line" id="termForm" autocomplete="off" novalidate>'
+      + '<label class="term__prompt" id="termPrompt" for="termInput">login as:</label>'
+      + '<input class="term__input" id="termInput" name="term_input" type="text" '
+      + 'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" '
+      + 'aria-label="Entrada de terminal" maxlength="256">'
+      + '</form></section></div>';
   }
 
   return {

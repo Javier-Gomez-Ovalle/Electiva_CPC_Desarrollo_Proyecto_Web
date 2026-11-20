@@ -355,8 +355,17 @@ window.HERA = (function () {
     ? String(window.HERA_API_BASE).replace(/\/+$/, '')
     : '';
   const API_BASE = API_ORIGIN + '/api/v1';
-  let activeRoleHeader = 'coordinador';
+  const TOKEN_KEY = 'hera_session_token';
   let bearerToken = null;
+  try { bearerToken = window.sessionStorage.getItem(TOKEN_KEY); } catch (e) { bearerToken = null; }
+
+  function storeToken(token) {
+    bearerToken = token || null;
+    try {
+      if (token) window.sessionStorage.setItem(TOKEN_KEY, token);
+      else window.sessionStorage.removeItem(TOKEN_KEY);
+    } catch (e) { /* almacenamiento no disponible */ }
+  }
 
   async function request(path, options) {
     if (typeof location !== 'undefined' && location.protocol === 'file:') {
@@ -364,14 +373,17 @@ window.HERA = (function () {
     }
     const opts = options || {};
     const headers = Object.assign({
-      'Content-Type': 'application/json',
-      'X-Hera-Role': activeRoleHeader
+      'Content-Type': 'application/json'
     }, opts.headers || {});
     if (bearerToken) {
       headers['Authorization'] = 'Bearer ' + bearerToken;
     }
     const res = await fetch(API_BASE + path, Object.assign({}, opts, { headers }));
-    const payload = await res.json();
+    const payload = await res.json().catch(() => ({}));
+    if (res.status === 401 && path !== '/auth/login') {
+      storeToken(null);
+      window.dispatchEvent(new Event('hera:unauthorized'));
+    }
     if (!res.ok || payload.success === false) {
       const err = new Error((payload.error && payload.error.message) || ('HTTP ' + res.status));
       err.status = res.status;
@@ -383,31 +395,23 @@ window.HERA = (function () {
   }
 
   const API = {
-    setRole(roleKey, password) {
-      activeRoleHeader = roleKey || 'coordinador';
+    hasSession() {
+      return Boolean(bearerToken);
+    },
+    /* Autenticación real: usuario + contraseña. Rechaza la promesa si falla. */
+    login(username, password) {
       return request('/auth/login', {
         method: 'POST',
-        body: JSON.stringify({ role: activeRoleHeader, password: password || 'demo-pass-2026' })
+        body: JSON.stringify({ username: username, password: password })
       }).then(data => {
-        if (data && data.access_token) bearerToken = data.access_token;
-        if (data && data.user && ROLES[activeRoleHeader]) {
-          const r = ROLES[activeRoleHeader];
-          r.name = data.user.full_name || r.name;
-          r.initials = data.user.initials || r.initials;
-          r.mail = data.user.email || r.mail;
-          r.institution = data.user.institution || r.institution;
-          r.phone = data.user.phone || r.phone;
-          if (data.user.avatar_url) r.avatarUrl = data.user.avatar_url;
-        }
+        if (data && data.access_token) storeToken(data.access_token);
         return data;
-      }).catch(() => null);
-    },
-    login(roleKey, password) {
-      return this.setRole(roleKey, password);
+      });
     },
     logout() {
-      bearerToken = null;
-      return request('/auth/logout', { method: 'POST' }).catch(() => null);
+      const p = request('/auth/logout', { method: 'POST' }).catch(() => null);
+      storeToken(null);
+      return p;
     },
     getMe() {
       return request('/auth/me');
