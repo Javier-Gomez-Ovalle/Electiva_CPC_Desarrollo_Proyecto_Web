@@ -101,10 +101,27 @@
       </div>
       <div class="topbar__actions">
         <span class="live"><span class="live__dot" aria-hidden="true"></span>Ingesta Keycloak activa · <span class="mono tnum">14:32:08</span> COT</span>
-        <button type="button" class="btn btn--secondary btn--sm" id="btnExport">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 10.5L12 15l4.5-4.5M4 20h16"/></svg>
-          Exportar
-        </button>
+        <div class="export-dropdown" id="topExportWrap">
+          <button type="button" class="btn btn--secondary btn--sm" id="btnExport" aria-haspopup="true" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 10.5L12 15l4.5-4.5M4 20h16"/></svg>
+            Exportar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="export-menu" id="topExportMenu" role="menu" aria-label="Formato de exportación">
+            <button type="button" class="export-menu__item" data-export-format="csv" role="menuitem">
+              <span class="export-menu__ext">CSV</span>
+              <span>Tabla separada por comas (.csv)</span>
+            </button>
+            <button type="button" class="export-menu__item" data-export-format="json" role="menuitem">
+              <span class="export-menu__ext">JSON</span>
+              <span>Estructura forense / STIX (.json)</span>
+            </button>
+            <button type="button" class="export-menu__item" data-export-format="xlsx" role="menuitem">
+              <span class="export-menu__ext">XLSX</span>
+              <span>Libro de Excel OpenXML (.xlsx)</span>
+            </button>
+          </div>
+        </div>
       </div>
     </header>
 

@@ -997,3 +997,61 @@ a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset
 }
 .term__input:focus-visible { outline: 0; }
 .term:focus-within { border-color: #4a90d9; }
+
+/* Menú desplegable de exportación (CSV / JSON / XLSX) */
+.export-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+.export-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 248px;
+  background: var(--surface);
+  color: var(--on-surface);
+  border: 1px solid var(--outline-strong);
+  border-radius: var(--r-md);
+  box-shadow: var(--lift-2);
+  padding: 6px;
+  z-index: 80;
+}
+.export-dropdown.is-open .export-menu {
+  display: grid;
+  gap: 2px;
+}
+.export-menu__item {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  min-height: 36px;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  color: var(--on-surface);
+  cursor: pointer;
+  text-align: left;
+}
+.export-menu__item:hover,
+.export-menu__item:focus-visible {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  outline: none;
+}
+.export-menu__ext {
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--surface-container, #edf2f7);
+  color: var(--primary, #0F4C81);
+  min-width: 44px;
+  text-align: center;
+}

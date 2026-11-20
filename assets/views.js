@@ -185,8 +185,14 @@ window.VIEWS = (function () {
       + '<div class="row">'
       + '<button type="button" class="btn btn--secondary btn--sm" data-copy-inc="' + esc(a.id) + '">'
       + icon('copy', 14) + 'Copiar incidente</button>'
-      + '<button type="button" class="btn btn--secondary btn--sm" data-action="export">'
-      + icon('download', 14) + 'Exportar STIX / JSON</button>'
+      + '<div class="export-dropdown">'
+      + '<button type="button" class="btn btn--secondary btn--sm" data-action="toggle-export-menu" aria-haspopup="true" aria-expanded="false">'
+      + icon('download', 14) + 'Exportar (CSV / JSON / XLSX)</button>'
+      + '<div class="export-menu" role="menu" aria-label="Formato de exportación del incidente">'
+      + '<button type="button" class="export-menu__item" data-export-format="csv" data-export-scope="alerta" data-export-id="' + esc(a.id) + '" role="menuitem"><span class="export-menu__ext">CSV</span><span>Incidente y árbol de decisión (.csv)</span></button>'
+      + '<button type="button" class="export-menu__item" data-export-format="json" data-export-scope="alerta" data-export-id="' + esc(a.id) + '" role="menuitem"><span class="export-menu__ext">JSON</span><span>Paquete STIX 2.1 / JSON (.json)</span></button>'
+      + '<button type="button" class="export-menu__item" data-export-format="xlsx" data-export-scope="alerta" data-export-id="' + esc(a.id) + '" role="menuitem"><span class="export-menu__ext">XLSX</span><span>Libro Excel de evidencia (.xlsx)</span></button>'
+      + '</div></div>'
       + '</div></div>'
 
       + '<div style="margin-bottom:24px">' + U.notice('block', 'triangle',
